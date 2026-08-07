@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Futures — The Future of Artificial Intelligence</title>
+  <meta name="description" content="In-depth articles on AI in Healthcare, Future Jobs, Generative AI, Education, and Ethics." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon"><i class="fa-solid fa-brain"></i></span>
+        <span class="logo-text">AI<span class="logo-accent">Futures</span></span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <div class="nav-dropdown">
+          <a href="#categories" class="nav-link">Categories <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="dropdown-menu" id="navCategories"></div>
+        </div>
+        <a href="#latest" class="nav-link">Latest</a>
+        <a href="#about" class="nav-link">About</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <a href="admin.html" class="btn-admin"><i class="fa-solid fa-lock"></i> Admin</a>
+        <button class="btn-hamburger" id="hamburger" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+    <!-- Search Bar -->
+    <div class="search-bar" id="searchBar">
+      <div class="container">
+        <div class="search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search articles, categories, tags…" autocomplete="off" />
+          <button class="btn-search-close" id="searchClose"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <div class="hero-badge"><i class="fa-solid fa-bolt"></i> Future of AI</div>
+      <h1 class="hero-title">Explore the Future of<br /><span class="gradient-text">Artificial Intelligence</span></h1>
+      <p class="hero-subtitle">In-depth analysis, expert insights, and actionable guides on AI in Healthcare, Jobs, Education, and beyond.</p>
+      <div class="hero-actions">
+        <a href="#latest" class="btn btn-primary">Read Latest Articles</a>
+        <a href="#categories" class="btn btn-ghost">Browse Categories</a>
+      </div>
+      <div class="hero-stats" id="heroStats">
+        <div class="stat"><span class="stat-num" id="statArticles">0</span><span class="stat-label">Articles</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" id="statCategories">0</span><span class="stat-label">Categories</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">2026</span><span class="stat-label">Up to Date</span></div>
+      </div>
+    </div>
+    <!-- Featured Article Overlay -->
+    <div class="hero-featured" id="heroFeatured"></div>
+  </section>
+
+  <!-- ===== TICKER ===== -->
+  <div class="ticker-bar">
+    <div class="ticker-label"><i class="fa-solid fa-fire"></i> Trending</div>
+    <div class="ticker-track" id="tickerTrack">
+      <div class="ticker-inner" id="tickerInner"></div>
+    </div>
+  </div>
+
+  <!-- ===== CATEGORIES ===== -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Browse by Category</h2>
+        <p class="section-subtitle">Dive deep into the topics that matter most in AI today</p>
+      </div>
+      <div class="categories-grid" id="categoriesGrid">
+        <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading categories…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED ARTICLES ===== -->
+  <section class="section section-dark" id="featured">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Articles</h2>
+        <p class="section-subtitle">Hand-picked reads from our editorial team</p>
+      </div>
+      <div class="featured-grid" id="featuredGrid">
+        <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading articles…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LATEST ARTICLES ===== -->
+  <section class="section" id="latest">
+    <div class="container">
+      <div class="section-header-flex">
+        <div>
+          <h2 class="section-title">Latest Articles</h2>
+          <p class="section-subtitle">Fresh content added regularly</p>
+        </div>
+        <div class="filter-bar" id="filterBar">
+          <button class="filter-btn active" data-category="all">All</button>
+        </div>
+      </div>
+      <div class="articles-grid" id="articlesGrid">
+        <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading articles…</div>
+      </div>
+      <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+        <button class="btn btn-outline" id="loadMoreBtn">Load More Articles <i class="fa-solid fa-arrow-down"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="section newsletter-section">
+    <div class="container">
+      <div class="newsletter-card">
+        <div class="newsletter-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+        <h2>Stay Ahead of the AI Curve</h2>
+        <p>Get the latest AI insights delivered straight to your inbox. No spam, ever.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" placeholder="Enter your email address" required />
+          <button type="submit" class="btn btn-primary">Subscribe <i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+        <p class="newsletter-note">Join thousands of readers staying informed about AI.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section section-dark" id="about">
+    <div class="container about-layout">
+      <div class="about-text">
+        <div class="section-badge">About AI Futures</div>
+        <h2 class="section-title">Your Guide to the AI Revolution</h2>
+        <p>AI Futures is a dedicated publication covering the most important developments in artificial intelligence — from breakthroughs in medical diagnosis to the evolving job market, generative tools, educational transformation, and the critical ethical questions shaping our AI-powered world.</p>
+        <p>Our mission: make AI accessible, understandable, and actionable for everyone — whether you're a professional navigating career change, a student exploring opportunities, or simply a curious mind tracking one of the most significant technological shifts in human history.</p>
+        <div class="about-features">
+          <div class="about-feature"><i class="fa-solid fa-check-circle"></i> In-depth, well-researched articles</div>
+          <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Up-to-date with 2026 developments</div>
+          <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Beginner-friendly to expert-level content</div>
+          <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Covering all major AI domains</div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-card-stack">
+          <div class="about-card ac1"><i class="fa-solid fa-heart-pulse"></i><span>Healthcare</span></div>
+          <div class="about-card ac2"><i class="fa-solid fa-briefcase"></i><span>Future Jobs</span></div>
+          <div class="about-card ac3"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Generative AI</span></div>
+          <div class="about-card ac4"><i class="fa-solid fa-graduation-cap"></i><span>Education</span></div>
+          <div class="about-card ac5"><i class="fa-solid fa-scale-balanced"></i><span>Ethics</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-icon"><i class="fa-solid fa-brain"></i></span>
+          <span class="logo-text">AI<span class="logo-accent">Futures</span></span>
+        </a>
+        <p>Exploring the future of artificial intelligence — one article at a time.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="RSS"><i class="fa-solid fa-rss"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul id="footerCategories"></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#latest">Latest Articles</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="admin.html">Admin Panel</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Topics</h4>
+        <div class="footer-tags" id="footerTags"></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 AI Futures. All rights reserved.</p>
+        <p>Built with <i class="fa-solid fa-heart" style="color:#ef4444"></i> for AI enthusiasts</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== BACK TO TOP ===== -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay">
+    <div class="mobile-nav">
+      <div class="mobile-nav-header">
+        <span class="logo-text">AI<span class="logo-accent">Futures</span></span>
+        <button id="mobileNavClose"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <nav class="mobile-nav-links" id="mobileNavLinks"></nav>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

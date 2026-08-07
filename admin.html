@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — AI Futures</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="admin-body">
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div class="admin-login-overlay" id="loginOverlay">
+  <div class="admin-login-card">
+    <div class="login-logo">
+      <i class="fa-solid fa-brain"></i>
+      <span>AI<span>Futures</span></span>
+    </div>
+    <h2>Admin Panel</h2>
+    <p>Enter your password to continue</p>
+    <form id="loginForm">
+      <div class="login-field">
+        <label>Password</label>
+        <div class="password-wrap">
+          <input type="password" id="adminPassword" placeholder="Enter password" autofocus />
+          <button type="button" id="togglePassword"><i class="fa-solid fa-eye"></i></button>
+        </div>
+      </div>
+      <div class="login-error" id="loginError" style="display:none;"></div>
+      <button type="submit" class="btn-login">Login <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+    <a href="index.html" class="back-to-site"><i class="fa-solid fa-arrow-left"></i> Back to website</a>
+  </div>
+</div>
+
+<!-- ===== ADMIN LAYOUT ===== -->
+<div class="admin-layout" id="adminLayout" style="display:none;">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-brand">
+      <i class="fa-solid fa-brain"></i>
+      <span>AI<span>Futures</span></span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active" data-view="dashboard">
+        <i class="fa-solid fa-gauge-high"></i> Dashboard
+      </a>
+      <a href="#" class="sidebar-link" data-view="articles">
+        <i class="fa-solid fa-newspaper"></i> Articles
+      </a>
+      <a href="#" class="sidebar-link" data-view="editor">
+        <i class="fa-solid fa-pen-to-square"></i> New Article
+      </a>
+      <a href="#" class="sidebar-link" data-view="categories">
+        <i class="fa-solid fa-folder-tree"></i> Categories
+      </a>
+      <a href="#" class="sidebar-link" data-view="settings">
+        <i class="fa-solid fa-gear"></i> Settings
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" class="sidebar-link"><i class="fa-solid fa-globe"></i> View Site</a>
+      <button class="sidebar-link btn-logout" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="admin-main">
+    <!-- Top Bar -->
+    <div class="admin-topbar">
+      <button class="sidebar-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-actions">
+        <span class="topbar-status" id="topbarStatus"></span>
+        <a href="#" class="topbar-btn" data-view="editor" id="newArticleBtn">
+          <i class="fa-solid fa-plus"></i> New Article
+        </a>
+      </div>
+    </div>
+
+    <!-- ===== DASHBOARD VIEW ===== -->
+    <div class="admin-view" id="view-dashboard">
+      <div class="view-header">
+        <h1>Dashboard</h1>
+        <p>Welcome back! Here's an overview of your blog.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-icon blue"><i class="fa-solid fa-newspaper"></i></div>
+          <div class="stat-card-info">
+            <div class="stat-card-num" id="dash-total">0</div>
+            <div class="stat-card-label">Total Articles</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon green"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="stat-card-info">
+            <div class="stat-card-num" id="dash-published">0</div>
+            <div class="stat-card-label">Published</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon yellow"><i class="fa-solid fa-pencil"></i></div>
+          <div class="stat-card-info">
+            <div class="stat-card-num" id="dash-drafts">0</div>
+            <div class="stat-card-label">Drafts</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon purple"><i class="fa-solid fa-folder-open"></i></div>
+          <div class="stat-card-info">
+            <div class="stat-card-num" id="dash-cats">0</div>
+            <div class="stat-card-label">Categories</div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-bottom">
+        <div class="dash-panel">
+          <h3><i class="fa-solid fa-clock-rotate-left"></i> Latest Articles</h3>
+          <div id="dashLatest"></div>
+        </div>
+        <div class="dash-panel">
+          <h3><i class="fa-solid fa-rotate"></i> Recently Updated</h3>
+          <div id="dashUpdated"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ARTICLES LIST VIEW ===== -->
+    <div class="admin-view" id="view-articles" style="display:none;">
+      <div class="view-header flex-between">
+        <div>
+          <h1>All Articles</h1>
+          <p>Manage, edit, and delete your articles.</p>
+        </div>
+        <button class="btn-primary-admin" data-view="editor" id="newFromList">
+          <i class="fa-solid fa-plus"></i> New Article
+        </button>
+      </div>
+      <div class="articles-toolbar">
+        <input type="text" id="articleSearch" placeholder="Search articles…" class="admin-input" />
+        <select id="articleFilterCat" class="admin-select">
+          <option value="all">All Categories</option>
+        </select>
+        <select id="articleFilterStatus" class="admin-select">
+          <option value="all">All Status</option>
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
+      </div>
+      <div class="articles-table-wrap">
+        <table class="articles-table" id="articlesTable">
+          <thead>
+            <tr>
+              <th>Cover</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="articlesTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== EDITOR VIEW ===== -->
+    <div class="admin-view" id="view-editor" style="display:none;">
+      <div class="view-header flex-between">
+        <div>
+          <h1 id="editorTitle">New Article</h1>
+          <p>Create or edit your article below.</p>
+        </div>
+        <div class="editor-header-actions">
+          <button class="btn-secondary-admin" id="saveDraftBtn"><i class="fa-solid fa-floppy-disk"></i> Save Draft</button>
+          <button class="btn-primary-admin" id="publishBtn"><i class="fa-solid fa-circle-check"></i> Publish</button>
+        </div>
+      </div>
+      <input type="hidden" id="editingArticleId" value="" />
+
+      <div class="editor-layout">
+        <!-- Left: Content -->
+        <div class="editor-content">
+          <!-- Title -->
+          <div class="editor-field">
+            <label>Article Title <span class="required">*</span></label>
+            <input type="text" id="artTitle" class="admin-input large" placeholder="Enter a compelling title…" />
+          </div>
+
+          <!-- Slug -->
+          <div class="editor-field">
+            <label>URL Slug</label>
+            <div class="slug-wrap">
+              <span class="slug-prefix">article.html?slug=</span>
+              <input type="text" id="artSlug" class="admin-input" placeholder="url-friendly-slug" />
+              <button class="btn-icon" id="generateSlug" title="Auto-generate from title"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+            </div>
+          </div>
+
+          <!-- Excerpt -->
+          <div class="editor-field">
+            <label>Excerpt / Summary</label>
+            <textarea id="artExcerpt" class="admin-textarea" rows="3" placeholder="Brief description of the article (used in cards and SEO)…"></textarea>
+          </div>
+
+          <!-- Rich Text Editor -->
+          <div class="editor-field">
+            <label>Content <span class="required">*</span></label>
+            <div class="rte-toolbar" id="rteToolbar">
+              <div class="rte-group">
+                <button class="rte-btn" data-cmd="formatBlock" data-val="h1" title="Heading 1"><b>H1</b></button>
+                <button class="rte-btn" data-cmd="formatBlock" data-val="h2" title="Heading 2"><b>H2</b></button>
+                <button class="rte-btn" data-cmd="formatBlock" data-val="h3" title="Heading 3"><b>H3</b></button>
+                <button class="rte-btn" data-cmd="formatBlock" data-val="p" title="Paragraph"><i class="fa-solid fa-paragraph"></i></button>
+              </div>
+              <div class="rte-group">
+                <button class="rte-btn" data-cmd="bold" title="Bold"><i class="fa-solid fa-bold"></i></button>
+                <button class="rte-btn" data-cmd="italic" title="Italic"><i class="fa-solid fa-italic"></i></button>
+                <button class="rte-btn" data-cmd="underline" title="Underline"><i class="fa-solid fa-underline"></i></button>
+                <button class="rte-btn" data-cmd="strikeThrough" title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
+              </div>
+              <div class="rte-group">
+                <button class="rte-btn" data-cmd="insertUnorderedList" title="Bullet List"><i class="fa-solid fa-list-ul"></i></button>
+                <button class="rte-btn" data-cmd="insertOrderedList" title="Numbered List"><i class="fa-solid fa-list-ol"></i></button>
+                <button class="rte-btn" data-cmd="formatBlock" data-val="blockquote" title="Quote"><i class="fa-solid fa-quote-left"></i></button>
+              </div>
+              <div class="rte-group">
+                <button class="rte-btn" id="rteLink" title="Hyperlink"><i class="fa-solid fa-link"></i></button>
+                <button class="rte-btn" id="rteImage" title="Insert Image"><i class="fa-solid fa-image"></i></button>
+                <button class="rte-btn" id="rteTable" title="Insert Table"><i class="fa-solid fa-table"></i></button>
+                <button class="rte-btn" data-cmd="formatBlock" data-val="pre" title="Code Block"><i class="fa-solid fa-code"></i></button>
+                <button class="rte-btn" id="rteHr" title="Horizontal Line"><i class="fa-solid fa-minus"></i></button>
+              </div>
+              <div class="rte-group">
+                <button class="rte-btn" data-cmd="justifyLeft" title="Align Left"><i class="fa-solid fa-align-left"></i></button>
+                <button class="rte-btn" data-cmd="justifyCenter" title="Align Center"><i class="fa-solid fa-align-center"></i></button>
+                <button class="rte-btn" data-cmd="justifyRight" title="Align Right"><i class="fa-solid fa-align-right"></i></button>
+              </div>
+              <div class="rte-group">
+                <button class="rte-btn" data-cmd="undo" title="Undo"><i class="fa-solid fa-rotate-left"></i></button>
+                <button class="rte-btn" data-cmd="redo" title="Redo"><i class="fa-solid fa-rotate-right"></i></button>
+              </div>
+              <div class="rte-group">
+                <button class="rte-btn" id="rteHtml" title="Edit HTML"><i class="fa-solid fa-code"></i> HTML</button>
+              </div>
+            </div>
+            <div class="rte-editor" id="rteEditor" contenteditable="true" spellcheck="true"></div>
+            <textarea class="rte-source" id="rteSource" style="display:none;" spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <!-- Right: Meta -->
+        <div class="editor-meta">
+          <!-- Cover Image -->
+          <div class="meta-card">
+            <h4><i class="fa-solid fa-image"></i> Cover Image</h4>
+            <div class="cover-upload-area" id="coverUploadArea">
+              <img id="coverPreview" src="" alt="Cover preview" style="display:none;" />
+              <div class="cover-placeholder" id="coverPlaceholder">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p>Click to upload or drag & drop</p>
+                <span>JPG, PNG, WebP — max 5MB</span>
+              </div>
+              <input type="file" id="coverFile" accept="image/*" style="display:none;" />
+            </div>
+            <div class="cover-progress" id="coverProgress" style="display:none;">
+              <div class="progress-bar"><div class="progress-fill" id="coverProgressFill"></div></div>
+              <span id="coverProgressText">Uploading…</span>
+            </div>
+            <div class="cover-url-row">
+              <input type="text" id="artCoverUrl" class="admin-input small" placeholder="Or paste image URL" />
+              <button class="btn-icon" id="useCoverUrl"><i class="fa-solid fa-check"></i></button>
+            </div>
+          </div>
+
+          <!-- Article Info -->
+          <div class="meta-card">
+            <h4><i class="fa-solid fa-circle-info"></i> Article Info</h4>
+            <div class="meta-field">
+              <label>Category <span class="required">*</span></label>
+              <select id="artCategory" class="admin-select full">
+                <option value="">Select category…</option>
+              </select>
+            </div>
+            <div class="meta-field">
+              <label>Status</label>
+              <select id="artStatus" class="admin-select full">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </div>
+            <div class="meta-field">
+              <label>Tags <small>(comma separated)</small></label>
+              <input type="text" id="artTags" class="admin-input" placeholder="AI, Healthcare, Future…" />
+              <div class="tags-preview" id="tagsPreview"></div>
+            </div>
+          </div>
+
+          <!-- Layout Options -->
+          <div class="meta-card">
+            <h4><i class="fa-solid fa-sliders"></i> Layout Options</h4>
+            <div class="meta-field">
+              <label>Image Position</label>
+              <select id="artImagePos" class="admin-select full">
+                <option value="cover">Full Cover (Hero)</option>
+                <option value="top">Top of Content</option>
+                <option value="left">Float Left</option>
+                <option value="right">Float Right</option>
+                <option value="none">No Featured Image</option>
+              </select>
+            </div>
+            <div class="meta-field">
+              <label>Article Layout</label>
+              <select id="artLayout" class="admin-select full">
+                <option value="standard">Standard</option>
+                <option value="wide">Wide (No Sidebar)</option>
+                <option value="compact">Compact</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- SEO -->
+          <div class="meta-card">
+            <h4><i class="fa-solid fa-magnifying-glass"></i> SEO</h4>
+            <div class="meta-field">
+              <label>Meta Description</label>
+              <textarea id="artMetaDesc" class="admin-textarea small" rows="3" placeholder="SEO description (160 chars max)…"></textarea>
+              <span class="char-count" id="metaDescCount">0 / 160</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CATEGORIES VIEW ===== -->
+    <div class="admin-view" id="view-categories" style="display:none;">
+      <div class="view-header flex-between">
+        <div>
+          <h1>Categories</h1>
+          <p>Manage your blog categories and subcategories.</p>
+        </div>
+        <button class="btn-primary-admin" id="newCategoryBtn">
+          <i class="fa-solid fa-plus"></i> New Category
+        </button>
+      </div>
+      <div class="categories-layout">
+        <div class="categories-list-panel" id="categoriesListPanel"></div>
+        <div class="category-form-panel" id="categoryFormPanel">
+          <div class="cat-form-placeholder">
+            <i class="fa-solid fa-folder-plus"></i>
+            <p>Select a category to edit or click "New Category"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SETTINGS VIEW ===== -->
+    <div class="admin-view" id="view-settings" style="display:none;">
+      <div class="view-header">
+        <h1>Settings</h1>
+        <p>Configure your blog and API connections.</p>
+      </div>
+      <div class="settings-grid">
+        <div class="settings-card">
+          <h3><i class="fa-solid fa-table"></i> Google Sheets Database</h3>
+          <div class="meta-field">
+            <label>Spreadsheet ID</label>
+            <input type="text" id="settingsSheetId" class="admin-input" placeholder="Your Google Sheets ID" />
+          </div>
+          <div class="meta-field">
+            <label>Apps Script URL</label>
+            <input type="text" id="settingsScriptUrl" class="admin-input" placeholder="https://script.google.com/macros/s/…" />
+          </div>
+          <div class="meta-field">
+            <label>Connection Status</label>
+            <div class="connection-status" id="connectionStatus">
+              <span class="status-dot offline"></span> Not configured
+            </div>
+          </div>
+          <button class="btn-primary-admin" id="saveSettingsBtn"><i class="fa-solid fa-floppy-disk"></i> Save Settings</button>
+          <button class="btn-secondary-admin" id="testConnectionBtn"><i class="fa-solid fa-wifi"></i> Test Connection</button>
+          <button class="btn-secondary-admin" id="seedDataBtn"><i class="fa-solid fa-database"></i> Seed Default Data</button>
+        </div>
+        <div class="settings-card">
+          <h3><i class="fa-solid fa-image"></i> Image Hosting (ImgBB)</h3>
+          <div class="meta-field">
+            <label>API Key</label>
+            <input type="text" id="settingsImgbbKey" class="admin-input" value="c64bdf9b051e440356c814b990048bd6" />
+          </div>
+          <button class="btn-secondary-admin" id="saveImgbbBtn"><i class="fa-solid fa-floppy-disk"></i> Save Key</button>
+        </div>
+        <div class="settings-card">
+          <h3><i class="fa-solid fa-lock"></i> Security</h3>
+          <div class="meta-field">
+            <label>Change Admin Password</label>
+            <input type="password" id="newPassword" class="admin-input" placeholder="New password" />
+          </div>
+          <div class="meta-field">
+            <input type="password" id="confirmPassword" class="admin-input" placeholder="Confirm new password" />
+          </div>
+          <button class="btn-primary-admin" id="changePasswordBtn"><i class="fa-solid fa-key"></i> Update Password</button>
+        </div>
+        <div class="settings-card setup-guide">
+          <h3><i class="fa-solid fa-book-open"></i> Setup Instructions</h3>
+          <div class="setup-steps" id="setupSteps"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end admin-main -->
+</div><!-- end admin-layout -->
+
+<!-- ===== MODALS ===== -->
+<!-- Link Modal -->
+<div class="modal-overlay" id="linkModal" style="display:none;">
+  <div class="modal">
+    <div class="modal-header"><h3>Insert Hyperlink</h3><button class="modal-close" data-modal="linkModal"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="modal-body">
+      <div class="meta-field"><label>Display Text</label><input type="text" id="linkText" class="admin-input" placeholder="Link text" /></div>
+      <div class="meta-field"><label>URL</label><input type="text" id="linkUrl" class="admin-input" placeholder="https://…" /></div>
+      <div class="meta-field">
+        <label><input type="checkbox" id="linkNewTab" checked /> Open in new tab</label>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-primary-admin" id="insertLinkBtn">Insert Link</button></div>
+  </div>
+</div>
+
+<!-- Image Modal -->
+<div class="modal-overlay" id="imageModal" style="display:none;">
+  <div class="modal">
+    <div class="modal-header"><h3>Insert Image</h3><button class="modal-close" data-modal="imageModal"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="modal-body">
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="upload">Upload</button>
+        <button class="modal-tab" data-tab="url">URL</button>
+      </div>
+      <div class="modal-tab-content" id="imgTabUpload">
+        <div class="img-upload-drop" id="imgUploadDrop">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <p>Click or drag image here</p>
+          <input type="file" id="imgUploadFile" accept="image/*" style="display:none;" />
+        </div>
+        <div class="img-upload-progress" id="imgUploadProgress" style="display:none;">
+          <div class="progress-bar"><div class="progress-fill" id="imgUploadFill"></div></div>
+          <span id="imgUploadText">Uploading…</span>
+        </div>
+      </div>
+      <div class="modal-tab-content" id="imgTabUrl" style="display:none;">
+        <div class="meta-field"><label>Image URL</label><input type="text" id="imgUrl" class="admin-input" placeholder="https://…" /></div>
+      </div>
+      <div class="meta-field"><label>Alt Text</label><input type="text" id="imgAlt" class="admin-input" placeholder="Image description" /></div>
+      <div class="meta-field">
+        <label>Alignment</label>
+        <select id="imgAlign" class="admin-select">
+          <option value="none">None</option>
+          <option value="left">Float Left</option>
+          <option value="center">Center</option>
+          <option value="right">Float Right</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-primary-admin" id="insertImageBtn">Insert Image</button></div>
+  </div>
+</div>
+
+<!-- Table Modal -->
+<div class="modal-overlay" id="tableModal" style="display:none;">
+  <div class="modal modal-sm">
+    <div class="modal-header"><h3>Insert Table</h3><button class="modal-close" data-modal="tableModal"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="modal-body">
+      <div class="table-size-grid" id="tableSizeGrid"></div>
+      <div class="table-size-label" id="tableSizeLabel">0 × 0</div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirm Modal -->
+<div class="modal-overlay" id="deleteModal" style="display:none;">
+  <div class="modal modal-sm">
+    <div class="modal-header"><h3>Confirm Delete</h3><button class="modal-close" data-modal="deleteModal"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="modal-body"><p id="deleteModalMsg">Are you sure you want to delete this item? This cannot be undone.</p></div>
+    <div class="modal-footer">
+      <button class="btn-secondary-admin modal-close" data-modal="deleteModal">Cancel</button>
+      <button class="btn-danger-admin" id="confirmDeleteBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
