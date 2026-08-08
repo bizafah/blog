@@ -5,11 +5,11 @@
 const BLOG_CONFIG = {
   // Google Sheets Configuration
   // Replace SPREADSHEET_ID with your actual Google Sheets ID after setup
-  SPREADSHEET_ID: "YOUR_SPREADSHEET_ID_HERE",
+  SPREADSHEET_ID: "1HA3Wo2L7qO5FxC2yPYJfXN-rR8EWGadVOsILIuwcfCY",
   
   // Google Apps Script Web App URL
   // Replace with your deployed Apps Script URL after setup
-  APPS_SCRIPT_URL: "YOUR_APPS_SCRIPT_URL_HERE",
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbyqVjVBwI6aF5byePKfO82wY6_1BxwWMfQNkcFIWgs9DVqLaIPWv_bT367L18Tz2sz60Q/exec",
 
   // ImgBB API Key
   IMGBB_API_KEY: "c64bdf9b051e440356c814b990048bd6",
