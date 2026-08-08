@@ -81,13 +81,20 @@ const AdminDB = {
 
 // ============================================================
 // GOOGLE SHEETS SYNC
+// Always resolves the script URL from BLOG_CONFIG first,
+// localStorage settings are an optional override.
 // ============================================================
 const SheetsSync = {
-  async pushArticle(article) {
+  getUrl() {
     const settings = AdminDB.getSettings();
-    if (!settings.scriptUrl) return;
+    return settings.scriptUrl || BLOG_CONFIG.APPS_SCRIPT_URL || null;
+  },
+
+  async pushArticle(article) {
+    const url = this.getUrl();
+    if (!url || url === 'YOUR_APPS_SCRIPT_URL_HERE') return;
     try {
-      await fetch(settings.scriptUrl, {
+      await fetch(url, {
         method: 'POST',
         body: JSON.stringify({ action: 'saveArticle', article }),
         headers: { 'Content-Type': 'text/plain' }
@@ -96,10 +103,10 @@ const SheetsSync = {
   },
 
   async pushCategory(cat) {
-    const settings = AdminDB.getSettings();
-    if (!settings.scriptUrl) return;
+    const url = this.getUrl();
+    if (!url || url === 'YOUR_APPS_SCRIPT_URL_HERE') return;
     try {
-      await fetch(settings.scriptUrl, {
+      await fetch(url, {
         method: 'POST',
         body: JSON.stringify({ action: 'saveCategory', category: cat }),
         headers: { 'Content-Type': 'text/plain' }
@@ -108,10 +115,10 @@ const SheetsSync = {
   },
 
   async deleteArticle(id) {
-    const settings = AdminDB.getSettings();
-    if (!settings.scriptUrl) return;
+    const url = this.getUrl();
+    if (!url || url === 'YOUR_APPS_SCRIPT_URL_HERE') return;
     try {
-      await fetch(settings.scriptUrl, {
+      await fetch(url, {
         method: 'POST',
         body: JSON.stringify({ action: 'deleteArticle', id }),
         headers: { 'Content-Type': 'text/plain' }
@@ -120,22 +127,22 @@ const SheetsSync = {
   },
 
   async testConnection() {
-    const settings = AdminDB.getSettings();
-    if (!settings.scriptUrl) return false;
+    const url = this.getUrl();
+    if (!url || url === 'YOUR_APPS_SCRIPT_URL_HERE') return false;
     try {
-      const res = await fetch(`${settings.scriptUrl}?action=ping`, { signal: AbortSignal.timeout(8000) });
+      const res = await fetch(`${url}?action=ping`, { signal: AbortSignal.timeout(8000) });
       const data = await res.json();
       return data.status === 'ok';
     } catch { return false; }
   },
 
   async pullAll() {
-    const settings = AdminDB.getSettings();
-    if (!settings.scriptUrl) return false;
+    const url = this.getUrl();
+    if (!url || url === 'YOUR_APPS_SCRIPT_URL_HERE') return false;
     try {
       const [artRes, catRes] = await Promise.all([
-        fetch(`${settings.scriptUrl}?action=getArticles`),
-        fetch(`${settings.scriptUrl}?action=getCategories`)
+        fetch(`${url}?action=getArticles`, { cache: 'no-store' }),
+        fetch(`${url}?action=getCategories`, { cache: 'no-store' })
       ]);
       const artData = await artRes.json();
       const catData = await catRes.json();
@@ -252,8 +259,36 @@ function initLogin() {
 // ============================================================
 // ADMIN UI INIT
 // ============================================================
-function initAdminUI() {
-  AdminDB.seedData();
+async function initAdminUI() {
+  // Bootstrap settings from BLOG_CONFIG so Sheets sync always works,
+  // even on a fresh browser that has never visited the settings page.
+  const settings = AdminDB.getSettings();
+  let changed = false;
+  if (!settings.scriptUrl && BLOG_CONFIG.APPS_SCRIPT_URL && BLOG_CONFIG.APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+    settings.scriptUrl = BLOG_CONFIG.APPS_SCRIPT_URL;
+    changed = true;
+  }
+  if (!settings.sheetId && BLOG_CONFIG.SPREADSHEET_ID && BLOG_CONFIG.SPREADSHEET_ID !== 'YOUR_SPREADSHEET_ID_HERE') {
+    settings.sheetId = BLOG_CONFIG.SPREADSHEET_ID;
+    changed = true;
+  }
+  if (!settings.imgbbKey) {
+    settings.imgbbKey = BLOG_CONFIG.IMGBB_API_KEY;
+    changed = true;
+  }
+  if (changed) AdminDB.saveSettings(settings);
+
+  // Pull fresh data from Google Sheets so dashboard reflects live content
+  const url = SheetsSync.getUrl();
+  if (url && url !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+    setTopbarStatus('Syncing…', 'saving');
+    await SheetsSync.pullAll();
+    setTopbarStatus('Synced ✓', 'saved');
+    setTimeout(() => setTopbarStatus(''), 2500);
+  } else {
+    AdminDB.seedData();
+  }
+
   initSidebar();
   initSidebarToggle();
   initLogout();
@@ -1179,7 +1214,9 @@ function renderSettings() {
 
   renderSetupSteps();
   initSettingsButtons();
-  updateConnectionStatus(settings.scriptUrl ? 'configured' : 'offline');
+  // Show correct status — check BLOG_CONFIG too, not just localStorage
+  const activeUrl = SheetsSync.getUrl();
+  updateConnectionStatus(activeUrl && activeUrl !== 'YOUR_APPS_SCRIPT_URL_HERE' ? 'configured' : 'offline');
 }
 
 function initSettingsButtons() {
@@ -1191,6 +1228,9 @@ function initSettingsButtons() {
       s.sheetId   = document.getElementById('settingsSheetId').value.trim();
       s.scriptUrl = document.getElementById('settingsScriptUrl').value.trim();
       AdminDB.saveSettings(s);
+      // Also update BLOG_CONFIG in memory so SheetsSync.getUrl() uses it immediately
+      if (s.scriptUrl) BLOG_CONFIG.APPS_SCRIPT_URL = s.scriptUrl;
+      if (s.sheetId)   BLOG_CONFIG.SPREADSHEET_ID  = s.sheetId;
       showToast('Settings saved!');
       updateConnectionStatus(s.scriptUrl ? 'configured' : 'offline');
     });

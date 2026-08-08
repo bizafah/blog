@@ -88,16 +88,25 @@ const DB = {
 
 // ============================================================
 // GOOGLE SHEETS API LAYER
+// Always uses BLOG_CONFIG.APPS_SCRIPT_URL — never depends on
+// localStorage being pre-configured. This ensures every browser,
+// device, and account sees the same centralized data.
 // ============================================================
 const SheetsAPI = {
-  async fetchArticles() {
+  // Get the script URL from config (hardcoded) with localStorage as override
+  getUrl() {
     const settings = DB.getSettings();
-    if (!settings.scriptUrl) return null;
+    return settings.scriptUrl || BLOG_CONFIG.APPS_SCRIPT_URL || null;
+  },
+
+  async fetchArticles() {
+    const url = this.getUrl();
+    if (!url || url === 'YOUR_APPS_SCRIPT_URL_HERE') return null;
     try {
-      const res = await fetch(`${settings.scriptUrl}?action=getArticles`);
+      const res = await fetch(`${url}?action=getArticles`, { cache: 'no-store' });
       if (!res.ok) return null;
       const data = await res.json();
-      if (data.articles) {
+      if (data.articles && Array.isArray(data.articles) && data.articles.length > 0) {
         localStorage.setItem(DB.KEY_ARTICLES, JSON.stringify(data.articles));
         return data.articles;
       }
@@ -106,18 +115,27 @@ const SheetsAPI = {
   },
 
   async fetchCategories() {
-    const settings = DB.getSettings();
-    if (!settings.scriptUrl) return null;
+    const url = this.getUrl();
+    if (!url || url === 'YOUR_APPS_SCRIPT_URL_HERE') return null;
     try {
-      const res = await fetch(`${settings.scriptUrl}?action=getCategories`);
+      const res = await fetch(`${url}?action=getCategories`, { cache: 'no-store' });
       if (!res.ok) return null;
       const data = await res.json();
-      if (data.categories) {
+      if (data.categories && Array.isArray(data.categories) && data.categories.length > 0) {
         localStorage.setItem(DB.KEY_CATEGORIES, JSON.stringify(data.categories));
         return data.categories;
       }
     } catch { return null; }
     return null;
+  },
+
+  // Fetch both in parallel, return true if at least articles loaded
+  async fetchAll() {
+    const [articles, categories] = await Promise.all([
+      this.fetchArticles(),
+      this.fetchCategories()
+    ]);
+    return { articles, categories };
   }
 };
 
@@ -256,20 +274,29 @@ function filterByCategory(categoryId) {
 // HOMEPAGE INIT
 // ============================================================
 async function initHomepage() {
-  // Seed data if needed
-  DB.seedIfEmpty();
+  // Show a loading state while fetching
+  showPageLoader(true);
 
-  // Try to refresh from Google Sheets in background
-  const settings = DB.getSettings();
-  if (settings.scriptUrl) {
-    SheetsAPI.fetchArticles().catch(() => {});
-    SheetsAPI.fetchCategories().catch(() => {});
+  // ALWAYS try Google Sheets first — this is the single source of truth
+  // for every browser and device. Only fall back to local data if Sheets
+  // is unreachable (no internet, script not set up, etc.)
+  const sheetsUrl = SheetsAPI.getUrl();
+
+  if (sheetsUrl && sheetsUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+    await SheetsAPI.fetchAll();
+    // fetchAll() already wrote results into localStorage, so DB.get*() below
+    // will return the fresh Sheets data automatically
+  } else {
+    // No Sheets configured — use local seed so the site still shows content
+    DB.seedIfEmpty();
   }
 
-  const articles = DB.getPublishedArticles();
+  showPageLoader(false);
+
+  const articles   = DB.getPublishedArticles();
   const categories = DB.getCategories();
 
-  // Sort by date desc
+  // Sort newest first
   articles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   renderHero(articles, categories);
@@ -280,6 +307,21 @@ async function initHomepage() {
   renderArticlesGrid(articles, categories);
   renderFooter(categories, articles);
   updateHeroStats(articles, categories);
+}
+
+function showPageLoader(show) {
+  let loader = document.getElementById('pageLoader');
+  if (!loader) {
+    loader = document.createElement('div');
+    loader.id = 'pageLoader';
+    loader.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#3b82f6,#8b5cf6,#3b82f6);background-size:200%;animation:shimmer 1.2s linear infinite;z-index:9999;transition:opacity 0.4s;';
+    const style = document.createElement('style');
+    style.textContent = '@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}';
+    document.head.appendChild(style);
+    document.body.prepend(loader);
+  }
+  loader.style.opacity = show ? '1' : '0';
+  if (!show) setTimeout(() => loader.remove(), 500);
 }
 
 function renderHero(articles, categories) {
@@ -610,7 +652,13 @@ function initNewsletter() {
 // ============================================================
 // ARTICLE PAGE — FOOTER CATEGORIES (shared)
 // ============================================================
-function initSharedFooter() {
+async function initSharedFooter() {
+  // Sync from Sheets so nav/footer categories are always up to date
+  const sheetsUrl = SheetsAPI.getUrl();
+  if (sheetsUrl && sheetsUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+    await SheetsAPI.fetchCategories();
+  }
+
   const categories = DB.getCategories();
   const articles   = DB.getPublishedArticles();
   renderFooter(categories, articles);
