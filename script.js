@@ -387,8 +387,10 @@ function renderNavCategories(categories) {
       <a href="index.html">Home</a>
       <div style="padding:10px 14px;font-size:0.75rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-top:8px;">Categories</div>
       ${categories.map(cat => `<a onclick="filterByCategory('${cat.id}');closeMobileNav()">${cat.name}</a>`).join('')}
+      <a href="index.html#services" onclick="closeMobileNav()">Services</a>
       <a href="index.html#latest" onclick="closeMobileNav()">Latest Articles</a>
-      <a href="index.html#about" onclick="closeMobileNav()">About</a>
+      <a href="index.html#about-us" onclick="closeMobileNav()">About Us</a>
+      <a href="index.html#contact" onclick="closeMobileNav()">Contact</a>
       <a href="admin.html">Admin Panel</a>`;
   }
 }
@@ -640,12 +642,31 @@ function initNewsletter() {
     e.preventDefault();
     const input = form.querySelector('input[type="email"]');
     if (input && input.value) {
-      // Store subscriber locally
       const subs = JSON.parse(localStorage.getItem('aifutures_subscribers') || '[]');
       if (!subs.includes(input.value)) subs.push(input.value);
       localStorage.setItem('aifutures_subscribers', JSON.stringify(subs));
       form.innerHTML = `<p style="color:#10b981;font-weight:600;font-size:1rem;"><i class="fa-solid fa-circle-check"></i> Thanks for subscribing! Welcome to AI Futures.</p>`;
     }
+  });
+}
+
+// ============================================================
+// CONTACT FORM
+// ============================================================
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…'; }
+    // Simulate send (replace with actual backend/EmailJS integration later)
+    setTimeout(() => {
+      const success = document.getElementById('cfSuccess');
+      if (success) success.style.display = 'flex';
+      form.reset();
+      if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane"></i>'; }
+    }, 1200);
   });
 }
 
@@ -679,8 +700,10 @@ async function initSharedFooter() {
     mobileLinks.innerHTML = `
       <a href="index.html">Home</a>
       ${categories.map(cat => `<a href="index.html#categories">${cat.name}</a>`).join('')}
+      <a href="index.html#services">Services</a>
       <a href="index.html#latest">Latest Articles</a>
-      <a href="index.html#about">About</a>
+      <a href="index.html#about-us">About Us</a>
+      <a href="index.html#contact">Contact</a>
       <a href="admin.html">Admin Panel</a>`;
   }
 }
@@ -700,6 +723,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHomepage();
     initLoadMore();
     initNewsletter();
+    initContactForm();
 
     // Check if returning from category filter
     const savedFilter = sessionStorage.getItem('filterCat');
