@@ -645,7 +645,7 @@ function initNewsletter() {
       const subs = JSON.parse(localStorage.getItem('aifutures_subscribers') || '[]');
       if (!subs.includes(input.value)) subs.push(input.value);
       localStorage.setItem('aifutures_subscribers', JSON.stringify(subs));
-      form.innerHTML = `<p style="color:#10b981;font-weight:600;font-size:1rem;"><i class="fa-solid fa-circle-check"></i> Thanks for subscribing! Welcome to AI Futures.</p>`;
+      form.innerHTML = `<p style="color:#10b981;font-weight:600;font-size:1rem;"><i class="fa-solid fa-circle-check"></i> Thanks for subscribing! Welcome to AI Reportly.</p>`;
     }
   });
 }
@@ -660,13 +660,109 @@ function initContactForm() {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
     if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…'; }
-    // Simulate send (replace with actual backend/EmailJS integration later)
     setTimeout(() => {
       const success = document.getElementById('cfSuccess');
       if (success) success.style.display = 'flex';
       form.reset();
       if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane"></i>'; }
     }, 1200);
+  });
+}
+
+// ============================================================
+// MISSION WHEEL — 3D drum scroll (all 3 cards always visible)
+// ============================================================
+function initMissionWheel() {
+  const drum  = document.getElementById('mwheelDrum');
+  const upBtn = document.getElementById('mwheelUp');
+  const dnBtn = document.getElementById('mwheelDown');
+  if (!drum) return;
+
+  const CARD_H  = 140; // px — must match CSS height
+  const GAP     = 14;  // px — must match CSS gap
+  const STEP    = CARD_H + GAP;
+  const TOTAL   = 3;
+  let current   = 0;
+  let autoTimer;
+
+  const cards = Array.from(drum.querySelectorAll('.mwheel-card'));
+  const dots  = Array.from(document.querySelectorAll('.mwheel-dot'));
+
+  // Position drum so the active card sits in the middle slot (slot index 1)
+  // When current=0: translateY(0) → card 0 is at top, we want it centred → shift down by STEP
+  // When current=1: shift down by 0
+  // When current=2: shift up by STEP
+  function getTranslate(idx) {
+    // Centre offset: window shows 3 cards; active goes to slot 1 (0-indexed)
+    return (1 - idx) * STEP;
+  }
+
+  function render(idx) {
+    current = ((idx % TOTAL) + TOTAL) % TOTAL;
+
+    // Move the drum
+    drum.style.transform = `translateY(${getTranslate(current)}px)`;
+
+    // Apply state classes
+    cards.forEach((card, i) => {
+      card.classList.remove('mwheel-active', 'mwheel-prev', 'mwheel-next');
+      const diff = ((i - current) + TOTAL) % TOTAL;
+      if (diff === 0)            card.classList.add('mwheel-active');
+      else if (diff === TOTAL-1) card.classList.add('mwheel-prev');  // wraps = above
+      else                       card.classList.add('mwheel-next');  // below
+    });
+
+    // Dots
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(() => render(current + 1), 3200);
+  }
+  function stopAuto() { clearInterval(autoTimer); }
+
+  // Init
+  render(0);
+  startAuto();
+
+  upBtn.addEventListener('click', () => { stopAuto(); render(current - 1); startAuto(); });
+  dnBtn.addEventListener('click', () => { stopAuto(); render(current + 1); startAuto(); });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => { stopAuto(); render(i); startAuto(); });
+  });
+
+  // Touch / swipe support
+  let touchStartY = 0;
+  drum.closest('.mwheel-wrap').addEventListener('touchstart', e => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  drum.closest('.mwheel-wrap').addEventListener('touchend', e => {
+    const delta = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(delta) > 30) {
+      stopAuto();
+      render(current + (delta > 0 ? 1 : -1));
+      startAuto();
+    }
+  }, { passive: true });
+}
+
+// ============================================================
+// TERMS ACCORDION
+// ============================================================
+function initTermsAccordion() {
+  const items = document.querySelectorAll('.ta-item');
+  items.forEach(item => {
+    const toggle = item.querySelector('.ta-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // Close all
+      items.forEach(i => i.classList.remove('open'));
+      // Toggle clicked
+      if (!isOpen) item.classList.add('open');
+    });
   });
 }
 
@@ -724,6 +820,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initLoadMore();
     initNewsletter();
     initContactForm();
+    initMissionWheel();
+    initTermsAccordion();
 
     // Check if returning from category filter
     const savedFilter = sessionStorage.getItem('filterCat');

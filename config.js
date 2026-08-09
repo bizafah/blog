@@ -18,7 +18,7 @@ const BLOG_CONFIG = {
   ADMIN_PASSWORD: "1234",
 
   // Blog Meta
-  BLOG_NAME: "AI Futures",
+  BLOG_NAME: "AI Reportly",
   BLOG_TAGLINE: "Exploring the Future of Artificial Intelligence",
   BLOG_DESCRIPTION: "In-depth articles on AI in Healthcare, Future Jobs, Generative AI, Education, and Ethics.",
 

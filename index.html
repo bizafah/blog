@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Futures — The Future of Artificial Intelligence</title>
+  <title>AI Reportly — The Future of Artificial Intelligence</title>
   <meta name="description" content="In-depth articles on AI in Healthcare, Future Jobs, Generative AI, Education, and Ethics." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,7 +17,7 @@
     <div class="container header-inner">
       <a href="index.html" class="logo">
         <span class="logo-icon"><i class="fa-solid fa-brain"></i></span>
-        <span class="logo-text">AI<span class="logo-accent">Futures</span></span>
+        <span class="logo-text">AI<span class="logo-accent">Reportly</span></span>
       </a>
       <nav class="main-nav" id="mainNav">
         <a href="index.html" class="nav-link active">Home</a>
@@ -85,26 +85,28 @@
     <div class="container">
       <div class="about-us-grid">
         <div class="about-us-text">
-          <div class="section-badge">Who We Are</div>
-          <h2 class="section-title" style="text-align:left;">We Write About the AI That's<br/><span class="gradient-text">Shaping Your World</span></h2>
-          <p>AI Futures is an independent media publication dedicated to covering artificial intelligence in plain language. We bridge the gap between cutting-edge research and the people whose lives it affects — professionals, students, entrepreneurs, and curious minds everywhere.</p>
+          <div class="section-badge">About Us</div>
+          <h2 class="section-title" style="text-align:left;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;">We Write About the AI That's<br/><span class="gradient-text">Shaping Your World</span></h2>
+          <p>AI Reportly is an independent media publication dedicated to covering artificial intelligence in plain language. We bridge the gap between cutting-edge research and the people whose lives it affects — professionals, students, entrepreneurs, and curious minds everywhere.</p>
           <p>Our editorial team combines expertise in technology journalism, data science, and digital ethics to deliver content that is accurate, balanced, and genuinely useful. We don't just cover what AI can do — we explore what it means.</p>
+
           <div class="about-us-stats">
             <div class="au-stat">
-              <span class="au-stat-num">50+</span>
-              <span class="au-stat-label">Articles Published</span>
+              <span class="au-stat-num">100%</span>
+              <span class="au-stat-label">Free to Read</span>
             </div>
             <div class="au-stat-div"></div>
             <div class="au-stat">
-              <span class="au-stat-num">5</span>
-              <span class="au-stat-label">AI Domains Covered</span>
+              <span class="au-stat-num">Weekly</span>
+              <span class="au-stat-label">New Content</span>
             </div>
             <div class="au-stat-div"></div>
             <div class="au-stat">
-              <span class="au-stat-num">2026</span>
-              <span class="au-stat-label">Always Current</span>
+              <span class="au-stat-num">0 Ads</span>
+              <span class="au-stat-label">No Distractions</span>
             </div>
           </div>
+
           <div class="about-us-socials">
             <span style="color:var(--muted);font-size:0.85rem;font-weight:600;">Follow us:</span>
             <a href="https://www.instagram.com/ai_futures0/" target="_blank" rel="noopener" aria-label="Instagram" class="au-social instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -115,23 +117,66 @@
             <a href="https://www.pinterest.com/AIfutures0/" target="_blank" rel="noopener" aria-label="Pinterest" class="au-social pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
           </div>
         </div>
-        <div class="about-us-mission">
-          <div class="mission-card">
-            <div class="mission-icon"><i class="fa-solid fa-bullseye"></i></div>
-            <h3>Our Mission</h3>
-            <p>To make artificial intelligence understandable, accessible, and actionable for every person on the planet — not just technologists.</p>
+
+        <!-- 3D Scroll Wheel Cards -->
+        <div class="mwheel-wrap" aria-label="Our Mission, Vision and Values">
+
+          <!-- Up arrow -->
+          <button class="mwheel-arrow mwheel-arrow--up" id="mwheelUp" aria-label="Previous">
+            <i class="fa-solid fa-chevron-up"></i>
+          </button>
+
+          <!-- The drum -->
+          <div class="mwheel-drum-window">
+          <div class="mwheel-drum" id="mwheelDrum">
+
+            <div class="mwheel-card" data-idx="0">
+              <div class="mwheel-card-inner mwheel-mission">
+                <div class="mwheel-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <div class="mwheel-text">
+                  <h3>Our Mission</h3>
+                  <p>To make artificial intelligence understandable, accessible, and actionable for every person on the planet — not just technologists.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mwheel-card" data-idx="1">
+              <div class="mwheel-card-inner mwheel-vision">
+                <div class="mwheel-icon" style="background:rgba(139,92,246,0.15);color:#8b5cf6;"><i class="fa-solid fa-eye"></i></div>
+                <div class="mwheel-text">
+                  <h3>Our Vision</h3>
+                  <p>A world where everyone can navigate the AI era with confidence, clarity, and an informed perspective on both its promise and its risks.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mwheel-card" data-idx="2">
+              <div class="mwheel-card-inner mwheel-values">
+                <div class="mwheel-icon" style="background:rgba(16,185,129,0.15);color:#10b981;"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="mwheel-text">
+                  <h3>Our Values</h3>
+                  <p>Accuracy first. No hype, no fearmongering. We report on AI honestly — including when the technology falls short of its promises.</p>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- end drum -->
+          </div><!-- end drum-window -->
+
+          <!-- Down arrow -->
+          <button class="mwheel-arrow mwheel-arrow--down" id="mwheelDown" aria-label="Next">
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+
+          <!-- Dots -->
+          <div class="mwheel-dots">
+            <button class="mwheel-dot active" data-idx="0"></button>
+            <button class="mwheel-dot" data-idx="1"></button>
+            <button class="mwheel-dot" data-idx="2"></button>
           </div>
-          <div class="mission-card">
-            <div class="mission-icon" style="background:rgba(139,92,246,0.15);color:#8b5cf6;"><i class="fa-solid fa-eye"></i></div>
-            <h3>Our Vision</h3>
-            <p>A world where everyone can navigate the AI era with confidence, clarity, and an informed perspective on both its promise and its risks.</p>
-          </div>
-          <div class="mission-card">
-            <div class="mission-icon" style="background:rgba(16,185,129,0.15);color:#10b981;"><i class="fa-solid fa-shield-halved"></i></div>
-            <h3>Our Values</h3>
-            <p>Accuracy first. No hype, no fearmongering. We report on AI honestly — including when the technology falls short of its promises.</p>
-          </div>
+
         </div>
+
       </div>
     </div>
   </section>
@@ -139,27 +184,13 @@
   <!-- ===== DISCLAIMER ===== -->
   <section class="section" id="disclaimer">
     <div class="container">
-      <div class="legal-section-wrap">
-        <div class="legal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-        <div class="legal-badge">Disclaimer</div>
-        <h2 class="section-title" style="text-align:center;">Important Disclaimer</h2>
-        <div class="legal-content">
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-circle-info"></i> General Information Only</h4>
-            <p>The content published on AI Futures is intended for general informational and educational purposes only. Nothing on this website constitutes professional advice — whether legal, financial, medical, technical, or otherwise. Always consult a qualified professional before making decisions based on information found here.</p>
-          </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-rotate"></i> Accuracy &amp; Currency</h4>
-            <p>The field of artificial intelligence evolves rapidly. While we strive to keep our content accurate and up to date, we cannot guarantee that all information is complete, current, or free from error. AI Futures expressly disclaims liability for any errors, omissions, or outdated information.</p>
-          </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-link"></i> Third-Party Links</h4>
-            <p>Our articles may contain links to external websites and third-party resources. These links are provided for convenience only. AI Futures does not endorse, control, or assume responsibility for the content, privacy practices, or accuracy of any third-party site.</p>
-          </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-comment-dots"></i> Opinions &amp; Views</h4>
-            <p>Opinions expressed in articles and editorials are those of the individual authors and do not necessarily represent the official position of AI Futures as a publication. Readers are encouraged to exercise their own judgment and verify information independently.</p>
-          </div>
+      <div class="disclaimer-wrap">
+        <div class="disclaimer-label"><i class="fa-solid fa-triangle-exclamation"></i> Disclaimer</div>
+        <h2 class="disclaimer-title">Important Disclaimer</h2>
+        <div class="disclaimer-body">
+          <p>The content on AI Reportly is for general informational and educational purposes only and does not constitute professional legal, financial, medical, or technical advice. Always consult a qualified professional before acting on anything you read here.</p>
+          <p>We strive for accuracy, but AI is a fast-moving field and we cannot guarantee every article is complete or current. AI Reportly expressly disclaims liability for errors, omissions, or outdated information. Links to third-party sites are provided for convenience only — we do not endorse or control their content.</p>
+          <p>Views expressed in articles are those of individual authors and do not necessarily represent the position of AI Reportly as a publication.</p>
         </div>
       </div>
     </div>
@@ -290,31 +321,47 @@
   <!-- ===== PRIVACY POLICY ===== -->
   <section class="section section-dark" id="privacy">
     <div class="container">
-      <div class="legal-section-wrap">
-        <div class="legal-icon" style="background:rgba(59,130,246,0.12);color:#3b82f6;"><i class="fa-solid fa-lock"></i></div>
-        <div class="legal-badge">Legal</div>
-        <h2 class="section-title" style="text-align:center;">Privacy Policy</h2>
-        <p style="text-align:center;color:var(--muted);margin-bottom:40px;">Last updated: August 2026</p>
-        <div class="legal-content">
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-database"></i> Information We Collect</h4>
-            <p>When you subscribe to our newsletter, we collect your email address. When you visit the site, we may collect standard usage data such as pages viewed, time on site, and referring URLs through analytics tools. We do not collect sensitive personal information.</p>
+      <div class="privacy-wrap">
+        <div class="privacy-header">
+          <span class="privacy-eyebrow"><i class="fa-solid fa-lock"></i> Legal</span>
+          <h2>Privacy Policy</h2>
+          <p>Last updated: August 2026 &nbsp;·&nbsp; AI Reportly takes your privacy seriously.</p>
+        </div>
+        <div class="privacy-timeline">
+          <div class="pt-item">
+            <div class="pt-marker"><i class="fa-solid fa-database"></i></div>
+            <div class="pt-content">
+              <h4>What We Collect</h4>
+              <p>When you subscribe to our newsletter, we collect your email address. We may also collect standard usage data — pages viewed, time on site, and referring URLs — through analytics tools. We do not collect sensitive personal information.</p>
+            </div>
           </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-gears"></i> How We Use Your Information</h4>
-            <p>Email addresses collected via newsletter signup are used solely to send you updates about new articles and AI Futures content. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+          <div class="pt-item">
+            <div class="pt-marker"><i class="fa-solid fa-gears"></i></div>
+            <div class="pt-content">
+              <h4>How We Use It</h4>
+              <p>Your email is used solely to send you new article updates. We do not sell, rent, or share your data with third parties for marketing. Analytics data is used only to improve our content and site experience.</p>
+            </div>
           </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-cookie-bite"></i> Cookies</h4>
-            <p>AI Futures uses minimal cookies necessary for site functionality. We may use analytics cookies (such as Google Analytics) to understand how visitors interact with our content. You can disable cookies in your browser settings at any time.</p>
+          <div class="pt-item">
+            <div class="pt-marker"><i class="fa-solid fa-cookie-bite"></i></div>
+            <div class="pt-content">
+              <h4>Cookies</h4>
+              <p>We use minimal cookies for site functionality and optional analytics cookies to understand visitor behaviour. You can disable cookies in your browser settings at any time without affecting your ability to read our content.</p>
+            </div>
           </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-user-shield"></i> Your Rights</h4>
-            <p>You have the right to access, correct, or request deletion of any personal data we hold about you. To exercise these rights, contact us at the address below. You may unsubscribe from our newsletter at any time using the link in any email we send.</p>
+          <div class="pt-item">
+            <div class="pt-marker"><i class="fa-solid fa-user-shield"></i></div>
+            <div class="pt-content">
+              <h4>Your Rights</h4>
+              <p>You may access, correct, or request deletion of your personal data at any time by contacting us. You can unsubscribe from our newsletter via the link in any email we send. We honour all requests promptly.</p>
+            </div>
           </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-rotate"></i> Changes to This Policy</h4>
-            <p>We may update this Privacy Policy from time to time. Significant changes will be noted on this page with a revised date. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+          <div class="pt-item">
+            <div class="pt-marker"><i class="fa-solid fa-rotate"></i></div>
+            <div class="pt-content">
+              <h4>Policy Updates</h4>
+              <p>We may update this policy periodically. The revised date at the top of this section reflects the latest version. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -324,31 +371,62 @@
   <!-- ===== TERMS & CONDITIONS ===== -->
   <section class="section" id="terms">
     <div class="container">
-      <div class="legal-section-wrap">
-        <div class="legal-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6;"><i class="fa-solid fa-file-contract"></i></div>
-        <div class="legal-badge">Legal</div>
-        <h2 class="section-title" style="text-align:center;">Terms &amp; Conditions</h2>
-        <p style="text-align:center;color:var(--muted);margin-bottom:40px;">Last updated: August 2026</p>
-        <div class="legal-content">
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-handshake"></i> Acceptance of Terms</h4>
-            <p>By accessing or using AI Futures, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use this website.</p>
+      <div class="terms-wrap">
+        <div class="terms-header">
+          <span class="terms-eyebrow"><i class="fa-solid fa-file-contract"></i> Legal</span>
+          <h2>Terms &amp; Conditions</h2>
+          <p>Last updated: August 2026 &nbsp;·&nbsp; Please read these terms before using AI Reportly.</p>
+        </div>
+        <div class="terms-accordion" id="termsAccordion">
+          <div class="ta-item open">
+            <button class="ta-toggle">
+              <span class="ta-num">01</span>
+              <span class="ta-title">Acceptance of Terms</span>
+              <i class="fa-solid fa-chevron-down ta-chevron"></i>
+            </button>
+            <div class="ta-body">
+              <p>By accessing or using AI Reportly, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use this website.</p>
+            </div>
           </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-copyright"></i> Intellectual Property</h4>
-            <p>All content on AI Futures — including articles, graphics, logos, and design — is the intellectual property of AI Futures or its content contributors. You may not reproduce, distribute, or commercially exploit any content without explicit written permission.</p>
+          <div class="ta-item">
+            <button class="ta-toggle">
+              <span class="ta-num">02</span>
+              <span class="ta-title">Intellectual Property</span>
+              <i class="fa-solid fa-chevron-down ta-chevron"></i>
+            </button>
+            <div class="ta-body">
+              <p>All content on AI Reportly — including articles, graphics, logos, and design — is the intellectual property of AI Reportly or its contributors. You may not reproduce, distribute, or commercially exploit any content without explicit written permission.</p>
+            </div>
           </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-pen-to-square"></i> Acceptable Use</h4>
-            <p>You agree not to use this site for any unlawful purpose, to scrape or harvest content in bulk, to attempt unauthorized access to any part of the site, or to interfere with the site's operation. We reserve the right to restrict access for violations of these terms.</p>
+          <div class="ta-item">
+            <button class="ta-toggle">
+              <span class="ta-num">03</span>
+              <span class="ta-title">Acceptable Use</span>
+              <i class="fa-solid fa-chevron-down ta-chevron"></i>
+            </button>
+            <div class="ta-body">
+              <p>You agree not to use this site for any unlawful purpose, to scrape or harvest content in bulk, to attempt unauthorised access to any part of the site, or to interfere with its operation. We reserve the right to restrict access for violations.</p>
+            </div>
           </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-circle-minus"></i> Limitation of Liability</h4>
-            <p>AI Futures is provided on an "as is" basis. To the fullest extent permitted by law, we disclaim all warranties and shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of this site or its content.</p>
+          <div class="ta-item">
+            <button class="ta-toggle">
+              <span class="ta-num">04</span>
+              <span class="ta-title">Limitation of Liability</span>
+              <i class="fa-solid fa-chevron-down ta-chevron"></i>
+            </button>
+            <div class="ta-body">
+              <p>AI Reportly is provided on an "as is" basis. To the fullest extent permitted by law, we disclaim all warranties and shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of this site or its content.</p>
+            </div>
           </div>
-          <div class="legal-block">
-            <h4><i class="fa-solid fa-scale-balanced"></i> Governing Law</h4>
-            <p>These Terms are governed by applicable law. Any disputes arising from the use of this website shall be subject to the exclusive jurisdiction of the relevant courts. We reserve the right to update these Terms at any time with notice on this page.</p>
+          <div class="ta-item">
+            <button class="ta-toggle">
+              <span class="ta-num">05</span>
+              <span class="ta-title">Governing Law &amp; Updates</span>
+              <i class="fa-solid fa-chevron-down ta-chevron"></i>
+            </button>
+            <div class="ta-body">
+              <p>These Terms are governed by applicable law. We reserve the right to update these Terms at any time with notice on this page. Continued use of the site after changes constitutes your acceptance of the revised Terms.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -375,9 +453,9 @@
   <section class="section section-dark" id="about">
     <div class="container about-layout">
       <div class="about-text">
-        <div class="section-badge">About AI Futures</div>
+        <div class="section-badge">About AI Reportly</div>
         <h2 class="section-title">Your Guide to the AI Revolution</h2>
-        <p>AI Futures is a dedicated publication covering the most important developments in artificial intelligence — from breakthroughs in medical diagnosis to the evolving job market, generative tools, educational transformation, and the critical ethical questions shaping our AI-powered world.</p>
+        <p>AI Reportly is a dedicated publication covering the most important developments in artificial intelligence — from breakthroughs in medical diagnosis to the evolving job market, generative tools, educational transformation, and the critical ethical questions shaping our AI-powered world.</p>
         <p>Our mission: make AI accessible, understandable, and actionable for everyone — whether you're a professional navigating career change, a student exploring opportunities, or simply a curious mind tracking one of the most significant technological shifts in human history.</p>
         <div class="about-features">
           <div class="about-feature"><i class="fa-solid fa-check-circle"></i> In-depth, well-researched articles</div>
@@ -414,7 +492,7 @@
             </div>
             <h4>Email Us</h4>
             <p>For editorial, partnerships, or general enquiries</p>
-            <a href="mailto:contact@aifutures.com" class="contact-link">contact@aifutures.com</a>
+            <a href="mailto:contact@ai-reportly.com" class="contact-link">contact@ai-reportly.com</a>
           </div>
           <div class="contact-card">
             <div class="contact-card-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6;">
@@ -422,7 +500,7 @@
             </div>
             <h4>Services &amp; Collaboration</h4>
             <p>Interested in our AI content services or brand partnerships?</p>
-            <a href="mailto:services@aifutures.com" class="contact-link">services@aifutures.com</a>
+            <a href="mailto:services@ai-reportly.com" class="contact-link">services@ai-reportly.com</a>
           </div>
           <div class="contact-card">
             <div class="contact-card-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">
@@ -485,7 +563,7 @@
       <div class="footer-brand">
         <a href="index.html" class="logo">
           <span class="logo-icon"><i class="fa-solid fa-brain"></i></span>
-          <span class="logo-text">AI<span class="logo-accent">Futures</span></span>
+          <span class="logo-text">AI<span class="logo-accent">Reportly</span></span>
         </a>
         <p>Exploring the future of artificial intelligence — one article at a time.</p>
         <div class="social-links">
@@ -521,7 +599,7 @@
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p>&copy; 2026 AI Futures. All rights reserved.</p>
+        <p>&copy; 2026 AI Reportly. All rights reserved.</p>
         <p>Built with <i class="fa-solid fa-heart" style="color:#ef4444"></i> for AI enthusiasts</p>
       </div>
     </div>
@@ -534,7 +612,7 @@
   <div class="mobile-nav-overlay" id="mobileNavOverlay">
     <div class="mobile-nav">
       <div class="mobile-nav-header">
-        <span class="logo-text">AI<span class="logo-accent">Futures</span></span>
+        <span class="logo-text">AI<span class="logo-accent">Reportly</span></span>
         <button id="mobileNavClose"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <nav class="mobile-nav-links" id="mobileNavLinks"></nav>

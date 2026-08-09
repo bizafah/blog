@@ -1304,7 +1304,7 @@ function renderSetupSteps() {
   const el = document.getElementById('setupSteps');
   if (!el) return;
   const steps = [
-    { title: 'Create Google Sheet', body: 'Go to <a href="https://sheets.google.com" target="_blank" style="color:#3b82f6;">sheets.google.com</a> and create a new spreadsheet. Name it "AI Futures Blog".' },
+    { title: 'Create Google Sheet', body: 'Go to <a href="https://sheets.google.com" target="_blank" style="color:#3b82f6;">sheets.google.com</a> and create a new spreadsheet. Name it "AI Reportly Blog".' },
     { title: 'Create 3 sheets (tabs)', body: 'Rename Sheet1 to <code>Articles</code>, add <code>Categories</code> and <code>Subscribers</code> tabs.' },
     { title: 'Add Headers — Articles', body: '<code>id, title, slug, excerpt, content, tags, metaDesc, coverImage, category, status, imagePos, layout, createdAt, updatedAt, views</code>' },
     { title: 'Add Headers — Categories', body: '<code>id, name, slug, description, color, icon, parent</code>' },

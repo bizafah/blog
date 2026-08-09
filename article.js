@@ -58,7 +58,7 @@ function renderArticleHero(article) {
   }
 
   // Page title & meta description
-  document.title = `${article.title} — AI Futures`;
+  document.title = `${article.title} — AI Reportly`;
   const descMeta = document.getElementById('pageDescription');
   if (descMeta) descMeta.setAttribute('content', article.excerpt || truncate(article.content, 160));
 }
@@ -320,7 +320,7 @@ function initShareButtons(article) {
 // 404 STATE
 // ============================================================
 function renderNotFound() {
-  document.title = 'Article Not Found — AI Futures';
+  document.title = 'Article Not Found — AI Reportly';
   const hero = document.getElementById('articleHero');
   if (hero) {
     hero.style.background = 'var(--bg2)';
