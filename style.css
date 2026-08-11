@@ -75,6 +75,7 @@ p { color: var(--muted); margin-bottom: 1rem; }
 .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg,var(--blue),var(--purple)); border-radius: 8px; display:flex;align-items:center;justify-content:center; font-size:16px; color:#fff; }
 .logo-text { font-size: 1.25rem; font-weight: 800; color: #fff; }
 .logo-accent { color: var(--blue); }
+.logo-img { height: 44px; width: auto; object-fit: contain; display: block; }
 .main-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
 .nav-link { padding: 8px 14px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: var(--trans); display:flex;align-items:center;gap:6px; }
 .nav-link:hover, .nav-link.active { color: #fff; background: rgba(255,255,255,0.07); }
