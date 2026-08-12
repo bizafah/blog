@@ -346,40 +346,51 @@ function renderNotFound() {
 
 // ============================================================
 // BOOT — ARTICLE PAGE
+// Same strategy as homepage: render instantly from localStorage,
+// sync Sheets in background so next load is always fresh.
 // ============================================================
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   const slug = getSlugFromUrl();
   if (!slug) { renderNotFound(); return; }
 
-  // Show a loading shimmer on the hero while we fetch
-  showArticleLoader(true);
-
-  // ALWAYS fetch from Google Sheets first so every browser sees
-  // the same content regardless of what is in localStorage.
-  const sheetsUrl = (BLOG_CONFIG && BLOG_CONFIG.APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE')
-    ? BLOG_CONFIG.APPS_SCRIPT_URL
-    : null;
-
-  if (sheetsUrl) {
-    // Fetch articles and categories in parallel before rendering
-    await Promise.all([
-      SheetsAPI.fetchArticles(),
-      SheetsAPI.fetchCategories()
-    ]);
-  } else {
-    // Sheets not configured — use local seed so site still works offline
-    DB.seedIfEmpty();
+  // ---- Seed categories if needed (first-ever visit) ----
+  if (!localStorage.getItem('aifutures_categories')) {
+    localStorage.setItem('aifutures_categories', JSON.stringify(BLOG_CONFIG.DEFAULT_CATEGORIES));
   }
 
-  showArticleLoader(false);
-
+  // ---- Try to render from localStorage immediately ----
   const article = DB.getArticleBySlug(slug);
-  if (!article || article.status !== 'published') { renderNotFound(); return; }
+  if (article && article.status === 'published') {
+    renderArticle(article);
+  }
 
+  // ---- Background Sheets sync ----
+  const sheetsUrl = (BLOG_CONFIG && BLOG_CONFIG.APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE')
+    ? BLOG_CONFIG.APPS_SCRIPT_URL : null;
+
+  if (sheetsUrl) {
+    Promise.all([SheetsAPI.fetchArticles(), SheetsAPI.fetchCategories()])
+      .then(() => {
+        // If we couldn't render from local data, try again after sync
+        if (!article || article.status !== 'published') {
+          const fresh = DB.getArticleBySlug(slug);
+          if (fresh && fresh.status === 'published') renderArticle(fresh);
+          else renderNotFound();
+        }
+      })
+      .catch(() => {
+        if (!article || article.status !== 'published') renderNotFound();
+      });
+  } else {
+    // No Sheets — if local lookup failed, show 404
+    if (!article || article.status !== 'published') renderNotFound();
+  }
+});
+
+function renderArticle(article) {
   // Increment view counter
-  DB.incrementView(slug);
+  DB.incrementView(article.slug);
 
-  // Render everything
   renderArticleHero(article);
   renderArticleBody(article);
   renderTOC();
@@ -389,30 +400,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderCategoryCard(article);
   initShareButtons(article);
   initReadingProgress();
-
-  // Delay TOC highlight until DOM is painted
   setTimeout(initTOCHighlight, 300);
-});
-
-function showArticleLoader(show) {
-  const heroTitle = document.getElementById('articleHeroTitle');
-  if (heroTitle) {
-    heroTitle.textContent = show ? 'Loading…' : '';
-  }
-  // Top progress bar (reuse the reading-progress bar slot with a shimmer)
-  let bar = document.getElementById('fetchLoader');
-  if (show && !bar) {
-    bar = document.createElement('div');
-    bar.id = 'fetchLoader';
-    bar.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#3b82f6,#8b5cf6,#3b82f6);background-size:200%;animation:shimmer 1.2s linear infinite;z-index:9999;';
-    const style = document.createElement('style');
-    style.textContent = '@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}';
-    document.head.appendChild(style);
-    document.body.prepend(bar);
-  }
-  if (!show && bar) {
-    bar.style.opacity = '0';
-    bar.style.transition = 'opacity 0.4s';
-    setTimeout(() => bar && bar.remove(), 500);
-  }
 }

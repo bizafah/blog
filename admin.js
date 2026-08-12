@@ -259,7 +259,7 @@ function initLogin() {
 // ============================================================
 // ADMIN UI INIT
 // ============================================================
-async function initAdminUI() {
+function initAdminUI() {
   // Bootstrap settings from BLOG_CONFIG so Sheets sync always works,
   // even on a fresh browser that has never visited the settings page.
   const settings = AdminDB.getSettings();
@@ -278,15 +278,17 @@ async function initAdminUI() {
   }
   if (changed) AdminDB.saveSettings(settings);
 
-  // Pull fresh data from Google Sheets so dashboard reflects live content
+  // Pull fresh data from Google Sheets in the background
+  // Don't await — let the dashboard render instantly from localStorage
   const url = SheetsSync.getUrl();
   if (url && url !== 'YOUR_APPS_SCRIPT_URL_HERE') {
-    setTopbarStatus('Syncing…', 'saving');
-    await SheetsSync.pullAll();
-    setTopbarStatus('Synced ✓', 'saved');
-    setTimeout(() => setTopbarStatus(''), 2500);
-  } else {
-    AdminDB.seedData();
+    SheetsSync.pullAll().then(ok => {
+      if (ok) {
+        setTopbarStatus('Synced ✓', 'saved');
+        setTimeout(() => setTopbarStatus(''), 2500);
+        renderDashboard(); // refresh dashboard with latest data
+      }
+    }).catch(() => {});
   }
 
   initSidebar();

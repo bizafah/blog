@@ -272,31 +272,40 @@ function filterByCategory(categoryId) {
 
 // ============================================================
 // HOMEPAGE INIT
+// Strategy:
+//   1. Render instantly from localStorage (0 ms — user sees content immediately)
+//   2. Seed default categories if nothing is stored yet
+//   3. Fetch fresh data from Google Sheets IN THE BACKGROUND
+//   4. When Sheets responds, silently update localStorage so the
+//      NEXT page load picks up the latest articles — no blank waiting
 // ============================================================
 async function initHomepage() {
-  // Show a loading state while fetching
-  showPageLoader(true);
 
-  // ALWAYS try Google Sheets first — this is the single source of truth
-  // for every browser and device. Only fall back to local data if Sheets
-  // is unreachable (no internet, script not set up, etc.)
-  const sheetsUrl = SheetsAPI.getUrl();
-
-  if (sheetsUrl && sheetsUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
-    await SheetsAPI.fetchAll();
-    // fetchAll() already wrote results into localStorage, so DB.get*() below
-    // will return the fresh Sheets data automatically
-  } else {
-    // No Sheets configured — use local seed so the site still shows content
-    DB.seedIfEmpty();
+  // ---- STEP 1: seed categories if this is a brand-new browser ----
+  if (!localStorage.getItem(DB.KEY_CATEGORIES)) {
+    localStorage.setItem(DB.KEY_CATEGORIES, JSON.stringify(BLOG_CONFIG.DEFAULT_CATEGORIES));
   }
 
-  showPageLoader(false);
+  // ---- STEP 2: render immediately from whatever is in localStorage ----
+  renderAll();
 
+  // ---- STEP 3: background sync — don't make the user wait ----
+  const sheetsUrl = SheetsAPI.getUrl();
+  if (sheetsUrl && sheetsUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+    // Fire and forget — no await, no spinner, no blocking
+    SheetsAPI.fetchAll().then(({ articles, categories }) => {
+      // If Sheets returned fresh data, re-render silently
+      if (articles || categories) renderAll();
+    }).catch(() => {
+      // Network error — silently ignore, local data is already showing
+    });
+  }
+}
+
+// Render the full homepage from whatever is currently in localStorage
+function renderAll() {
   const articles   = DB.getPublishedArticles();
   const categories = DB.getCategories();
-
-  // Sort newest first
   articles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   renderHero(articles, categories);
@@ -307,21 +316,6 @@ async function initHomepage() {
   renderArticlesGrid(articles, categories);
   renderFooter(categories, articles);
   updateHeroStats(articles, categories);
-}
-
-function showPageLoader(show) {
-  let loader = document.getElementById('pageLoader');
-  if (!loader) {
-    loader = document.createElement('div');
-    loader.id = 'pageLoader';
-    loader.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#3b82f6,#8b5cf6,#3b82f6);background-size:200%;animation:shimmer 1.2s linear infinite;z-index:9999;transition:opacity 0.4s;';
-    const style = document.createElement('style');
-    style.textContent = '@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}';
-    document.head.appendChild(style);
-    document.body.prepend(loader);
-  }
-  loader.style.opacity = show ? '1' : '0';
-  if (!show) setTimeout(() => loader.remove(), 500);
 }
 
 function renderHero(articles, categories) {
@@ -767,20 +761,14 @@ function initTermsAccordion() {
 }
 
 // ============================================================
-// ARTICLE PAGE — FOOTER CATEGORIES (shared)
+// ARTICLE PAGE — FOOTER / NAV (shared, non-blocking)
 // ============================================================
-async function initSharedFooter() {
-  // Sync from Sheets so nav/footer categories are always up to date
-  const sheetsUrl = SheetsAPI.getUrl();
-  if (sheetsUrl && sheetsUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
-    await SheetsAPI.fetchCategories();
-  }
-
+function initSharedFooter() {
+  // Render nav/footer instantly from localStorage
   const categories = DB.getCategories();
   const articles   = DB.getPublishedArticles();
   renderFooter(categories, articles);
 
-  // Nav categories dropdown
   const navCats = document.getElementById('navCategories');
   if (navCats) {
     navCats.innerHTML = categories.map(cat => `
@@ -790,7 +778,6 @@ async function initSharedFooter() {
       </a>`).join('');
   }
 
-  // Mobile nav
   const mobileLinks = document.getElementById('mobileNavLinks');
   if (mobileLinks) {
     mobileLinks.innerHTML = `
@@ -801,6 +788,12 @@ async function initSharedFooter() {
       <a href="index.html#about-us">About Us</a>
       <a href="index.html#contact">Contact</a>
       <a href="admin.html">Admin Panel</a>`;
+  }
+
+  // Background sync — quietly refresh categories for next load
+  const sheetsUrl = SheetsAPI.getUrl();
+  if (sheetsUrl && sheetsUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+    SheetsAPI.fetchCategories().catch(() => {});
   }
 }
 
