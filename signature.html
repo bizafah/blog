@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Noir | VELIRRA</title>
+    <meta name="description" content="Velirra Signature Noir — A luxurious woody-amber fragrance. Oud, incense, benzoin, raspberry. 12–24+ hour longevity.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ── PAGE-LEVEL OVERRIDES ── */
+        body { background: #080808; }
+        .main-header { background: #0d0d0d; border-bottom: 1px solid rgba(197,160,89,0.15); }
+        .main-header .logo a, .nav-menu a, .header-actions a { color: #e8e0d0; }
+        .nav-menu a:hover, .nav-menu a.active { color: #c5a059; }
+        .top-bar { background: #0d0d0d; border-bottom: 1px solid rgba(197,160,89,0.2); color: #c5a059; letter-spacing: 0.15em; }
+
+        /* ── TEXT MASK HERO ── */
+        .sig-hero {
+            background: #080808;
+            padding: 80px 40px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+        .sig-hero-eyebrow {
+            font-size: 0.68rem;
+            letter-spacing: 0.35em;
+            color: #c5a059;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .sig-mask-wrap { line-height: 0.9; margin-bottom: 0; }
+        .sig-mask-text {
+            font-size: clamp(72px, 14vw, 200px);
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background-image: url('masked_txt.png');
+            background-size: cover;
+            background-position: center 60%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: inline-block;
+            filter: brightness(1.2) contrast(1.15) saturate(1.1);
+            user-select: none;
+        }
+        .sig-mask-sub {
+            font-size: clamp(18px, 3vw, 38px);
+            font-weight: 300;
+            letter-spacing: 0.55em;
+            text-transform: uppercase;
+            color: #c5a059;
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 60px;
+        }
+
+        /* ── BIG EDITORIAL CARD ── */
+        .sig-card-section {
+            background: #080808;
+            padding: 0 40px 100px;
+        }
+        .sig-card {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #111;
+            border: 1px solid rgba(197,160,89,0.2);
+            border-radius: 6px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+        }
+        /* LEFT — image col (sizing only; slider handles fill) */
+        .sig-card-img-col::after {
+            content: '';
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(to right, transparent 60%, #111 100%);
+            pointer-events: none;
+        }
+        .sig-card-img-badge {
+            position: absolute; top: 28px; left: 28px; z-index: 2;
+            background: linear-gradient(135deg,#b8860b,#ffd700);
+            color: #000; font-size: 0.6rem; font-weight: 800;
+            letter-spacing: 0.25em; padding: 6px 16px;
+            border-radius: 2px; text-transform: uppercase;
+        }
+
+        /* RIGHT — details */
+        .sig-card-details {
+            padding: 56px 52px;
+            color: #e8e0d0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0;
+        }
+        .sig-card-overline {
+            font-size: 0.62rem; letter-spacing: 0.28em;
+            color: #c5a059; font-weight: 700;
+            text-transform: uppercase; margin-bottom: 16px;
+        }
+        .sig-card-title {
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 800; line-height: 1.05;
+            color: #fff; margin-bottom: 6px;
+        }
+        .sig-card-tagline {
+            font-size: 0.8rem; letter-spacing: 0.22em;
+            color: #c5a059; text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+        .sig-card-desc {
+            font-size: 0.88rem; line-height: 1.85;
+            color: #8a8070; margin-bottom: 28px;
+            border-left: 2px solid rgba(197,160,89,0.3);
+            padding-left: 16px;
+        }
+        /* family tags */
+        .sig-card-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 28px; }
+        .sig-card-tags span {
+            font-size: 0.62rem; letter-spacing: 0.12em;
+            text-transform: uppercase; color: #c5a059;
+            border: 1px solid rgba(197,160,89,0.3);
+            padding: 4px 12px; border-radius: 20px;
+        }
+        /* notes */
+        .sig-notes { margin-bottom: 26px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .sig-note-row {
+            display: flex; align-items: baseline; gap: 14px;
+            padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .sig-note-label {
+            min-width: 46px; font-size: 0.6rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: #c5a059; font-weight: 700;
+        }
+        .sig-note-val { font-size: 0.82rem; color: #b8b0a0; }
+        /* performance pills */
+        .sig-perf { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+        .sig-perf-pill {
+            background: rgba(197,160,89,0.08);
+            border: 1px solid rgba(197,160,89,0.2);
+            border-radius: 4px; padding: 10px 16px;
+            display: flex; flex-direction: column; gap: 2px;
+        }
+        .sig-perf-pill strong {
+            font-size: 0.6rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: #c5a059;
+        }
+        .sig-perf-pill span { font-size: 0.78rem; color: #8a8070; }
+        /* price + CTA */
+        .sig-card-cta {
+            display: flex; align-items: center;
+            gap: 24px; flex-wrap: wrap;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .sig-price-block { display: flex; flex-direction: column; gap: 2px; }
+        .sig-price-label { font-size: 0.58rem; letter-spacing: 0.2em; color: #555; text-transform: uppercase; }
+        .sig-price-amount {
+            font-size: 2rem; font-weight: 800;
+            color: #c5a059; letter-spacing: 0.02em;
+        }
+        .sig-cart-btn {
+            flex: 1; min-width: 160px;
+            background: linear-gradient(135deg, #c5a059, #8a5e20);
+            color: #000; border: none;
+            padding: 16px 32px;
+            font-size: 0.7rem; letter-spacing: 0.22em;
+            font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif;
+            text-transform: uppercase; cursor: pointer;
+            border-radius: 3px; transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .sig-cart-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(197,160,89,0.4); }
+        .sig-cart-btn:active { transform: translateY(0); }
+
+        /* ── IMAGE SLIDER ── */
+        /* Col must be a positioned container with a real height */
+        .sig-card-img-col {
+            position: relative;
+            min-height: 600px;
+            /* stretch to fill the grid row */
+            align-self: stretch;
+        }
+        .sig-img-slider {
+            position: absolute;
+            inset: 0;                 /* fills col exactly — no blank space */
+            overflow: hidden;
+        }
+        .sig-img-slider .slides {
+            display: flex;
+            height: 100%;
+            /* each slide is 100% of the slider width */
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+        .sig-img-slider .slide {
+            min-width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+        }
+        .sig-img-slider .slide img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.88) contrast(1.08);
+        }
+
+        /* responsive */
+        @media (max-width: 960px) {
+            .sig-card { grid-template-columns: 1fr; }
+            .sig-card-img-col { min-height: 400px; }
+            .sig-card-img-col::after { background: linear-gradient(to bottom, transparent 60%, #111 100%); }
+            .sig-card-details { padding: 40px 32px; }
+            .sig-hero { padding: 60px 24px 0; }
+            .sig-card-section { padding: 0 24px 80px; }
+        }
+        @media (max-width: 540px) {
+            .sig-hero {
+                overflow: visible;
+                padding-left: 16px;
+                padding-right: 16px;
+                text-align: left;
+            }
+            .sig-mask-wrap { overflow: visible; text-align: left; }
+            .sig-mask-text {
+                font-size: clamp(42px, 13vw, 68px);
+                letter-spacing: 0;          /* kill spacing — the main overflow culprit */
+                display: block;
+                text-align: left;
+                width: 100%;
+            }
+            .sig-mask-sub {
+                letter-spacing: 0.25em;
+                font-size: clamp(14px, 4vw, 22px);
+                text-align: left;
+            }
+            .sig-hero-eyebrow { letter-spacing: 0.08em; font-size: 0.58rem; text-align: left; }
+            .sig-card-details { padding: 32px 24px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar"><p>✦ VELIRRA SIGNATURE — THE PINNACLE OF THE COLLECTION</p></div>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html"><img src="logo.png" alt="VELIRRA" id="main-logo"></a>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="gents.html">GENTS</a></li>
+                    <li><a href="ladies.html">LADIES</a></li>
+                    <li><a href="unisex.html">UNISEX</a></li>
+                    <li><a href="premium.html">PREMIUM</a></li>
+                    <li><a href="signature.html" class="active">SIGNATURE</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="#" aria-label="Search" class="search-trigger"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#" aria-label="Cart" class="cart-trigger">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-overlay">
+        <div class="search-container">
+            <div class="search-header">
+                <input type="text" id="search-input" placeholder="Search for perfumes, notes, inspirations...">
+                <button class="close-search"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
+
+    <div class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>YOUR CART</h3>
+            <button class="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <div class="empty-cart-msg">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="promo-section">
+                <input type="text" id="promo-input" placeholder="Promo Code">
+                <button id="apply-promo">APPLY</button>
+            </div>
+            <div id="discount-row" style="display:none;justify-content:space-between;margin-bottom:10px;color:#e74c3c;font-weight:600;">
+                <span>Discount (20%):</span><span id="discount-amount">-₨ 0</span>
+            </div>
+            <div id="delivery-row" style="display:none;justify-content:space-between;margin-bottom:10px;font-weight:600;">
+                <span>Delivery Charges:</span><span>₨ 200</span>
+            </div>
+            <div class="cart-total"><span>Total:</span><span id="cart-subtotal">₨ 0</span></div>
+            <button class="checkout-btn">CHECKOUT</button>
+        </div>
+    </div>
+
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>DELIVERY DETAILS</h3>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="checkout-form">
+                <div class="form-group"><label>Phone Number *</label><input type="tel" id="checkout-phone" placeholder="e.g. 03001234567" required></div>
+                <div class="form-group"><label>Full Delivery Address *</label><textarea id="checkout-address" placeholder="House #, Street, Area, City" required></textarea></div>
+                <div class="form-group"><label>Postal Code (Optional)</label><input type="text" id="checkout-postal" placeholder="e.g. 46000"></div>
+                <div class="form-group"><label>Google Map Link (Optional)</label><input type="url" id="checkout-location" placeholder="Paste link here"></div>
+                <button type="submit" class="confirm-order-btn">CONFIRM & SEND ON WHATSAPP</button>
+            </form>
+        </div>
+    </div>
+    <div class="drawer-overlay"></div>
+
+    <main>
+        <!-- TEXT-MASK HERO -->
+        <section class="sig-hero">
+            <p class="sig-hero-eyebrow">Velirra · The Signature Collection · 2026</p>
+            <div class="sig-mask-wrap">
+                <span class="sig-mask-text">SIGNATURE</span>
+                <span class="sig-mask-sub">N O I R</span>
+            </div>
+        </section>
+
+        <!-- BIG EDITORIAL CARD -->
+        <section class="sig-card-section">
+            <div class="sig-card">
+
+                <!-- LEFT: Image (auto-crossfade, no arrows) -->
+                <div class="sig-card-img-col">
+                    <span class="sig-card-img-badge">✦ Signature</span>
+                    <div class="sig-img-slider" id="sigSlider">
+                        <div class="slides" id="sigSlides">
+                            <div class="slide">
+                                <img src="noir.jpeg" alt="Velirra Signature Noir">
+                            </div>
+                            <div class="slide">
+                                <img src="box.jpeg" alt="Velirra Signature Noir — Box">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Details -->
+                <div class="sig-card-details">
+
+                    <p class="sig-card-overline">✦ New Arrival · Original Composition · Unisex</p>
+                    <h1 class="sig-card-title">Velirra<br>Signature Noir</h1>
+                    <p class="sig-card-tag="sline">Bold · Resinous · Eternal</p>
+
+                    <p class="sig-card-desc">
+                        A luxurious woody-amber fragrance crafted for those who appreciate depth, sophistication,
+                        and lasting elegance. Rich oud, smoky incense, warm amberwood, and subtle fruity accents
+                        create a bold yet refined composition that leaves a memorable trail from day to night.
+                    </p>
+
+                    <!-- Fragrance Family -->
+                    <div class="sig-card-tags">
+                        <span>Woody Amber</span>
+                        <span>Oud</span>
+                        <span>Smoky</span>
+                        <span>Unisex</span>
+                        <span>Original</span>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="sig-notes">
+                        <div class="sig-note-row">
+                            <span class="sig-note-label">Top</span>
+                            <span class="sig-note-val">Raspberry · Smoky Incense</span>
+                        </div>
+                        <div class="sig-note-row">
+                            <span class="sig-note-label">Heart</span>
+                            <span class="sig-note-val">Natural Oud · Rose Nuances · Saffron</span>
+                        </div>
+                        <div class="sig-note-row">
+                            <span class="sig-note-label">Base</span>
+                            <span class="sig-note-val">Benzoin · Birch Smoke · Amberwood · Resinous Woods</span>
+                        </div>
+                    </div>
+
+                    <!-- Performance -->
+                    <div class="sig-perf">
+                        <div class="sig-perf-pill">
+                            <strong>Longevity</strong>
+                            <span>12–24+ hrs on skin</span>
+                            <span>2–5 days on fabric</span>
+                        </div>
+                        <div class="sig-perf-pill">
+                            <strong>Projection</strong>
+                            <span>Very strong · 2–3 hrs</span>
+                            <span>Moderate · 5–7 hrs</span>
+                        </div>
+                        <div class="sig-perf-pill">
+                            <strong>Sillage</strong>
+                            <span>Excellent</span>
+                            <span>Rich, noticeable trail</span>
+                        </div>
+                    </div>
+
+                    <!-- Price + Cart -->
+                    <div class="sig-card-cta">
+                        <div class="sig-price-block">
+                            <span class="sig-price-label">Price</span>
+                            <span class="sig-price-amount">₨ 3,780</span>
+                        </div>
+                        <button class="sig-cart-btn add-to-cart"
+                                data-id="sig-noir"
+                                data-name="Velirra Signature Noir"
+                                data-price="3780">
+                            <i class="fa-solid fa-bag-shopping" style="margin-right:8px"></i> Add to Cart
+                        </button>
+                    </div>
+
+                </div><!-- /details -->
+            </div><!-- /sig-card -->
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo"><span class="logo-text">VELIRRA</span></div>
+                <p>Velirra has been crafting exceptional fragrances with a simple principle: excellence in every drop.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Collections</h4>
+                <ul>
+                    <li><a href="gents.html">Gents Line</a></li>
+                    <li><a href="ladies.html">Ladies Line</a></li>
+                    <li><a href="unisex.html">Unisex Line</a></li>
+                    <li><a href="premium.html">Premium Line</a></li>
+                    <li><a href="signature.html">Signature</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="mailto:sales@velirra.store">sales@velirra.store</a></li>
+                    <li><a href="https://wa.me/923710738971">WhatsApp: 03710738971</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Velirra. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+    <script>
+        /* ── Auto-crossfade image slider (no arrows, no dots) ── */
+        (function () {
+            var slides  = document.querySelectorAll('#sigSlides .slide');
+            var current = 0;
+            if (slides.length < 2) return;
+
+            /* initial state: first visible, second hidden */
+            slides.forEach(function (s, i) {
+                s.style.cssText = 'position:absolute;inset:0;opacity:' + (i === 0 ? '1' : '0') + ';transition:opacity 1s ease;';
+            });
+            /* slides container must be relative so absolute children stack */
+            document.getElementById('sigSlides').style.position = 'relative';
+
+            setInterval(function () {
+                slides[current].style.opacity = '0';
+                current = (current + 1) % slides.length;
+                slides[current].style.opacity = '1';
+            }, 3500);   /* swap every 3.5 s */
+        })();
+    </script>
+</body>
+</html>

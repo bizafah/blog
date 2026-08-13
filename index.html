@@ -1,622 +1,866 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Reportly — The Future of Artificial Intelligence</title>
-  <meta name="description" content="In-depth articles on AI in Healthcare, Future Jobs, Generative AI, Education, and Ethics." />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velirra | Luxury Parfumerie</title>
+    <meta name="facebook-domain-verification" content="di5mrlw0qw9v99vs75t76t54x1u62v" />
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1457179279266064');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1457179279266064&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+    <meta name="description" content="Experience the deep, rich tapestry of fragrance mastery with VELIRRA.">
+    <meta name="facebook-domain-verification" content="di5mrlw0qw9v99vs75t76t54x1u62v" />
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
-
-  <!-- ===== HEADER ===== -->
-  <header class="site-header" id="siteHeader">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <img src="logo.png" alt="AI Reportly" class="logo-img" />
-      </a>
-      <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="nav-link active">Home</a>
-        <div class="nav-dropdown">
-          <a href="#categories" class="nav-link">Categories <i class="fa-solid fa-chevron-down"></i></a>
-          <div class="dropdown-menu" id="navCategories"></div>
-        </div>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#latest" class="nav-link">Latest</a>
-        <a href="#about-us" class="nav-link">About</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <button class="btn-search" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <button class="btn-hamburger" id="hamburger" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
-      </div>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <p>🌙 SEASONAL SALE</p>
     </div>
-    <!-- Search Bar -->
-    <div class="search-bar" id="searchBar">
-      <div class="container">
-        <div class="search-input-wrap">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="searchInput" placeholder="Search articles, categories, tags…" autocomplete="off" />
-          <button class="btn-search-close" id="searchClose"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="search-results" id="searchResults"></div>
-      </div>
-    </div>
-  </header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="container hero-content">
-      <div class="hero-badge"><i class="fa-solid fa-bolt"></i> Future of AI</div>
-      <h1 class="hero-title">Explore the Future of<br /><span class="gradient-text">Artificial Intelligence</span></h1>
-      <p class="hero-subtitle">In-depth analysis, expert insights, and actionable guides on AI in Healthcare, Jobs, Education, and beyond.</p>
-      <div class="hero-actions">
-        <a href="#latest" class="btn btn-primary">Read Latest Articles</a>
-        <a href="#categories" class="btn btn-ghost">Browse Categories</a>
-      </div>
-      <div class="hero-stats" id="heroStats">
-        <div class="stat"><span class="stat-num" id="statArticles">0</span><span class="stat-label">Articles</span></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num" id="statCategories">0</span><span class="stat-label">Categories</span></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num">2026</span><span class="stat-label">Up to Date</span></div>
-      </div>
-    </div>
-    <!-- Featured Article Overlay -->
-    <div class="hero-featured" id="heroFeatured"></div>
-  </section>
-
-  <!-- ===== TICKER ===== -->
-  <div class="ticker-bar">
-    <div class="ticker-label"><i class="fa-solid fa-fire"></i> Trending</div>
-    <div class="ticker-track" id="tickerTrack">
-      <div class="ticker-inner" id="tickerInner"></div>
-    </div>
-  </div>
-
-  <!-- ===== ABOUT US ===== -->
-  <section class="section section-dark" id="about-us">
-    <div class="container">
-      <div class="about-us-grid">
-        <div class="about-us-text">
-          <div class="section-badge">About Us</div>
-          <h2 class="section-title" style="text-align:left;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;">We Write About the AI That's<br/><span class="gradient-text">Shaping Your World</span></h2>
-          <p>AI Reportly is an independent media publication dedicated to covering artificial intelligence in plain language. We bridge the gap between cutting-edge research and the people whose lives it affects — professionals, students, entrepreneurs, and curious minds everywhere.</p>
-          <p>Our editorial team combines expertise in technology journalism, data science, and digital ethics to deliver content that is accurate, balanced, and genuinely useful. We don't just cover what AI can do — we explore what it means.</p>
-
-          <div class="about-us-stats">
-            <div class="au-stat">
-              <span class="au-stat-num">100%</span>
-              <span class="au-stat-label">Free to Read</span>
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="/">
+                    <img src="logo.png" alt="VELIRRA" id="main-logo">
+                </a>
             </div>
-            <div class="au-stat-div"></div>
-            <div class="au-stat">
-              <span class="au-stat-num">Weekly</span>
-              <span class="au-stat-label">New Content</span>
-            </div>
-            <div class="au-stat-div"></div>
-            <div class="au-stat">
-              <span class="au-stat-num">0 Ads</span>
-              <span class="au-stat-label">No Distractions</span>
-            </div>
-          </div>
 
-          <div class="about-us-socials">
-            <span style="color:var(--muted);font-size:0.85rem;font-weight:600;">Follow us:</span>
-            <a href="https://www.instagram.com/aireportly7/" target="_blank" rel="noopener" aria-label="Instagram" class="au-social instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/ai-reportly-773770330/?isSelfProfile=true" target="_blank" rel="noopener" aria-label="LinkedIn" class="au-social linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://x.com/Ailifefuturehub" target="_blank" rel="noopener" aria-label="X (Twitter)" class="au-social twitter-x"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://web.facebook.com/profile.php?id=61593088054611" target="_blank" rel="noopener" aria-label="Facebook" class="au-social facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://medium.com/@aireportly7" target="_blank" rel="noopener" aria-label="Medium" class="au-social medium"><i class="fa-brands fa-medium"></i></a>
-            <a href="https://www.pinterest.com/aireportly/_profile/" target="_blank" rel="noopener" aria-label="Pinterest" class="au-social pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
-          </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#" class="active">HOME</a></li>
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#perfumes">PERFUMES</a></li>
+                    <li><a href="premium.html">PREMIUM</a></li>
+                    <li><a href="signature.html" style="color:#c5a059;font-weight:700;">SIGNATURE</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="#" aria-label="Search" class="search-trigger"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#" aria-label="Cart" class="cart-trigger">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
         </div>
+    </header>
 
-        <!-- 3D Scroll Wheel Cards -->
-        <div class="mwheel-wrap" aria-label="Our Mission, Vision and Values">
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-container">
+            <div class="search-header">
+                <input type="text" id="search-input" placeholder="Search for perfumes, notes, inspirations...">
+                <button class="close-search"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
 
-          <!-- Up arrow -->
-          <button class="mwheel-arrow mwheel-arrow--up" id="mwheelUp" aria-label="Previous">
-            <i class="fa-solid fa-chevron-up"></i>
-          </button>
-
-          <!-- The drum -->
-          <div class="mwheel-drum-window">
-          <div class="mwheel-drum" id="mwheelDrum">
-
-            <div class="mwheel-card" data-idx="0">
-              <div class="mwheel-card-inner mwheel-mission">
-                <div class="mwheel-icon"><i class="fa-solid fa-bullseye"></i></div>
-                <div class="mwheel-text">
-                  <h3>Our Mission</h3>
-                  <p>To make artificial intelligence understandable, accessible, and actionable for every person on the planet — not just technologists.</p>
+    <!-- Cart Drawer -->
+    <div class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>YOUR CART</h3>
+            <button class="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <!-- Items will be injected here -->
+            <div class="empty-cart-msg">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="promo-section">
+                <input type="text" id="promo-input" placeholder="Promo Code">
+                <button id="apply-promo">APPLY</button>
+            </div>
+            <div id="discount-row"
+                style="display: none; justify-content: space-between; margin-bottom: 10px; color: #e74c3c; font-weight: 600;">
+                <span>Discount (20%):</span>
+                <span id="discount-amount">-₨ 0</span>
+            </div>
+            <div id="delivery-row"
+                style="display: none; justify-content: space-between; margin-bottom: 10px; font-weight: 600;">
+                <span>Delivery Charges:</span>
+                <span>₨ 200</span>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-subtotal">₨ 0</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+        </div>
+    </div>
+    <!-- Checkout Details Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>DELIVERY DETAILS</h3>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="checkout-phone" placeholder="e.g. 03001234567" required>
                 </div>
-              </div>
-            </div>
-
-            <div class="mwheel-card" data-idx="1">
-              <div class="mwheel-card-inner mwheel-vision">
-                <div class="mwheel-icon" style="background:rgba(139,92,246,0.15);color:#8b5cf6;"><i class="fa-solid fa-eye"></i></div>
-                <div class="mwheel-text">
-                  <h3>Our Vision</h3>
-                  <p>A world where everyone can navigate the AI era with confidence, clarity, and an informed perspective on both its promise and its risks.</p>
+                <div class="form-group">
+                    <label>Full Delivery Address *</label>
+                    <textarea id="checkout-address" placeholder="House #, Street, Area, City" required></textarea>
                 </div>
-              </div>
-            </div>
-
-            <div class="mwheel-card" data-idx="2">
-              <div class="mwheel-card-inner mwheel-values">
-                <div class="mwheel-icon" style="background:rgba(16,185,129,0.15);color:#10b981;"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="mwheel-text">
-                  <h3>Our Values</h3>
-                  <p>Accuracy first. No hype, no fearmongering. We report on AI honestly — including when the technology falls short of its promises.</p>
+                <div class="form-group">
+                    <label>Postal Code (Optional)</label>
+                    <input type="text" id="checkout-postal" placeholder="e.g. 46000">
                 </div>
-              </div>
-            </div>
-
-          </div><!-- end drum -->
-          </div><!-- end drum-window -->
-
-          <!-- Down arrow -->
-          <button class="mwheel-arrow mwheel-arrow--down" id="mwheelDown" aria-label="Next">
-            <i class="fa-solid fa-chevron-down"></i>
-          </button>
-
-          <!-- Dots -->
-          <div class="mwheel-dots">
-            <button class="mwheel-dot active" data-idx="0"></button>
-            <button class="mwheel-dot" data-idx="1"></button>
-            <button class="mwheel-dot" data-idx="2"></button>
-          </div>
-
+                <div class="form-group">
+                    <label>Google Map Link (Optional)</label>
+                    <input type="url" id="checkout-location" placeholder="Paste link here">
+                </div>
+                <button type="submit" class="confirm-order-btn">CONFIRM & SEND ON WHATSAPP</button>
+            </form>
         </div>
-
-      </div>
     </div>
-  </section>
+    <div class="drawer-overlay"></div>
 
-  <!-- ===== DISCLAIMER ===== -->
-  <section class="section" id="disclaimer">
-    <div class="container">
-      <div class="disclaimer-wrap">
-        <div class="disclaimer-label"><i class="fa-solid fa-triangle-exclamation"></i> Disclaimer</div>
-        <h2 class="disclaimer-title">Important Disclaimer</h2>
-        <div class="disclaimer-body">
-          <p>The content on AI Reportly is for general informational and educational purposes only and does not constitute professional legal, financial, medical, or technical advice. Always consult a qualified professional before acting on anything you read here.</p>
-          <p>We strive for accuracy, but AI is a fast-moving field and we cannot guarantee every article is complete or current. AI Reportly expressly disclaims liability for errors, omissions, or outdated information. Links to third-party sites are provided for convenience only — we do not endorse or control their content.</p>
-          <p>Views expressed in articles are those of individual authors and do not necessarily represent the position of AI Reportly as a publication.</p>
+    <main>
+        <section class="hero">
+            <div class="hero-slider" id="hero-slider">
+                <div class="slide active" style="--bg: url('legacy.jpeg'); --mobile-bg: url('legacy_mobile.jpeg');">
+                </div>
+                <div class="slide" style="--bg: url('classic.jpeg'); --mobile-bg: url('classic_mobile.jpeg');"></div>
+                <div class="slide" style="--bg: url('7one.jpeg'); --mobile-bg: url('7one_mobile.jpeg');"></div>
+                <div class="slide" style="--bg: url('bloom.jpeg'); --mobile-bg: url('bloom_mobile.jpeg');"></div>
+                <div class="slide" style="--bg: url('legendary.jpeg'); --mobile-bg: url('legendary_mobile.jpeg');">
+                </div>
+                <div class="slide" style="--bg: url('intense.jpeg'); --mobile-bg: url('intense_mobile.jpeg');"></div>
+                <div class="slide" style="--bg: url('ocean.jpeg'); --mobile-bg: url('ocean_mobile.jpeg');"></div>
+                <div class="slide" style="--bg: url('prime.jpeg'); --mobile-bg: url('prime_mobile.jpeg');"></div>
+            </div>
+        </section>
+
+        <!-- Brand Strip / Marquee -->
+        <section class="brand-strip">
+            <div class="marquee">
+                <div class="marquee-content">
+                    <span>LEGACY</span>
+                    <span>CLASSIC</span>
+                    <span>7ONE</span>
+                    <span>BLOOM</span>
+                    <span>LEGENDARY</span>
+                    <span>INTENSE</span>
+                    <span>OCEAN</span>
+                    <span>PRIME</span>
+                    <span>Blue</span>
+                    <span>Homme</span>
+                    <!-- Duplicate for seamless loop -->
+                    <span>LEGACY</span>
+                    <span>CLASSIC</span>
+                    <span>7ONE</span>
+                    <span>BLOOM</span>
+                    <span>LEGENDARY</span>
+                    <span>INTENSE</span>
+                    <span>OCEAN</span>
+                    <span>PRIME</span>
+                    <span>Blue</span>
+                    <span>Homme</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Section -->
+        <section class="featured-section">
+            <div class="container featured-container">
+                <div class="featured-card">
+                    <img src="prime cover.jpeg" alt="Prime Cover">
+                </div>
+                <div class="featured-card">
+                    <img src="legendary cover.jpeg" alt="Legendary Cover">
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="video-section">
+            <div class="video-container">
+                <video autoplay muted loop playsinline class="brand-video">
+                    <source src="vedio.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+
+
+        <!-- Match Section -->
+        <section class="match-section">
+            <div class="container">
+                <h2 class="section-title">FIND YOUR PERFECT MATCH</h2>
+                <div class="match-grid">
+                    <a href="gents.html" class="match-card">
+                        <img src="men.jpeg" alt="Men's Perfume">
+                        <div class="match-label">MEN'S PERFUME</div>
+                    </a>
+                    <a href="unisex.html" class="match-card">
+                        <img src="unisex.jpeg" alt="Decants">
+                        <div class="match-label">UNISEX</div>
+                    </a>
+                    <a href="ladies.html" class="match-card">
+                        <img src="women.jpeg" alt="Women's Perfume">
+                        <div class="match-label">WOMEN'S PERFUME</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collection Section -->
+        <section id="perfumes" class="collection-section">
+            <div class="container">
+                <h2 class="section-title">OUR COLLECTION</h2>
+                <div class="product-grid">
+                    <!-- Legacy -->
+                    <a href="product-legacy.html" class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="sale-badge">SAVE 20%</span>
+                            <img src="legacy_new.jpeg" alt="Legacy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">LEGACY</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by Azzaro The Most Wanted 50ML EDP</p>
+                            <p class="product-price">
+                                <span class="price-original">₨ 3,400</span>
+                                <span class="price-current">₨ 2,399</span>
+                            </p>
+                        </div>
+                    </a>
+                    <!-- Classic -->
+                    <a href="product-classic.html" class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="sale-badge">SAVE 7%</span>
+                            <img src="classic_new.jpeg" alt="Classic">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">CLASSIC</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by Dolce & Gabbana Pour Homme</p>
+                            <p class="product-price">
+                                <span class="price-original">₨ 2,900</span>
+                                <span class="price-current">₨ 1,699</span>
+                            </p>
+                        </div>
+                    </a>
+                    <!-- 7One -->
+                    <a href="product-7one.html" class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="sale-badge">SAVE 25%</span>
+                            <img src="7one_new.jpeg" alt="7One">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">7ONE</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by Invictus Legend 50ML EDP</p>
+                            <p class="product-price">
+                                <span class="price-original">₨ 3,200</span>
+                                <span class="price-current">₨ 1,699</span>
+                            </p>
+                        </div>
+                    </a>
+                    <!-- Bloom -->
+                    <a href="product-bloom.html" class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="sale-badge">SAVE 23%</span>
+                            <img src="bloom_new.jpeg" alt="Bloom">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">BLOOM</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by VS Bombshell 50ML EDP</p>
+                            <p class="product-price">
+                                <span class="price-original">₨ 2,550</span>
+                                <span class="price-current">₨ 1,499</span>
+                            </p>
+                        </div>
+                    </a>
+                    <!-- Legendary -->
+                    <a href="product-legendary.html" class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="sale-badge">SAVE 30%</span>
+                            <img src="legendary_new.jpeg" alt="Legendary">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">LEGENDARY</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by 1 Million Lucky 50ML EDP</p>
+                            <p class="product-price">
+                                <span class="price-original">₨ 3,300</span>
+                                <span class="price-current">₨ 1,999</span>
+                            </p>
+                        </div>
+                    </a>
+                    <!-- Intense -->
+                    <a href="product-intense.html" class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="sale-badge">SAVE 20%</span>
+                            <img src="intense_new.jpeg" alt="Intense">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">INTENSE</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by Tuscan Leather • 50ML EDP</p>
+                            <p class="product-price">
+                                <span class="price-original">₨ 3,200</span>
+                                <span class="price-current">₨ 2,099</span>
+                            </p>
+                        </div>
+                    </a>
+                    <!-- Ocean -->
+                    <a href="product-ocean.html" class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="sale-badge">SAVE 29%</span>
+                            <img src="ocean_new.jpeg" alt="Ocean">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">OCEAN</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by Davidoff Cool Water • 50ML EDP</p>
+                            <p class="product-price">
+                                <span class="price-original">₨ 2,770</span>
+                                <span class="price-current">₨ 1,699</span>
+                            </p>
+                        </div>
+                    </a>
+                    <!-- Prime -->
+                    <a href="product-prime.html" class="product-card">
+                        <div class="product-img-wrapper">
+                            <span class="sale-badge">SAVE 13%</span>
+                            <img src="prime_new.jpeg" alt="Prime">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">PRIME</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by Bleu De Chanel • 50ML</p>
+                            <p class="product-price">
+                                <span class="price-original">₨ 2,800</span>
+                                <span class="price-current">₨ 1,899</span>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- PREMIUM SUB-SECTION -->
+                <div style="margin-top: 4rem;">
+                    <div class="premium-divider">
+                        <span class="premium-line"></span>
+                        <span class="premium-label">✦ PREMIUM COLLECTION ✦</span>
+                        <span class="premium-line"></span>
+                    </div>
+                    <p
+                        style="text-align:center; color:#8a8a8a; font-size:0.78rem; letter-spacing:0.15rem; margin-bottom:2.5rem; margin-top:-1.5rem;">
+                        Our finest, long-lasting luxury fragrances</p>
+                    <div class="product-grid"
+                        style="max-width:1050px; margin:0 auto; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                        <!-- Blue -->
+                        <a href="product-blue.html" class="product-card"
+                            style="border:1px solid rgba(201,169,98,0.3); border-radius:6px; background:linear-gradient(160deg,rgba(201,169,98,0.07) 0%,transparent 60%);">
+                            <div class="product-img-wrapper">
+                                <span class="sale-badge"
+                                    style="background:linear-gradient(135deg,#b8860b,#ffd700); color:#000;">PREMIUM</span>
+                                <img src="Blue.jpeg" alt="Blue">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">BLUE</h3>
+                                <p class="product-brand">VELIRRA</p>
+                                <p class="product-inspiration">Inspired by Light Blue Dolce &amp; Gabbana</p>
+                                <p class="product-price">
+                                    <span class="price-original">₨ 3,790</span>
+                                    <span class="price-current">₨ 1,899</span>
+                                </p>
+                            </div>
+                        </a>
+                        <!-- Homme -->
+                        <a href="product-homme.html" class="product-card"
+                            style="border:1px solid rgba(201,169,98,0.3); border-radius:6px; background:linear-gradient(160deg,rgba(201,169,98,0.07) 0%,transparent 60%);">
+                            <div class="product-img-wrapper">
+                                <span class="sale-badge"
+                                    style="background:linear-gradient(135deg,#b8860b,#ffd700); color:#000;">PREMIUM</span>
+                                <img src="Homme.jpeg" alt="Homme">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">HOMME</h3>
+                                <p class="product-brand">VELIRRA</p>
+                                <p class="product-inspiration">Inspired by DIOR Homme Intense</p>
+                                <p class="product-price">
+                                    <span class="price-original">₨ 3,990</span>
+                                    <span class="price-current">₨ 1,899</span>
+                                </p>
+                            </div>
+                        </a>
+                        <!-- Aura Oud -->
+                        <a href="product-auraoud.html" class="product-card"
+                            style="border:1px solid rgba(201,169,98,0.3); border-radius:6px; background:linear-gradient(160deg,rgba(201,169,98,0.07) 0%,transparent 60%);">
+                            <div class="product-img-wrapper">
+                                <span class="sale-badge"
+                                    style="background:linear-gradient(135deg,#b8860b,#ffd700); color:#000;">PREMIUM</span>
+                                <img src="Aura_OUD.jpeg" alt="Aura Oud">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">AURA OUD</h3>
+                                <p class="product-brand">VELIRRA</p>
+                                <p class="product-inspiration">Inspired by Ameer Al Oud</p>
+                                <p class="product-price">
+                                    <span class="price-original">₨ 3,990</span>
+                                    <span class="price-current">₨ 2,160</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIGNATURE SECTION -->
+        <section id="signature" style="background:#080808; padding:80px 0 0; overflow:hidden;">
+
+            <!-- Text-mask heading -->
+            <div style="text-align:center; padding:0 40px; margin-bottom:0; line-height:0.9;">
+                <p style="font-size:0.65rem; letter-spacing:0.35em; color:#c5a059; font-weight:700; text-transform:uppercase; margin-bottom:22px; line-height:1;">✦ The Signature Collection · 2026</p>
+                <span style="
+                    font-size: clamp(64px, 13vw, 180px);
+                    font-weight: 900;
+                    letter-spacing: 0.08em;
+                    text-transform: uppercase;
+                    background-image: url('masked_txt.png');
+                    background-size: cover;
+                    background-position: center 60%;
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    color: transparent;
+                    display: inline-block;
+                    filter: brightness(1.2) contrast(1.15) saturate(1.1);
+                    line-height: 0.9;
+                ">SIGNATURE</span>
+                <span style="display:block; font-size:clamp(14px,2.5vw,30px); font-weight:300; letter-spacing:0.55em; text-transform:uppercase; color:#c5a059; margin-top:10px; margin-bottom:52px;">N O I R</span>
+            </div>
+
+            <!-- Big product card -->
+            <div style="padding:0 40px 90px;">
+                <div style="
+                    max-width:1240px; margin:0 auto;
+                    background:#111;
+                    border:1px solid rgba(197,160,89,0.2);
+                    border-radius:6px;
+                    display:grid;
+                    grid-template-columns:1fr 1fr;
+                    overflow:hidden;
+                    box-shadow:0 40px 100px rgba(0,0,0,0.7);
+                " class="sig-home-card">
+
+                    <!-- Image -->
+                    <div style="position:relative; overflow:hidden; min-height:560px;" class="sig-home-img">
+                        <span style="position:absolute;top:24px;left:24px;z-index:2;background:linear-gradient(135deg,#b8860b,#ffd700);color:#000;font-size:0.58rem;font-weight:800;letter-spacing:0.25em;padding:5px 14px;border-radius:2px;text-transform:uppercase;">✦ Signature</span>
+                        <img src="noir.jpeg" alt="Velirra Signature Noir"
+                            style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.88) contrast(1.08);transition:transform 0.8s ease;"
+                            class="sig-home-img-el">
+                        <div style="position:absolute;inset:0;background:linear-gradient(to right,transparent 55%,#111 100%);pointer-events:none;"></div>
+                    </div>
+
+                    <!-- Details -->
+                    <div style="padding:52px 48px; color:#e8e0d0; display:flex; flex-direction:column; justify-content:center;">
+                        <p style="font-size:0.6rem;letter-spacing:0.28em;color:#c5a059;font-weight:700;text-transform:uppercase;margin-bottom:14px;">✦ New Arrival · Original Composition · Unisex</p>
+                        <h2 style="font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;line-height:1.05;color:#fff;margin-bottom:6px;">Velirra<br>Signature Noir</h2>
+                        <p style="font-size:0.75rem;letter-spacing:0.22em;color:#c5a059;text-transform:uppercase;margin-bottom:20px;">Bold · Resinous · Eternal</p>
+                        <p style="font-size:0.86rem;line-height:1.85;color:#7a7060;margin-bottom:24px;border-left:2px solid rgba(197,160,89,0.3);padding-left:14px;">
+                            A luxurious woody-amber fragrance crafted for those who appreciate depth, sophistication, and lasting elegance. Rich oud, smoky incense, warm amberwood, and subtle fruity accents create a bold yet refined composition that leaves a memorable trail from day to night.
+                        </p>
+
+                        <!-- Family tags -->
+                        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px;">
+                            <span style="font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#c5a059;border:1px solid rgba(197,160,89,0.3);padding:4px 12px;border-radius:20px;">Woody Amber</span>
+                            <span style="font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#c5a059;border:1px solid rgba(197,160,89,0.3);padding:4px 12px;border-radius:20px;">Oud</span>
+                            <span style="font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#c5a059;border:1px solid rgba(197,160,89,0.3);padding:4px 12px;border-radius:20px;">Smoky</span>
+                            <span style="font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#c5a059;border:1px solid rgba(197,160,89,0.3);padding:4px 12px;border-radius:20px;">Unisex</span>
+                        </div>
+
+                        <!-- Notes -->
+                        <div style="border-top:1px solid rgba(255,255,255,0.06);margin-bottom:24px;">
+                            <div style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                                <span style="min-width:44px;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#c5a059;font-weight:700;">Top</span>
+                                <span style="font-size:0.8rem;color:#b8b0a0;">Raspberry · Smoky Incense</span>
+                            </div>
+                            <div style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                                <span style="min-width:44px;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#c5a059;font-weight:700;">Heart</span>
+                                <span style="font-size:0.8rem;color:#b8b0a0;">Natural Oud · Rose · Saffron</span>
+                            </div>
+                            <div style="display:flex;gap:14px;padding:10px 0;">
+                                <span style="min-width:44px;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#c5a059;font-weight:700;">Base</span>
+                                <span style="font-size:0.8rem;color:#b8b0a0;">Benzoin · Birch Smoke · Amberwood</span>
+                            </div>
+                        </div>
+
+                        <!-- Performance pills -->
+                        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;">
+                            <div style="background:rgba(197,160,89,0.08);border:1px solid rgba(197,160,89,0.2);border-radius:4px;padding:10px 14px;">
+                                <strong style="display:block;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#c5a059;">Longevity</strong>
+                                <span style="font-size:0.76rem;color:#7a7060;">12–24+ hrs on skin</span>
+                            </div>
+                            <div style="background:rgba(197,160,89,0.08);border:1px solid rgba(197,160,89,0.2);border-radius:4px;padding:10px 14px;">
+                                <strong style="display:block;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#c5a059;">Sillage</strong>
+                                <span style="font-size:0.76rem;color:#7a7060;">Excellent — noticeable trail</span>
+                            </div>
+                            <div style="background:rgba(197,160,89,0.08);border:1px solid rgba(197,160,89,0.2);border-radius:4px;padding:10px 14px;">
+                                <strong style="display:block;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:#c5a059;">Projection</strong>
+                                <span style="font-size:0.76rem;color:#7a7060;">Very strong 2–3 hrs</span>
+                            </div>
+                        </div>
+
+                        <!-- Price + CTA -->
+                        <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);">
+                            <div>
+                                <span style="display:block;font-size:0.56rem;letter-spacing:0.2em;color:#555;text-transform:uppercase;">Price</span>
+                                <span style="font-size:1.9rem;font-weight:800;color:#c5a059;">₨ 3,780</span>
+                            </div>
+                            <button class="add-to-cart"
+                                    data-id="sig-noir"
+                                    data-name="Velirra Signature Noir"
+                                    data-price="3780"
+                                    style="flex:1;min-width:160px;background:linear-gradient(135deg,#c5a059,#8a5e20);color:#000;border:none;padding:16px 28px;font-size:0.68rem;letter-spacing:0.22em;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.3s ease;">
+                                <i class="fa-solid fa-bag-shopping" style="margin-right:8px;"></i> Add to Cart
+                            </button>
+                            <a href="signature.html"
+                               style="font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:#c5a059;text-decoration:none;border-bottom:1px solid rgba(197,160,89,0.4);padding-bottom:2px;white-space:nowrap;">
+                                View Full Details →
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <style>
+        @media (max-width: 900px) {
+            .sig-home-card { grid-template-columns: 1fr !important; }
+            .sig-home-img { min-height: 380px !important; }
+        }
+        .sig-home-card:hover .sig-home-img-el { transform: scale(1.03); }
+        @media (max-width: 540px) {
+            /* Fix SIGNATURE heading cut-off on mobile */
+            #signature > div:first-child {
+                padding: 0 16px !important;
+                text-align: left !important;
+            }
+            #signature > div:first-child span:first-of-type {
+                font-size: clamp(42px, 13vw, 68px) !important;
+                letter-spacing: 0 !important;
+                display: block !important;
+            }
+            #signature > div:first-child span:last-of-type {
+                text-align: left !important;
+                letter-spacing: 0.2em !important;
+            }
+            #signature > div:first-child p {
+                text-align: left !important;
+                letter-spacing: 0.08em !important;
+            }
+        }
+        </style>
+        <!-- END SIGNATURE SECTION -->
+
+        <!-- Slogan Marquee Strip -->
+        <section class="slogan-strip">
+            <div class="marquee">
+                <div class="marquee-content">
+                    <span>Your scent, your signature.</span>
+                    <span>Elegance in every spray.</span>
+                    <span>Your scent, your signature.</span>
+                    <span>Elegance in every spray.</span>
+                    <span>Your scent, your signature.</span>
+                    <span>Elegance in every spray.</span>
+                    <span>Your scent, your signature.</span>
+                    <span>Elegance in every spray.</span>
+                    <!-- Seamless loop duplication -->
+                    <span>Your scent, your signature.</span>
+                    <span>Elegance in every spray.</span>
+                    <span>Your scent, your signature.</span>
+                    <span>Elegance in every spray.</span>
+                    <span>Your scent, your signature.</span>
+                    <span>Elegance in every spray.</span>
+                    <span>Your scent, your signature.</span>
+                    <span>Elegance in every spray.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision & Mission Section -->
+        <section class="vision-mission">
+            <div class="container text-center-section">
+                <h2 class="extra-large-title">Redefining Inspired Perfumery</h2>
+                <div class="content-block">
+                    <h3>VISION</h3>
+                    <p>To redefine the world of inspired perfumery by making high-end, luxury-grade scents accessible to
+                        everyone, everywhere, without compromising on quality or craftsmanship.</p>
+                </div>
+                <div class="content-block" style="margin-bottom: 0;">
+                    <h3>MISSION</h3>
+                    <p>We are dedicated to sourcing the finest ingredients and blending them with precision. Our goal is
+                        to provide lasting confidence through a diverse collection of perfumes that evoke emotion and
+                        leave a legendary trail.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delivery Policy Section -->
+        <section class="delivery-policy">
+            <div class="container">
+                <h2 class="section-title">Velirra Delivery Policy</h2>
+                <div class="policy-content">
+                    <p>All orders are processed and delivered within <strong>1-3 business days</strong>. Delivery time
+                        may vary depending on the customer's location and the courier service.</p>
+                    <p>Once your order has been delivered, you will receive a confirmation message with tracking
+                        details, where available. Velirra is not responsible for delays caused by courier services,
+                        weather conditions, incorrect shipping information, or any circumstances beyond our control.</p>
+                    <p>Customers are responsible for providing the correct delivery address at the time of order. If an
+                        order is returned due to an incorrect or incomplete address, additional shipping charges may
+                        apply.</p>
+                    <p><strong>Delivery Charges: ₨ 200</strong></p>
+                    <p>For urgent deliveries, we can arrange an inDrive rider (service available for Lahore only). Extra
+                        charges will apply based on the calculated fare.</p>
+                    <p>If your package arrives damaged or you receive the wrong item, please contact us within 24–48
+                        hours of delivery with clear photos and video of the package and product so we can review and
+                        assist you.</p>
+                    <p>Velirra carefully packs every order to ensure your product arrives safely. Thank you for shopping
+                        with Velirra.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- WhatsApp Floating Button -->
+        <div class="whatsapp-sticky">
+            <a href="https://wa.me/923710738971" target="_blank" class="whatsapp-btn" aria-label="Chat on WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
         </div>
-      </div>
-    </div>
-  </section>
+    </main>
 
-  <!-- ===== CATEGORIES ===== -->
-  <section class="section" id="categories">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Browse by Category</h2>
-        <p class="section-subtitle">Dive deep into the topics that matter most in AI today</p>
-      </div>
-      <div class="categories-grid" id="categoriesGrid">
-        <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading categories…</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SERVICES ===== -->
-  <section class="section section-dark" id="services">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">What We Offer</div>
-        <h2 class="section-title">Our Services</h2>
-        <p class="section-subtitle">Professional AI content solutions for creators, brands, and businesses</p>
-      </div>
-      <div class="services-grid">
-
-        <div class="service-card">
-          <div class="service-icon" style="background:rgba(59,130,246,0.12);color:#3b82f6;">
-            <i class="fa-solid fa-robot"></i>
-          </div>
-          <h3>AI Content Optimization</h3>
-          <p>We take your existing AI-generated content and optimize it for search engines, readability, and audience engagement. Get higher rankings and better reader retention.</p>
-          <ul class="service-features">
-            <li><i class="fa-solid fa-check"></i> SEO keyword integration</li>
-            <li><i class="fa-solid fa-check"></i> Structure and flow improvements</li>
-            <li><i class="fa-solid fa-check"></i> Meta descriptions and titles</li>
-            <li><i class="fa-solid fa-check"></i> Readability scoring</li>
-          </ul>
-          <a href="#contact" class="service-cta">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonial-header">
+                <span class="testimonial-subtitle">T E S T I M O N I A L</span>
+                <h2 class="section-title">What Our Client Says</h2>
+                <p class="section-description">Our business is one of close relationships and we are very fortunate to
+                    be able to share so many positive experiences with our clients.</p>
+            </div>
+            <div class="testimonial-carousel">
+                <div class="testimonial-track">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"I've tried many luxury perfumes, but VELIRRA's quality is
+                            unmatched. The
+                            scent profile is identical to the high-end brands, and the longevity is incredible."</p>
+                        <p class="testimonial-author">Sarah Malik</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Absolutely satisfied with my purchase. The packaging was premium,
+                            and the
+                            fragrance exceeded my expectations. Velirra is now my go-to for daily scents."</p>
+                        <p class="testimonial-author">Ahmed Rizwan</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"I've been a loyal customer for over a year now. Every new scent I
+                            try is
+                            better than the last. I don't buy perfumes from anywhere else anymore."</p>
+                        <p class="testimonial-author">Zainab Khan</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Finding authentic-smelling inspired perfumes in Pakistan is hard,
+                            but
+                            VELIRRA has earned my trust. Highly recommend to anyone looking for genuine quality."</p>
+                        <p class="testimonial-author">Bilal Sheikh</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Exceptional service and even better products. The signature scent I
+                            bought reflects my personality perfectly. Thank you, Velirra, for this excellence!"</p>
+                        <p class="testimonial-author">Ayesha Noor</p>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="prev-test"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="next-test"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="service-card service-card-featured">
-          <div class="service-badge-top">Most Popular</div>
-          <div class="service-icon" style="background:rgba(139,92,246,0.15);color:#8b5cf6;">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-          </div>
-          <h3>AI Humanizing</h3>
-          <p>Transform robotic, detectable AI text into natural, engaging, human-sounding prose. Beat AI detectors and connect authentically with your readers.</p>
-          <ul class="service-features">
-            <li><i class="fa-solid fa-check"></i> Natural tone and voice</li>
-            <li><i class="fa-solid fa-check"></i> AI detector bypass</li>
-            <li><i class="fa-solid fa-check"></i> Personality and nuance injection</li>
-            <li><i class="fa-solid fa-check"></i> Brand voice alignment</li>
-          </ul>
-          <a href="#contact" class="service-cta">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+    <!-- About Us Section -->
+    <section id="about" class="about-section">
+        <div class="container about-container">
+            <div class="about-image">
+                <img src="velirra.jpeg" alt="VELIRRA Brand Image">
+            </div>
+            <div class="about-content">
+                <span class="about-subtitle">About Us</span>
+                <h2 class="about-title">Designed For Presence, Engineered To Last.</h2>
+                <p class="about-text">
+                    At Velirra, we don't just create scents; we engineer experiences. Our fragrances are formulated
+                    using highly concentrated oils to ensure that your signature scent stays with you from the first
+                    light of morning to the final hours of the night.
+                </p>
+            </div>
         </div>
+    </section>
 
-        <div class="service-card">
-          <div class="service-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">
-            <i class="fa-solid fa-pen-nib"></i>
-          </div>
-          <h3>AI Content Editing</h3>
-          <p>Comprehensive editing of AI-generated drafts — fixing factual errors, improving logical flow, removing repetition, and ensuring the content truly delivers value.</p>
-          <ul class="service-features">
-            <li><i class="fa-solid fa-check"></i> Fact verification</li>
-            <li><i class="fa-solid fa-check"></i> Structural editing</li>
-            <li><i class="fa-solid fa-check"></i> Tone consistency</li>
-            <li><i class="fa-solid fa-check"></i> Removing filler content</li>
-          </ul>
-          <a href="#contact" class="service-cta">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+    <!-- Working Hours Section -->
+    <section id="contact" class="store-section">
+        <div class="container">
+            <div class="store-card">
+                <h3>WORKING HOURS</h3>
+                <div class="store-timings">
+                    <div class="timing-row">
+                        <span>Mon - Fri:</span>
+                        <span>8:30am - 10:30pm</span>
+                    </div>
+                    <div class="timing-row">
+                        <span>Saturday:</span>
+                        <span>8:30am - 10:30pm</span>
+                    </div>
+                    <div class="timing-row">
+                        <span>Sunday:</span>
+                        <span>8:30am - 10:30pm</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/923710738971" target="_blank" class="directions-btn">CONTACT US</a>
+
+                <div class="store-socials">
+                    <a href="https://www.facebook.com/share/18ajLgnWNp/?mibextid=wwXIfr" target="_blank"
+                        aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/velirra.store?igsh=NnB3aTUwbzc5dXRn" target="_blank"
+                        aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://whatsapp.com/channel/0029VbCTjSlDzgT7cqQIKu0Z" target="_blank"
+                        aria-label="WhatsApp Group"><i class="fa-solid fa-users"></i></a>
+                    <a href="https://wa.me/923710738971" target="_blank" aria-label="WhatsApp Contact"><i
+                            class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="service-card">
-          <div class="service-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">
-            <i class="fa-solid fa-spell-check"></i>
-          </div>
-          <h3>Copyediting</h3>
-          <p>Line-by-line copyediting for grammar, punctuation, spelling, and style consistency. Polish your content to a professional standard before it goes live.</p>
-          <ul class="service-features">
-            <li><i class="fa-solid fa-check"></i> Grammar and spelling</li>
-            <li><i class="fa-solid fa-check"></i> Punctuation and syntax</li>
-            <li><i class="fa-solid fa-check"></i> Style guide compliance</li>
-            <li><i class="fa-solid fa-check"></i> Final proofread</li>
-          </ul>
-          <a href="#contact" class="service-cta">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-text">VELIRRA</span>
+                </div>
+                <p>Velirra has been crafting exceptional fragrances with a simple principle: excellence in every drop.
+                </p>
+            </div>
+            <div class="footer-column">
+                <h4>Collections</h4>
+                <ul>
+                    <li><a href="gents.html">Gents Line</a></li>
+                    <li><a href="ladies.html">Ladies Line</a></li>
+                    <li><a href="unisex.html">Unisex Line</a></li>
+                    <li><a href="premium.html">Premium Line</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="mailto:sales@velirra.store">sales@velirra.store</a></li>
+                    <li><a href="https://wa.me/923710738971">WhatsApp: 03710738971</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
         </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FEATURED ARTICLES ===== -->
-  <section class="section section-dark" id="featured">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Featured Articles</h2>
-        <p class="section-subtitle">Hand-picked reads from our editorial team</p>
-      </div>
-      <div class="featured-grid" id="featuredGrid">
-        <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading articles…</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== LATEST ARTICLES ===== -->
-  <section class="section" id="latest">
-    <div class="container">
-      <div class="section-header-flex">
-        <div>
-          <h2 class="section-title">Latest Articles</h2>
-          <p class="section-subtitle">Fresh content added regularly</p>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Velirra. All rights reserved to Bizafah and Bunyad Labs.</p>
+                <div class="social-links" style="display: flex; gap: 20px;">
+                    <a href="#" style="color: #666;"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" style="color: #666;"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" style="color: #666;"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
         </div>
-        <div class="filter-bar" id="filterBar">
-          <button class="filter-btn active" data-category="all">All</button>
-        </div>
-      </div>
-      <div class="articles-grid" id="articlesGrid">
-        <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading articles…</div>
-      </div>
-      <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
-        <button class="btn btn-outline" id="loadMoreBtn">Load More Articles <i class="fa-solid fa-arrow-down"></i></button>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- ===== PRIVACY POLICY ===== -->
-  <section class="section section-dark" id="privacy">
-    <div class="container">
-      <div class="privacy-wrap">
-        <div class="privacy-header">
-          <span class="privacy-eyebrow"><i class="fa-solid fa-lock"></i> Legal</span>
-          <h2>Privacy Policy</h2>
-          <p>Last updated: August 2026 &nbsp;·&nbsp; AI Reportly takes your privacy seriously.</p>
-        </div>
-        <div class="privacy-timeline">
-          <div class="pt-item">
-            <div class="pt-marker"><i class="fa-solid fa-database"></i></div>
-            <div class="pt-content">
-              <h4>What We Collect</h4>
-              <p>When you subscribe to our newsletter, we collect your email address. We may also collect standard usage data — pages viewed, time on site, and referring URLs — through analytics tools. We do not collect sensitive personal information.</p>
-            </div>
-          </div>
-          <div class="pt-item">
-            <div class="pt-marker"><i class="fa-solid fa-gears"></i></div>
-            <div class="pt-content">
-              <h4>How We Use It</h4>
-              <p>Your email is used solely to send you new article updates. We do not sell, rent, or share your data with third parties for marketing. Analytics data is used only to improve our content and site experience.</p>
-            </div>
-          </div>
-          <div class="pt-item">
-            <div class="pt-marker"><i class="fa-solid fa-cookie-bite"></i></div>
-            <div class="pt-content">
-              <h4>Cookies</h4>
-              <p>We use minimal cookies for site functionality and optional analytics cookies to understand visitor behaviour. You can disable cookies in your browser settings at any time without affecting your ability to read our content.</p>
-            </div>
-          </div>
-          <div class="pt-item">
-            <div class="pt-marker"><i class="fa-solid fa-user-shield"></i></div>
-            <div class="pt-content">
-              <h4>Your Rights</h4>
-              <p>You may access, correct, or request deletion of your personal data at any time by contacting us. You can unsubscribe from our newsletter via the link in any email we send. We honour all requests promptly.</p>
-            </div>
-          </div>
-          <div class="pt-item">
-            <div class="pt-marker"><i class="fa-solid fa-rotate"></i></div>
-            <div class="pt-content">
-              <h4>Policy Updates</h4>
-              <p>We may update this policy periodically. The revised date at the top of this section reflects the latest version. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TERMS & CONDITIONS ===== -->
-  <section class="section" id="terms">
-    <div class="container">
-      <div class="terms-wrap">
-        <div class="terms-header">
-          <span class="terms-eyebrow"><i class="fa-solid fa-file-contract"></i> Legal</span>
-          <h2>Terms &amp; Conditions</h2>
-          <p>Last updated: August 2026 &nbsp;·&nbsp; Please read these terms before using AI Reportly.</p>
-        </div>
-        <div class="terms-accordion" id="termsAccordion">
-          <div class="ta-item open">
-            <button class="ta-toggle">
-              <span class="ta-num">01</span>
-              <span class="ta-title">Acceptance of Terms</span>
-              <i class="fa-solid fa-chevron-down ta-chevron"></i>
-            </button>
-            <div class="ta-body">
-              <p>By accessing or using AI Reportly, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use this website.</p>
-            </div>
-          </div>
-          <div class="ta-item">
-            <button class="ta-toggle">
-              <span class="ta-num">02</span>
-              <span class="ta-title">Intellectual Property</span>
-              <i class="fa-solid fa-chevron-down ta-chevron"></i>
-            </button>
-            <div class="ta-body">
-              <p>All content on AI Reportly — including articles, graphics, logos, and design — is the intellectual property of AI Reportly or its contributors. You may not reproduce, distribute, or commercially exploit any content without explicit written permission.</p>
-            </div>
-          </div>
-          <div class="ta-item">
-            <button class="ta-toggle">
-              <span class="ta-num">03</span>
-              <span class="ta-title">Acceptable Use</span>
-              <i class="fa-solid fa-chevron-down ta-chevron"></i>
-            </button>
-            <div class="ta-body">
-              <p>You agree not to use this site for any unlawful purpose, to scrape or harvest content in bulk, to attempt unauthorised access to any part of the site, or to interfere with its operation. We reserve the right to restrict access for violations.</p>
-            </div>
-          </div>
-          <div class="ta-item">
-            <button class="ta-toggle">
-              <span class="ta-num">04</span>
-              <span class="ta-title">Limitation of Liability</span>
-              <i class="fa-solid fa-chevron-down ta-chevron"></i>
-            </button>
-            <div class="ta-body">
-              <p>AI Reportly is provided on an "as is" basis. To the fullest extent permitted by law, we disclaim all warranties and shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of this site or its content.</p>
-            </div>
-          </div>
-          <div class="ta-item">
-            <button class="ta-toggle">
-              <span class="ta-num">05</span>
-              <span class="ta-title">Governing Law &amp; Updates</span>
-              <i class="fa-solid fa-chevron-down ta-chevron"></i>
-            </button>
-            <div class="ta-body">
-              <p>These Terms are governed by applicable law. We reserve the right to update these Terms at any time with notice on this page. Continued use of the site after changes constitutes your acceptance of the revised Terms.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== NEWSLETTER ===== -->
-  <section class="section newsletter-section">
-    <div class="container">
-      <div class="newsletter-card">
-        <div class="newsletter-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
-        <h2>Stay Ahead of the AI Curve</h2>
-        <p>Get the latest AI insights delivered straight to your inbox. No spam, ever.</p>
-        <form class="newsletter-form" id="newsletterForm">
-          <input type="email" placeholder="Enter your email address" required />
-          <button type="submit" class="btn btn-primary">Subscribe <i class="fa-solid fa-arrow-right"></i></button>
-        </form>
-        <p class="newsletter-note">Join thousands of readers staying informed about AI.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ABOUT (kept as a second deeper section) ===== -->
-  <section class="section section-dark" id="about">
-    <div class="container about-layout">
-      <div class="about-text">
-        <div class="section-badge">About AI Reportly</div>
-        <h2 class="section-title">Your Guide to the AI Revolution</h2>
-        <p>AI Reportly is a dedicated publication covering the most important developments in artificial intelligence — from breakthroughs in medical diagnosis to the evolving job market, generative tools, educational transformation, and the critical ethical questions shaping our AI-powered world.</p>
-        <p>Our mission: make AI accessible, understandable, and actionable for everyone — whether you're a professional navigating career change, a student exploring opportunities, or simply a curious mind tracking one of the most significant technological shifts in human history.</p>
-        <div class="about-features">
-          <div class="about-feature"><i class="fa-solid fa-check-circle"></i> In-depth, well-researched articles</div>
-          <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Up-to-date with 2026 developments</div>
-          <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Beginner-friendly to expert-level content</div>
-          <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Covering all major AI domains</div>
-        </div>
-      </div>
-      <div class="about-visual">
-        <div class="about-card-stack">
-          <div class="about-card ac1"><i class="fa-solid fa-heart-pulse"></i><span>Healthcare</span></div>
-          <div class="about-card ac2"><i class="fa-solid fa-briefcase"></i><span>Future Jobs</span></div>
-          <div class="about-card ac3"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Generative AI</span></div>
-          <div class="about-card ac4"><i class="fa-solid fa-graduation-cap"></i><span>Education</span></div>
-          <div class="about-card ac5"><i class="fa-solid fa-scale-balanced"></i><span>Ethics</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT US ===== -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-badge">Get In Touch</div>
-        <h2 class="section-title">Contact Us</h2>
-        <p class="section-subtitle">Have a question, a story tip, or want to work with us? We'd love to hear from you.</p>
-      </div>
-      <div class="contact-layout">
-        <div class="contact-info">
-          <div class="contact-card">
-            <div class="contact-card-icon" style="background:rgba(59,130,246,0.12);color:#3b82f6;">
-              <i class="fa-solid fa-envelope"></i>
-            </div>
-            <h4>Email Us</h4>
-            <p>For editorial, partnerships, or general enquiries</p>
-            <a href="mailto:aireportly7@gmail.com" class="contact-link">aireportly7@gmail.com</a>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6;">
-              <i class="fa-solid fa-briefcase"></i>
-            </div>
-            <h4>Services &amp; Collaboration</h4>
-            <p>Interested in our AI content services or brand partnerships?</p>
-            <a href="mailto:aireportly7@gmail.com" class="contact-link">aireportly7@gmail.com</a>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-icon" style="background:rgba(16,185,129,0.12);color:#10b981;">
-              <i class="fa-solid fa-share-nodes"></i>
-            </div>
-            <h4>Follow Us</h4>
-            <p>Stay connected and join the conversation</p>
-            <div class="contact-socials">
-              <a href="https://www.instagram.com/aireportly7/" target="_blank" rel="noopener" aria-label="Instagram" class="cs instagram"><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://www.linkedin.com/in/ai-reportly-773770330/?isSelfProfile=true" target="_blank" rel="noopener" aria-label="LinkedIn" class="cs linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
-              <a href="https://x.com/Ailifefuturehub" target="_blank" rel="noopener" aria-label="X" class="cs twitter-x"><i class="fa-brands fa-x-twitter"></i></a>
-              <a href="https://web.facebook.com/profile.php?id=61593088054611" target="_blank" rel="noopener" aria-label="Facebook" class="cs facebook"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://medium.com/@aireportly7" target="_blank" rel="noopener" aria-label="Medium" class="cs medium"><i class="fa-brands fa-medium"></i></a>
-              <a href="https://www.pinterest.com/aireportly/_profile/" target="_blank" rel="noopener" aria-label="Pinterest" class="cs pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
-            </div>
-          </div>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <h3>Send a Message</h3>
-          <div class="cf-row">
-            <div class="cf-field">
-              <label>Your Name</label>
-              <input type="text" placeholder="John Smith" required />
-            </div>
-            <div class="cf-field">
-              <label>Your Email</label>
-              <input type="email" placeholder="john@example.com" required />
-            </div>
-          </div>
-          <div class="cf-field">
-            <label>Subject</label>
-            <select>
-              <option value="">Select a topic…</option>
-              <option>General Enquiry</option>
-              <option>Article Suggestion</option>
-              <option>AI Content Services</option>
-              <option>Partnership / Collaboration</option>
-              <option>Press &amp; Media</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="cf-field">
-            <label>Message</label>
-            <textarea rows="5" placeholder="Tell us what's on your mind…" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
-            Send Message <i class="fa-solid fa-paper-plane"></i>
-          </button>
-          <div class="cf-success" id="cfSuccess" style="display:none;">
-            <i class="fa-solid fa-circle-check"></i> Message sent! We'll get back to you within 48 hours.
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="logo">
-          <img src="logo.png" alt="AI Reportly" class="logo-img" />
-        </a>
-        <p>Exploring the future of artificial intelligence — one article at a time.</p>
-        <div class="social-links">
-          <a href="https://www.instagram.com/aireportly7/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/ai-reportly-773770330/?isSelfProfile=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://x.com/Ailifefuturehub" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="https://web.facebook.com/profile.php?id=61593088054611" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="https://medium.com/@aireportly7" target="_blank" rel="noopener" aria-label="Medium"><i class="fa-brands fa-medium"></i></a>
-          <a href="https://www.pinterest.com/aireportly/_profile/" target="_blank" rel="noopener" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Categories</h4>
-        <ul id="footerCategories"></ul>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#about-us">About Us</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#latest">Latest Articles</a></li>
-          <li><a href="#privacy">Privacy Policy</a></li>
-          <li><a href="#terms">Terms &amp; Conditions</a></li>
-          <li><a href="#disclaimer">Disclaimer</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Topics</h4>
-        <div class="footer-tags" id="footerTags"></div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <p>&copy; 2026 AI Reportly. All rights reserved.</p>
-        <p>Built with <i class="fa-solid fa-heart" style="color:#ef4444"></i> for AI enthusiasts</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ===== BACK TO TOP ===== -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-
-  <!-- ===== MOBILE NAV OVERLAY ===== -->
-  <div class="mobile-nav-overlay" id="mobileNavOverlay">
-    <div class="mobile-nav">
-      <div class="mobile-nav-header">
-        <span class="logo-text">AI<span class="logo-accent">Reportly</span></span>
-        <button id="mobileNavClose"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <nav class="mobile-nav-links" id="mobileNavLinks"></nav>
-    </div>
-  </div>
-
-  <script src="config.js"></script>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
 </body>
+
 </html>
