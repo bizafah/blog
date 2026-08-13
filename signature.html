@@ -23,7 +23,7 @@
             background: #080808;
             padding: 80px 40px 0;
             text-align: center;
-            overflow: hidden;
+            overflow: visible;   /* never clip the heading */
         }
         .sig-hero-eyebrow {
             font-size: 0.68rem;
@@ -181,33 +181,35 @@
         .sig-cart-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(197,160,89,0.4); }
         .sig-cart-btn:active { transform: translateY(0); }
 
-        /* ── IMAGE SLIDER ── */
-        /* Col must be a positioned container with a real height */
+        /* ── IMAGE SLIDER — crossfade, stacked in CSS, no JS needed for layout ── */
         .sig-card-img-col {
             position: relative;
             min-height: 600px;
-            /* stretch to fill the grid row */
             align-self: stretch;
         }
         .sig-img-slider {
             position: absolute;
-            inset: 0;                 /* fills col exactly — no blank space */
+            inset: 0;
             overflow: hidden;
         }
         .sig-img-slider .slides {
-            display: flex;
+            position: relative;
+            width: 100%;
             height: 100%;
-            /* each slide is 100% of the slider width */
-            transition: transform 0.5s ease;
-            will-change: transform;
         }
+        /* Both slides stacked, second hidden by default */
         .sig-img-slider .slide {
-            min-width: 100%;
-            height: 100%;
-            flex-shrink: 0;
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .sig-img-slider .slide:first-child {
+            opacity: 1;
         }
         .sig-img-slider .slide img {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             display: block;
             filter: brightness(0.88) contrast(1.08);
@@ -223,26 +225,43 @@
             .sig-card-section { padding: 0 24px 80px; }
         }
         @media (max-width: 540px) {
+            /* ── HEADING FIX ──
+               "SIGNATURE" = 9 chars.
+               font-size: 8.5vw, letter-spacing: 0
+               → 9 × (8.5vw × ~0.65) ≈ 49.7vw — well within 100vw, centered.
+               No overflow, no clipping, no left-drift.
+            ── */
             .sig-hero {
-                overflow: visible;
-                padding-left: 16px;
-                padding-right: 16px;
-                text-align: left;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                text-align: center !important;
+                overflow: visible !important;
             }
-            .sig-mask-wrap { overflow: visible; text-align: left; }
-            .sig-mask-text {
-                font-size: clamp(42px, 13vw, 68px);
-                letter-spacing: 0;          /* kill spacing — the main overflow culprit */
+            .sig-mask-wrap {
                 display: block;
-                text-align: left;
                 width: 100%;
+                text-align: center;
+                overflow: visible;
+            }
+            .sig-mask-text {
+                font-size: 8.5vw !important;
+                letter-spacing: 0 !important;
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
             }
             .sig-mask-sub {
-                letter-spacing: 0.25em;
-                font-size: clamp(14px, 4vw, 22px);
-                text-align: left;
+                font-size: 4vw !important;
+                letter-spacing: 0.35em !important;
+                text-align: center !important;
+                display: block !important;
             }
-            .sig-hero-eyebrow { letter-spacing: 0.08em; font-size: 0.58rem; text-align: left; }
+            .sig-hero-eyebrow {
+                font-size: 0.55rem !important;
+                letter-spacing: 0.1em !important;
+                text-align: center !important;
+                padding: 0 12px;
+            }
             .sig-card-details { padding: 32px 24px; }
         }
     </style>
@@ -362,7 +381,7 @@
 
                     <p class="sig-card-overline">✦ New Arrival · Original Composition · Unisex</p>
                     <h1 class="sig-card-title">Velirra<br>Signature Noir</h1>
-                    <p class="sig-card-tag="sline">Bold · Resinous · Eternal</p>
+                    <p class="sig-card-tagline">Bold · Resinous · Eternal</p>
 
                     <p class="sig-card-desc">
                         A luxurious woody-amber fragrance crafted for those who appreciate depth, sophistication,
@@ -465,24 +484,17 @@
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
     <script>
-        /* ── Auto-crossfade image slider (no arrows, no dots) ── */
+        /* ── Auto-crossfade (CSS does the stacking, JS just toggles opacity) ── */
         (function () {
             var slides  = document.querySelectorAll('#sigSlides .slide');
             var current = 0;
             if (slides.length < 2) return;
 
-            /* initial state: first visible, second hidden */
-            slides.forEach(function (s, i) {
-                s.style.cssText = 'position:absolute;inset:0;opacity:' + (i === 0 ? '1' : '0') + ';transition:opacity 1s ease;';
-            });
-            /* slides container must be relative so absolute children stack */
-            document.getElementById('sigSlides').style.position = 'relative';
-
             setInterval(function () {
                 slides[current].style.opacity = '0';
                 current = (current + 1) % slides.length;
                 slides[current].style.opacity = '1';
-            }, 3500);   /* swap every 3.5 s */
+            }, 3500);
         })();
     </script>
 </body>

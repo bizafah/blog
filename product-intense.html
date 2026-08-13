@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELIRRA INTENSE | Premium Fragrance</title>
+    <meta name="facebook-domain-verification" content="di5mrlw0qw9v99vs75t76t54x1u62v" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1457179279266064');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1457179279266064&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+
+<body class="product-page">
+    <div class="top-bar">
+        <p>🌙 SEASONAL SALE</p>
+    </div>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="VELIRRA" id="main-logo">
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="index.html#about">ABOUT</a></li>
+                    <li><a href="index.html#perfumes">PERFUMES</a></li>
+                    <li><a href="index.html#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="#" aria-label="Search" class="search-trigger"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#" aria-label="Cart" class="cart-trigger">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-container">
+            <div class="search-header">
+                <input type="text" id="search-input" placeholder="Search for perfumes, notes, inspirations...">
+                <button class="close-search"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>YOUR CART</h3>
+            <button class="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <div class="empty-cart-msg">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="promo-section">
+                <input type="text" id="promo-input" placeholder="Promo Code">
+                <button id="apply-promo">APPLY</button>
+            </div>
+            <div id="discount-row"
+                style="display: none; justify-content: space-between; margin-bottom: 10px; color: #e74c3c; font-weight: 600;">
+                <span>Discount (20%):</span>
+                <span id="discount-amount">-₨ 0</span>
+            </div>
+            <div id="delivery-row"
+                style="display: none; justify-content: space-between; margin-bottom: 10px; font-weight: 600;">
+                <span>Delivery Charges:</span>
+                <span>₨ 200</span>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-subtotal">₨ 0</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+        </div>
+    </div>
+    <!-- Checkout Details Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>DELIVERY DETAILS</h3>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="checkout-phone" placeholder="e.g. 03001234567" required>
+                </div>
+                <div class="form-group">
+                    <label>Full Delivery Address *</label>
+                    <textarea id="checkout-address" placeholder="House #, Street, Area, City" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Postal Code (Optional)</label>
+                    <input type="text" id="checkout-postal" placeholder="e.g. 46000">
+                </div>
+                <div class="form-group">
+                    <label>Google Map Link (Optional)</label>
+                    <input type="url" id="checkout-location" placeholder="Paste link here">
+                </div>
+                <button type="submit" class="confirm-order-btn">CONFIRM & SEND ON WHATSAPP</button>
+            </form>
+        </div>
+    </div>
+    <div class="drawer-overlay"></div>
+
+    <main class="product-detail-main">
+        <div class="container">
+            <div class="product-detail-grid">
+                <div class="product-gallery">
+                    <div class="main-image-container">
+                        <div class="main-image active">
+                            <img src="intense_new.jpeg" alt="VELIRRA Intense">
+                        </div>
+                        <div class="main-image">
+                            <img src="box_front.jpeg" alt="Box Front">
+                        </div>
+                        <div class="main-image">
+                            <img src="box_back.jpeg" alt="Box Back">
+                        </div>
+                        <button class="gallery-nav prev"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="gallery-nav next"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    <div class="image-dots">
+                        <span class="image-dot active"></span>
+                        <span class="image-dot"></span>
+                        <span class="image-dot"></span>
+                    </div>
+                </div>
+
+                <div class="product-details">
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a> / <a href="unisex.html">Unisex</a> / Intense
+                    </nav>
+
+                    <h1 class="product-title">VELIRRA INTENSE</h1>
+                    <p class="product-subtitle">Inspired by Tom Ford Tuscan Leather</p>
+
+                    <div class="product-pricing">
+                        <span class="price-current">₨ 2,099</span>
+                        <span class="price-original">₨ 3,200</span>
+                        <span class="discount-percent">20% OFF</span>
+                    </div>
+
+                    <p class="product-description">
+                        Velirra Intense is a bold and luxurious fragrance crafted for individuals who appreciate
+                        sophistication, power, and timeless elegance. Inspired by the iconic Tuscan Leather, this scent
+                        delivers a rich blend of smoky leather, warm spices, and sensual woody accords.
+                    </p>
+
+                    <div class="purchase-actions">
+                        <div class="quantity-selector">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" value="1" min="1" class="qty-input">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">ADD TO CART</button>
+                    </div>
+
+                    <div class="product-tabs">
+                        <div class="tab-item active">
+                            <h3>FRAGRANCE NOTES</h3>
+                            <div class="notes-grid">
+                                <div class="note-box">
+                                    <span class="note-label">Top Notes</span>
+                                    <p>Raspberry, Saffron, Thyme</p>
+                                </div>
+                                <div class="note-box">
+                                    <span class="note-label">Heart Notes</span>
+                                    <p>Leather, Jasmine, Olibanum</p>
+                                </div>
+                                <div class="note-box">
+                                    <span class="note-label">Base Notes</span>
+                                    <p>Amber, Woody Notes, Suede</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-item">
+                            <h3>FRAGRANCE PROFILE</h3>
+                            <ul class="profile-list">
+                                <li><strong>Family:</strong> Leather Woody</li>
+                                <li><strong>Gender:</strong> Unisex / Men</li>
+                                <li><strong>Longevity:</strong> Long Lasting</li>
+                                <li><strong>Projection:</strong> Strong</li>
+                                <li><strong>Best For:</strong> Evening Wear, Luxury Occasions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo"><span class="logo-text">VELIRRA</span></div>
+                <p>Velirra has been crafting exceptional fragrances with a simple principle: excellence in every drop.
+                </p>
+            </div>
+            <div class="footer-column">
+                <h4>Collections</h4>
+                <ul>
+                    <li><a href="gents.html">Gents Line</a></li>
+                    <li><a href="ladies.html">Ladies Line</a></li>
+                    <li><a href="unisex.html">Unisex Line</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Velirra. All rights reserved to Bizafah and Bunyad Labs.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

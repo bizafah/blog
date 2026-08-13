@@ -1,0 +1,602 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Collection | VELIRRA</title>
+    <meta name="facebook-domain-verification" content="di5mrlw0qw9v99vs75t76t54x1u62v" />
+    <meta name="description"
+        content="Discover VELIRRA's Premium Collection. Our finest, long-lasting luxury fragrances.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1457179279266064');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1457179279266064&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+
+<body>
+    <div class="top-bar">
+        <p>🌙 SEASONAL SALE</p>
+    </div>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="VELIRRA" id="main-logo">
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="gents.html">GENTS</a></li>
+                    <li><a href="ladies.html">LADIES</a></li>
+                    <li><a href="unisex.html">UNISEX</a></li>
+                    <li><a href="premium.html" class="active">PREMIUM</a></li>
+                    <li><a href="signature.html" style="color:#c5a059;font-weight:700;">SIGNATURE</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="#" aria-label="Search" class="search-trigger"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#" aria-label="Cart" class="cart-trigger">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-container">
+            <div class="search-header">
+                <input type="text" id="search-input" placeholder="Search for perfumes, notes, inspirations...">
+                <button class="close-search"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>YOUR CART</h3>
+            <button class="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <div class="empty-cart-msg">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="promo-section">
+                <input type="text" id="promo-input" placeholder="Promo Code">
+                <button id="apply-promo">APPLY</button>
+            </div>
+            <div id="discount-row"
+                style="display: none; justify-content: space-between; margin-bottom: 10px; color: #e74c3c; font-weight: 600;">
+                <span>Discount (20%):</span>
+                <span id="discount-amount">-₨ 0</span>
+            </div>
+            <div id="delivery-row"
+                style="display: none; justify-content: space-between; margin-bottom: 10px; font-weight: 600;">
+                <span>Delivery Charges:</span>
+                <span>₨ 200</span>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-subtotal">₨ 0</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+        </div>
+    </div>
+    <!-- Checkout Details Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>DELIVERY DETAILS</h3>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="checkout-phone" placeholder="e.g. 03001234567" required>
+                </div>
+                <div class="form-group">
+                    <label>Full Delivery Address *</label>
+                    <textarea id="checkout-address" placeholder="House #, Street, Area, City" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Postal Code (Optional)</label>
+                    <input type="text" id="checkout-postal" placeholder="e.g. 46000">
+                </div>
+                <div class="form-group">
+                    <label>Google Map Link (Optional)</label>
+                    <input type="url" id="checkout-location" placeholder="Paste link here">
+                </div>
+                <button type="submit" class="confirm-order-btn">CONFIRM & SEND ON WHATSAPP</button>
+            </form>
+        </div>
+    </div>
+    <div class="drawer-overlay"></div>
+
+    <main>
+        <section class="collection-section">
+            <div class="container">
+                <h2 class="section-title">PREMIUM COLLECTION</h2>
+                <p style="text-align: center; color: var(--color-text-muted); margin-bottom: 3rem; font-size: 1.1rem;">
+                    Our finest, long-lasting luxury fragrances</p>
+                <div class="product-grid" style="max-width: 1200px; margin: 0 auto;">
+                    <!-- Blue -->
+                    <a href="product-blue.html" class="product-card">
+                        <div class="product-img-wrapper"
+                            style="border: 1px solid rgba(201,169,98,0.3); border-radius: 8px;">
+                            <span class="sale-badge"
+                                style="background: linear-gradient(135deg,#b8860b,#ffd700); color:#000;">PREMIUM</span>
+                            <img src="Blue.jpeg" alt="Blue">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">BLUE</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by Light Blue Dolce & Gabbana</p>
+                            <p class="product-price">
+                                <span class="price-current">₨ 1,899</span>
+                            </p>
+                        </div>
+                    </a>
+                    <!-- Homme -->
+                    <a href="product-homme.html" class="product-card">
+                        <div class="product-img-wrapper"
+                            style="border: 1px solid rgba(201,169,98,0.3); border-radius: 8px;">
+                            <span class="sale-badge"
+                                style="background: linear-gradient(135deg,#b8860b,#ffd700); color:#000;">PREMIUM</span>
+                            <img src="Homme.jpeg" alt="Homme">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">HOMME</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by DIOR Homme Intense</p>
+                            <p class="product-price">
+                                <span class="price-current">₨ 1,899</span>
+                            </p>
+                        </div>
+                    </a>
+                    <!-- Aura Oud -->
+                    <a href="product-auraoud.html" class="product-card">
+                        <div class="product-img-wrapper"
+                            style="border: 1px solid rgba(201,169,98,0.3); border-radius: 8px;">
+                            <span class="sale-badge"
+                                style="background: linear-gradient(135deg,#b8860b,#ffd700); color:#000;">PREMIUM</span>
+                            <img src="Aura_OUD.jpeg" alt="Aura Oud">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">AURA OUD</h3>
+                            <p class="product-brand">VELIRRA</p>
+                            <p class="product-inspiration">Inspired by Ameer Al Oud</p>
+                            <p class="product-price">
+                                <span class="price-current">₨ 2,160</span>
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- Signature Noir -->
+                    <div class="product-card" style="background:#0e0e0e; border:1px solid rgba(197,160,89,0.3); border-radius:8px; cursor:pointer;">
+                        <div class="product-img-wrapper" style="border:1px solid rgba(197,160,89,0.3); border-radius:8px;">
+                            <span class="sale-badge" style="background:linear-gradient(135deg,#b8860b,#ffd700);color:#000;">SIGNATURE</span>
+                            <img src="noir.jpeg" alt="Signature Noir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name" style="color:#fff">SIGNATURE NOIR</h3>
+                            <p class="product-brand" style="color:var(--accent-gold)">VELIRRA</p>
+                            <p class="product-inspiration" style="color:#888">Woody Amber · Oud · Unisex</p>
+                            <p class="product-price">
+                                <span class="price-original" style="text-decoration:line-through;color:#555;font-size:0.8rem;margin-right:8px">₨ 4,500</span>
+                                <span class="price-current" style="color:var(--accent-gold)">₨ 2,799</span>
+                            </p>
+                            <button class="add-to-cart-btn add-to-cart"
+                                    data-id="sig-noir" data-name="Velirra Signature Noir" data-price="2799"
+                                    style="margin-top:12px;width:100%;padding:10px;background:linear-gradient(135deg,#c5a059,#a07830);color:#000;border:none;font-weight:700;letter-spacing:0.1em;font-size:0.75rem;cursor:pointer;font-family:inherit;">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SIGNATURE NOIR — EDITORIAL SECTION
+    ═══════════════════════════════════════════════════════ -->
+    <section class="sig-noir-section">
+
+        <!-- Text-mask headline -->
+        <div class="sig-noir-headline">
+            <span class="sig-mask-text">SIGNATURE</span>
+        </div>
+
+        <div class="sig-noir-inner">
+
+            <!-- LEFT: product image -->
+            <div class="sig-noir-img-col">
+                <div class="sig-noir-img-wrap">
+                    <img src="noir.jpeg" alt="Velirra Signature Noir" class="sig-noir-img">
+                    <div class="sig-noir-badge">SIGNATURE</div>
+                </div>
+            </div>
+
+            <!-- RIGHT: details -->
+            <div class="sig-noir-details">
+
+                <p class="sig-noir-overline">✦ NEW ARRIVAL · SIGNATURE COLLECTION</p>
+                <h2 class="sig-noir-title">Velirra<br>Signature Noir</h2>
+                <p class="sig-noir-tagline">Bold. Resinous. Eternal.</p>
+
+                <p class="sig-noir-desc">
+                    A luxurious woody-amber fragrance crafted for those who appreciate depth, sophistication, and
+                    lasting elegance. Rich oud, smoky incense, warm amberwood, and subtle fruity accents create a
+                    bold yet refined composition that leaves a memorable trail from day to night.
+                </p>
+
+                <!-- Fragrance family tags -->
+                <div class="sig-noir-tags">
+                    <span>Woody Amber</span><span>Oud</span><span>Smoky</span><span>Unisex</span>
+                </div>
+
+                <!-- Notes accordion -->
+                <div class="sig-noir-notes">
+                    <div class="sig-note-row">
+                        <span class="sig-note-label">Top</span>
+                        <span class="sig-note-val">Raspberry · Smoky Incense</span>
+                    </div>
+                    <div class="sig-note-row">
+                        <span class="sig-note-label">Heart</span>
+                        <span class="sig-note-val">Natural Oud · Rose · Saffron</span>
+                    </div>
+                    <div class="sig-note-row">
+                        <span class="sig-note-label">Base</span>
+                        <span class="sig-note-val">Benzoin · Birch Smoke · Amberwood</span>
+                    </div>
+                </div>
+
+                <!-- Performance -->
+                <div class="sig-noir-perf">
+                    <div class="sig-perf-item">
+                        <span class="sig-perf-icon">⏱</span>
+                        <div>
+                            <strong>Longevity</strong>
+                            <span>12–24+ hrs on skin · 2–5 days on fabric</span>
+                        </div>
+                    </div>
+                    <div class="sig-perf-item">
+                        <span class="sig-perf-icon">✦</span>
+                        <div>
+                            <strong>Sillage</strong>
+                            <span>Excellent — rich, noticeable trail</span>
+                        </div>
+                    </div>
+                    <div class="sig-perf-item">
+                        <span class="sig-perf-icon">🌊</span>
+                        <div>
+                            <strong>Projection</strong>
+                            <span>Very strong first 2–3 hrs · moderate 5–7 hrs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price & CTA -->
+                <div class="sig-noir-cta-row">
+                    <div class="sig-noir-price">
+                        <span class="sig-price-old">₨ 4,500</span>
+                        <span class="sig-price-now">₨ 2,799</span>
+                    </div>
+                    <button class="sig-noir-cart-btn add-to-cart"
+                            data-id="sig-noir"
+                            data-name="Velirra Signature Noir"
+                            data-price="2799">
+                        ADD TO CART
+                    </button>
+                </div>
+
+            </div><!-- /details -->
+        </div><!-- /inner -->
+    </section>
+    <!-- END SIGNATURE NOIR -->
+
+    <style>
+    /* ─── SIGNATURE NOIR ─────────────────────────────────── */
+    .sig-noir-section {
+        background: #0a0a0a;
+        padding: 80px 40px 100px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* text-mask headline */
+    .sig-noir-headline {
+        text-align: center;
+        margin-bottom: 60px;
+        line-height: 1;
+    }
+    .sig-mask-text {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: clamp(60px, 12vw, 160px);
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+
+        /* image fill text — the magic */
+        background-image: url('noir.jpeg');
+        background-size: cover;
+        background-position: center 30%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+
+        display: inline-block;
+        filter: brightness(1.15) contrast(1.1);
+    }
+
+    /* two-column layout */
+    .sig-noir-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 70px;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* image col */
+    .sig-noir-img-col { position: relative; }
+    .sig-noir-img-wrap {
+        position: relative;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .sig-noir-img-wrap::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(160deg, transparent 50%, rgba(0,0,0,0.6));
+        z-index: 1;
+    }
+    .sig-noir-img {
+        width: 100%;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        display: block;
+        filter: brightness(0.92) contrast(1.05);
+        transition: transform 0.7s ease;
+    }
+    .sig-noir-img-wrap:hover .sig-noir-img { transform: scale(1.03); }
+    .sig-noir-badge {
+        position: absolute;
+        bottom: 28px; left: 28px;
+        z-index: 2;
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        font-weight: 700;
+        color: #000;
+        background: linear-gradient(135deg, #c5a059, #ffd700);
+        padding: 6px 18px;
+        border-radius: 2px;
+    }
+
+    /* details col */
+    .sig-noir-details { color: #e8e0d0; }
+
+    .sig-noir-overline {
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        color: #c5a059;
+        font-weight: 600;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+    }
+    .sig-noir-title {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        line-height: 1.05;
+        color: #fff;
+        margin-bottom: 10px;
+        letter-spacing: 0.02em;
+    }
+    .sig-noir-tagline {
+        font-size: 0.9rem;
+        letter-spacing: 0.2em;
+        color: #c5a059;
+        margin-bottom: 22px;
+        text-transform: uppercase;
+    }
+    .sig-noir-desc {
+        font-size: 0.92rem;
+        line-height: 1.8;
+        color: #a09880;
+        margin-bottom: 26px;
+    }
+
+    /* tags */
+    .sig-noir-tags {
+        display: flex; flex-wrap: wrap; gap: 8px;
+        margin-bottom: 28px;
+    }
+    .sig-noir-tags span {
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #c5a059;
+        border: 1px solid rgba(197,160,89,0.35);
+        padding: 5px 14px;
+        border-radius: 20px;
+    }
+
+    /* notes */
+    .sig-noir-notes {
+        border-top: 1px solid rgba(255,255,255,0.08);
+        margin-bottom: 26px;
+    }
+    .sig-note-row {
+        display: flex;
+        align-items: baseline;
+        gap: 16px;
+        padding: 11px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .sig-note-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #c5a059;
+        font-weight: 700;
+        min-width: 50px;
+    }
+    .sig-note-val {
+        font-size: 0.85rem;
+        color: #c8bfb0;
+    }
+
+    /* performance */
+    .sig-noir-perf {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 34px;
+    }
+    .sig-perf-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+    }
+    .sig-perf-icon {
+        font-size: 1.1rem;
+        padding-top: 2px;
+        flex-shrink: 0;
+    }
+    .sig-perf-item strong {
+        display: block;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 2px;
+    }
+    .sig-perf-item span {
+        font-size: 0.82rem;
+        color: #7a7060;
+    }
+
+    /* CTA row */
+    .sig-noir-cta-row {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        flex-wrap: wrap;
+    }
+    .sig-noir-price {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .sig-price-old {
+        font-size: 0.8rem;
+        color: #555;
+        text-decoration: line-through;
+    }
+    .sig-price-now {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: #c5a059;
+        letter-spacing: 0.02em;
+    }
+    .sig-noir-cart-btn {
+        background: linear-gradient(135deg, #c5a059, #a07830);
+        color: #000;
+        border: none;
+        padding: 14px 36px;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        font-weight: 800;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    .sig-noir-cart-btn::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: rgba(255,255,255,0);
+        transition: background 0.3s;
+    }
+    .sig-noir-cart-btn:hover::after { background: rgba(255,255,255,0.12); }
+    .sig-noir-cart-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(197,160,89,0.35); }
+    .sig-noir-cart-btn:active { transform: translateY(0); }
+
+    /* responsive */
+    @media (max-width: 900px) {
+        .sig-noir-inner { grid-template-columns: 1fr; gap: 48px; }
+        .sig-noir-img { aspect-ratio: 4/3; }
+        .sig-noir-section { padding: 60px 24px 80px; }
+    }
+    @media (max-width: 540px) {
+        .sig-mask-text { font-size: 18vw; letter-spacing: 0.06em; }
+        .sig-noir-headline { margin-bottom: 36px; }
+    }
+    </style>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo"><span class="logo-text">VELIRRA</span></div>
+                <p>Velirra has been crafting exceptional fragrances with a simple principle: excellence in every drop.
+                </p>
+            </div>
+            <div class="footer-column">
+                <h4>Collections</h4>
+                <ul>
+                    <li><a href="gents.html">Gents Line</a></li>
+                    <li><a href="ladies.html">Ladies Line</a></li>
+                    <li><a href="unisex.html">Unisex Line</a></li>
+                    <li><a href="premium.html">Premium Line</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="mailto:sales@velirra.store">sales@velirra.store</a></li>
+                    <li><a href="https://wa.me/923710738971">WhatsApp: 03710738971</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Velirra. All rights reserved to Bizafah and Bunyad Labs.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+
+</html>

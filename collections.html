@@ -1,0 +1,596 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velirra | All Collections</title>
+    <meta name="facebook-domain-verification" content="di5mrlw0qw9v99vs75t76t54x1u62v" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-logo">VELIRRA</div>
+        <div class="preloader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Velirra Logo">
+            VELIRRA
+        </a>
+        <ul class="nav-links">
+
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="premium.html">Premium</a></li>
+            <li><a href="index.html#story">Our Story</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="nav-extra">
+            <div class="cart-trigger">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                    <path d="M3 6h18" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                <span class="cart-count">0</span>
+            </div>
+            <div class="menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+
+        <a href="collections.html">Collections</a>
+        <a href="index.html#story">Our Story</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#contact">Contact</a>
+    </div>
+
+    <!-- Collection Header -->
+    <section class="collection-hero">
+        <div>
+            <h1 class="hero-title" style="font-size: 4rem; opacity: 1; transform: none; animation: none;">Our
+                <span>Collections</span>
+            </h1>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Selection</h3>
+            <button class="cart-close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart-msg">Your collection is empty.</div>
+        </div>
+        <div class="cart-footer">
+
+            <span>Total</span>
+            <span class="total-amount">₨ 0</span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+    </div>
+    <div class="cart-overlay"></div>
+
+    <!-- Products Section -->
+    <section class="featured" style="padding-top: 2rem;">
+        <div class="section-header">
+            <div class="search-container"
+                style="margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <div class="search-wrapper" style="position: relative;">
+                    <input type="text" id="perfume-search" placeholder="Search for your signature scent..."
+                        style="width: 100%; padding: 1rem 1rem 1rem 3rem; background: var(--color-bg-light); border: 1px solid rgba(201, 169, 98, 0.2); color: var(--color-text); font-family: var(--font-sans); font-size: 0.9rem; transition: border-color 0.3s ease;">
+                    <svg style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 1.2rem; height: 1.2rem; color: var(--color-gold); opacity: 0.7;"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+            </div>
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">All</button>
+                <button class="tab-btn" data-category="male">Gents</button>
+                <button class="tab-btn" data-category="female">Ladies</button>
+                <button class="tab-btn" data-category="unisex">Unisex</button>
+                <button class="tab-btn" data-category="premium">Premium</button>
+            </div>
+        </div>
+        <div class="featured-grid">
+            <!-- GENTS COLLECTION -->
+            <div class="product-card" data-id="g1" data-category="male unisex">
+                <div class="product-image">
+                    <img src="7one_new.jpeg" alt="Velirra 7one">
+                    <div class="discount-badge">SAVE 25%</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by Invictus Legend • 50ML EDP</p>
+                    <h3 class="product-name">Velirra 7one</h3>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 3,200</span>
+                        <span class="product-price">₨ 1,699</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="product-card" data-id="g3" data-category="male">
+                <div class="product-image">
+                    <img src="classic_new.jpeg" alt="Velirra Classic">
+                    <div class="discount-badge">SAVE 7%</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by Dolce & Gabbana Pour Homme</p>
+                    <h3 class="product-name">Velirra Classic</h3>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 2,900</span>
+                        <span class="product-price">₨ 1,699</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="g4" data-category="male unisex">
+                <div class="product-image">
+                    <img src="intense_new.jpeg" alt="Velirra INTENSE">
+                    <div class="discount-badge">SAVE 25%</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by Tuscan Leather • 50ML EDP</p>
+                    <h3 class="product-name">Velirra INTENSE</h3>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 3,200</span>
+                        <span class="product-price">₨ 2,099</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="g5" data-category="male unisex">
+                <div class="product-image">
+                    <img src="legacy_new.jpeg" alt="Velirra LEGACY">
+                    <div class="discount-badge">SAVE 20%</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by Azzaro The Most Wanted • 50ML EDP</p>
+                    <h3 class="product-name">Velirra LEGACY</h3>
+                    <div class="rating-stars">★★★★★ <span class="rating-text">5.00</span></div>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 3,400</span>
+                        <span class="product-price">₨ 2,399</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="g6" data-category="male unisex">
+                <div class="product-image">
+                    <img src="legendary_new.jpeg" alt="Velirra Legendary">
+                    <div class="discount-badge">SAVE 30%</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by 1 Million Lucky • 50ML EDP</p>
+                    <h3 class="product-name">Velirra Legendary</h3>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 3,300</span>
+                        <span class="product-price">₨ 1,999</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="g7" data-category="male">
+                <div class="product-image">
+                    <img src="prime_new.jpeg" alt="Velirra Prime">
+                    <div class="discount-badge dynamic">SAVE 21%</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by Bleu De Chanel • 50ML</p>
+                    <h3 class="product-name">Velirra Prime</h3>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 2,800</span>
+                        <span class="product-price">₨ 1,899</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LADIES COLLECTION -->
+            <div class="product-card" data-id="l1" data-category="female">
+                <div class="product-image">
+                    <img src="bloom_new.jpeg" alt="Velirra BLOOM">
+                    <div class="discount-badge">SAVE 27%</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by VS Bombshell • 50ML EDP</p>
+                    <h3 class="product-name">Velirra BLOOM</h3>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 2,550</span>
+                        <span class="product-price">₨ 1,499</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="l2" data-category="female">
+                <div class="product-image">
+                    <img src="ocean_new.jpeg" alt="Velirra OCEAN">
+                    <div class="discount-badge">SAVE 31%</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by Davidoff Cool Water • 50ML EDP</p>
+                    <h3 class="product-name">Velirra OCEAN</h3>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 2,770</span>
+                        <span class="product-price">₨ 1,699</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREMIUM COLLECTION SUB-SECTION -->
+    <section class="featured premium-section" style="padding-top: 0; padding-bottom: 5rem;">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <div class="premium-divider">
+                <span class="premium-line"></span>
+                <span class="premium-label">✦ PREMIUM COLLECTION ✦</span>
+                <span class="premium-line"></span>
+            </div>
+            <p style="color: var(--color-text-muted); font-size: 0.8rem; letter-spacing: 0.15rem; margin-top: 1rem;">Our
+                finest, long-lasting luxury fragrances</p>
+        </div>
+        <div class="featured-grid premium-grid" style="max-width: 1200px;">
+            <!-- Blue -->
+            <a href="product-blue.html" class="product-card premium-card" data-id="p1" data-category="female premium">
+                <div class="product-image">
+                    <img src="Blue.jpeg" alt="Velirra Blue">
+                    <div class="discount-badge"
+                        style="background: linear-gradient(135deg,#b8860b,#ffd700); color:#000;">PREMIUM</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by Light Blue Dolce &amp; Gabbana</p>
+                    <h3 class="product-name">Velirra Blue</h3>
+                    <p style="font-size:0.72rem; color:var(--color-gold); letter-spacing:0.1rem; margin-bottom:0.5rem;">
+                        Longevity: 5-7 hrs | Spring &amp; Summer</p>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 3,790</span>
+                        <span class="product-price">₨ 1,899</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Homme -->
+            <a href="product-homme.html" class="product-card premium-card" data-id="p2" data-category="male premium">
+                <div class="product-image">
+                    <img src="Homme.jpeg" alt="Velirra Homme">
+                    <div class="discount-badge"
+                        style="background: linear-gradient(135deg,#b8860b,#ffd700); color:#000;">PREMIUM</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by DIOR Homme Intense</p>
+                    <h3 class="product-name">Velirra Homme</h3>
+                    <p style="font-size:0.72rem; color:var(--color-gold); letter-spacing:0.1rem; margin-bottom:0.5rem;">
+                        Longevity: 8-12+ hrs | Fall &amp; Winter</p>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 3,990</span>
+                        <span class="product-price">₨ 1,899</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Aura Oud -->
+            <a href="product-auraoud.html" class="product-card premium-card" data-id="p3"
+                data-category="unisex premium">
+                <div class="product-image">
+                    <img src="Aura_OUD.jpeg" alt="Velirra Aura Oud">
+                    <div class="discount-badge"
+                        style="background: linear-gradient(135deg,#b8860b,#ffd700); color:#000;">PREMIUM</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Inspired by Ameer Al Oud</p>
+                    <h3 class="product-name">Velirra Aura Oud</h3>
+                    <p style="font-size:0.72rem; color:var(--color-gold); letter-spacing:0.1rem; margin-bottom:0.5rem;">
+                        Longevity: 8-12+ hrs | Fall, Winter &amp; Evenings</p>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 3,990</span>
+                        <span class="product-price">₨ 2,160</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Signature Noir -->
+            <div class="product-card premium-card" data-id="sig-noir" data-category="unisex premium"
+                 style="background: #0e0e0e; border: 1px solid rgba(197,160,89,0.25);">
+                <div class="product-image">
+                    <img src="noir.jpeg" alt="Velirra Signature Noir">
+                    <div class="discount-badge"
+                        style="background: linear-gradient(135deg,#b8860b,#ffd700); color:#000;">SIGNATURE</div>
+                    <div class="product-overlay"></div>
+                    <button class="product-btn add-to-cart"
+                            data-id="sig-noir" data-name="Velirra Signature Noir" data-price="2799">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <p class="product-category" style="color:var(--color-gold)">Woody Amber · Oud · Unisex</p>
+                    <h3 class="product-name" style="color:#fff">Velirra Signature Noir</h3>
+                    <p style="font-size:0.72rem; color:var(--color-gold); letter-spacing:0.1rem; margin-bottom:0.5rem;">
+                        Longevity: 12–24+ hrs | All Seasons</p>
+                    <div class="price-wrapper">
+                        <span class="old-price">₨ 4,500</span>
+                        <span class="product-price">₨ 2,799</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SIGNATURE NOIR — EDITORIAL SECTION
+    ═══════════════════════════════════════════════════════ -->
+    <section class="sig-noir-section">
+
+        <!-- Text-mask headline -->
+        <div class="sig-noir-headline">
+            <span class="sig-mask-text">SIGNATURE</span>
+        </div>
+
+        <div class="sig-noir-inner">
+
+            <!-- LEFT: product image -->
+            <div class="sig-noir-img-col">
+                <div class="sig-noir-img-wrap">
+                    <img src="noir.jpeg" alt="Velirra Signature Noir" class="sig-noir-img">
+                    <div class="sig-noir-badge">SIGNATURE</div>
+                </div>
+            </div>
+
+            <!-- RIGHT: details -->
+            <div class="sig-noir-details">
+
+                <p class="sig-noir-overline">✦ NEW ARRIVAL · SIGNATURE COLLECTION</p>
+                <h2 class="sig-noir-title">Velirra<br>Signature Noir</h2>
+                <p class="sig-noir-tagline">Bold. Resinous. Eternal.</p>
+
+                <p class="sig-noir-desc">
+                    A luxurious woody-amber fragrance crafted for those who appreciate depth, sophistication, and
+                    lasting elegance. Rich oud, smoky incense, warm amberwood, and subtle fruity accents create a
+                    bold yet refined composition that leaves a memorable trail from day to night.
+                </p>
+
+                <div class="sig-noir-tags">
+                    <span>Woody Amber</span><span>Oud</span><span>Smoky</span><span>Unisex</span>
+                </div>
+
+                <div class="sig-noir-notes">
+                    <div class="sig-note-row">
+                        <span class="sig-note-label">Top</span>
+                        <span class="sig-note-val">Raspberry · Smoky Incense</span>
+                    </div>
+                    <div class="sig-note-row">
+                        <span class="sig-note-label">Heart</span>
+                        <span class="sig-note-val">Natural Oud · Rose · Saffron</span>
+                    </div>
+                    <div class="sig-note-row">
+                        <span class="sig-note-label">Base</span>
+                        <span class="sig-note-val">Benzoin · Birch Smoke · Amberwood</span>
+                    </div>
+                </div>
+
+                <div class="sig-noir-perf">
+                    <div class="sig-perf-item">
+                        <span class="sig-perf-icon">⏱</span>
+                        <div>
+                            <strong>Longevity</strong>
+                            <span>12–24+ hrs on skin · 2–5 days on fabric</span>
+                        </div>
+                    </div>
+                    <div class="sig-perf-item">
+                        <span class="sig-perf-icon">✦</span>
+                        <div>
+                            <strong>Sillage</strong>
+                            <span>Excellent — rich, noticeable trail</span>
+                        </div>
+                    </div>
+                    <div class="sig-perf-item">
+                        <span class="sig-perf-icon">🌊</span>
+                        <div>
+                            <strong>Projection</strong>
+                            <span>Very strong first 2–3 hrs · moderate 5–7 hrs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sig-noir-cta-row">
+                    <div class="sig-noir-price">
+                        <span class="sig-price-old">₨ 4,500</span>
+                        <span class="sig-price-now">₨ 2,799</span>
+                    </div>
+                    <button class="sig-noir-cart-btn add-to-cart"
+                            data-id="sig-noir"
+                            data-name="Velirra Signature Noir"
+                            data-price="2799">
+                        ADD TO CART
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- END SIGNATURE NOIR -->
+
+    <style>
+    .sig-noir-section {
+        background: #0a0a0a;
+        padding: 80px 40px 100px;
+        overflow: hidden;
+    }
+    .sig-noir-headline { text-align: center; margin-bottom: 60px; line-height: 1; }
+    .sig-mask-text {
+        font-family: var(--font-sans, 'Montserrat', sans-serif);
+        font-size: clamp(60px, 12vw, 160px);
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background-image: url('noir.jpeg');
+        background-size: cover;
+        background-position: center 30%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        display: inline-block;
+        filter: brightness(1.15) contrast(1.1);
+    }
+    .sig-noir-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 70px;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .sig-noir-img-col { position: relative; }
+    .sig-noir-img-wrap { position: relative; border-radius: 4px; overflow: hidden; }
+    .sig-noir-img-wrap::before {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(160deg, transparent 50%, rgba(0,0,0,0.6)); z-index: 1;
+    }
+    .sig-noir-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; filter: brightness(0.92) contrast(1.05); transition: transform 0.7s ease; }
+    .sig-noir-img-wrap:hover .sig-noir-img { transform: scale(1.03); }
+    .sig-noir-badge { position: absolute; bottom: 28px; left: 28px; z-index: 2; font-size: 0.65rem; letter-spacing: 0.25em; font-weight: 700; color: #000; background: linear-gradient(135deg, #c5a059, #ffd700); padding: 6px 18px; border-radius: 2px; }
+    .sig-noir-details { color: #e8e0d0; }
+    .sig-noir-overline { font-size: 0.65rem; letter-spacing: 0.25em; color: #c5a059; font-weight: 600; margin-bottom: 18px; text-transform: uppercase; }
+    .sig-noir-title { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.05; color: #fff; margin-bottom: 10px; letter-spacing: 0.02em; }
+    .sig-noir-tagline { font-size: 0.9rem; letter-spacing: 0.2em; color: #c5a059; margin-bottom: 22px; text-transform: uppercase; }
+    .sig-noir-desc { font-size: 0.92rem; line-height: 1.8; color: #a09880; margin-bottom: 26px; }
+    .sig-noir-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .sig-noir-tags span { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: #c5a059; border: 1px solid rgba(197,160,89,0.35); padding: 5px 14px; border-radius: 20px; }
+    .sig-noir-notes { border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 26px; }
+    .sig-note-row { display: flex; align-items: baseline; gap: 16px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .sig-note-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #c5a059; font-weight: 700; min-width: 50px; }
+    .sig-note-val { font-size: 0.85rem; color: #c8bfb0; }
+    .sig-noir-perf { display: flex; flex-direction: column; gap: 12px; margin-bottom: 34px; }
+    .sig-perf-item { display: flex; align-items: flex-start; gap: 14px; }
+    .sig-perf-icon { font-size: 1.1rem; padding-top: 2px; flex-shrink: 0; }
+    .sig-perf-item strong { display: block; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; margin-bottom: 2px; }
+    .sig-perf-item span { font-size: 0.82rem; color: #7a7060; }
+    .sig-noir-cta-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+    .sig-noir-price { display: flex; flex-direction: column; gap: 2px; }
+    .sig-price-old { font-size: 0.8rem; color: #555; text-decoration: line-through; }
+    .sig-price-now { font-size: 1.7rem; font-weight: 800; color: #c5a059; }
+    .sig-noir-cart-btn { background: linear-gradient(135deg, #c5a059, #a07830); color: #000; border: none; padding: 14px 36px; font-size: 0.72rem; letter-spacing: 0.2em; font-weight: 800; font-family: inherit; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .sig-noir-cart-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(197,160,89,0.35); }
+    .sig-noir-cart-btn:active { transform: translateY(0); }
+    @media (max-width: 900px) { .sig-noir-inner { grid-template-columns: 1fr; gap: 48px; } .sig-noir-img { aspect-ratio: 4/3; } .sig-noir-section { padding: 60px 24px 80px; } }
+    @media (max-width: 540px) { .sig-mask-text { font-size: 18vw; letter-spacing: 0.06em; } .sig-noir-headline { margin-bottom: 36px; } }
+    </style>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="Velirra Logo">
+                    VELIRRA
+                </div>
+                <p class="footer-description">Velirra has been crafting exceptional fragrances with a simple principle:
+                    excellence in every drop.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Collections</h4>
+                <ul>
+                    <li><a href="collections.html?cat=male">Gents Line</a></li>
+                    <li><a href="collections.html?cat=female">Ladies Line</a></li>
+                    <li><a href="collections.html?cat=unisex">Unisex Line</a></li>
+                    <li><a href="premium.html">Premium Line</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="index.html#story">Our Story</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="mailto:sales@velirra.store">sales@velirra.store</a></li>
+                    <li><a href="https://wa.me/923710738971">WhatsApp: 03710738971</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">2026 Velirra. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/share/1bDXmCmiVy/" target="_blank" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/velirra.store?igsh=NnB3aTUwbzc5dXRn" target="_blank"
+                    aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    </svg>
+                </a>
+                <a href="https://wa.me/923710738971" target="_blank" aria-label="WhatsApp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-12.7 8.38 8.38 0 0 1 3.8.9L21 3z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+
+</html>
