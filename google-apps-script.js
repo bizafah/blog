@@ -14,14 +14,14 @@
 // 7. Paste URL in Admin Panel → Settings → Apps Script URL
 // ============================================================
 
-const SHEET_NAME_ARTICLES   = 'Articles';
+const SHEET_NAME_ARTICLES = 'Articles';
 const SHEET_NAME_CATEGORIES = 'Categories';
-const SHEET_NAME_SUBSCRIBERS= 'Subscribers';
+const SHEET_NAME_SUBSCRIBERS = 'Subscribers';
 
 // ---- Article columns (in order) ----
-const ART_COLS = ['id','title','slug','excerpt','content','tags','metaDesc','coverImage','category','status','imagePos','layout','createdAt','updatedAt','views'];
+const ART_COLS = ['id', 'title', 'slug', 'excerpt', 'content', 'tags', 'metaDesc', 'coverImage', 'category', 'status', 'imagePos', 'layout', 'createdAt', 'updatedAt', 'views'];
 // ---- Category columns ----
-const CAT_COLS = ['id','name','slug','description','color','icon','parent'];
+const CAT_COLS = ['id', 'name', 'slug', 'description', 'color', 'icon', 'parent'];
 
 // ============================================================
 // GET HANDLER
@@ -39,7 +39,7 @@ function doGet(e) {
   } else if (action === 'getArticle') {
     const slug = e.parameter.slug || '';
     const articles = getArticles();
-    const article  = articles.find(a => a.slug === slug) || null;
+    const article = articles.find(a => a.slug === slug) || null;
     result = { article };
   } else {
     result = { error: 'Unknown action' };
@@ -78,6 +78,9 @@ function doPost(e) {
   } else if (action === 'addSubscriber') {
     addSubscriber(body.email);
     result = { success: true };
+  } else if (action === 'sendContactMessage') {
+    sendContactMessage(body.name, body.email, body.subject, body.message);
+    result = { success: true };
   } else {
     result = { error: 'Unknown action' };
   }
@@ -96,7 +99,7 @@ function jsonResponse(data) {
 // ============================================================
 function getArticles() {
   const sheet = getOrCreateSheet(SHEET_NAME_ARTICLES, ART_COLS);
-  const data  = sheet.getDataRange().getValues();
+  const data = sheet.getDataRange().getValues();
   if (data.length <= 1) return [];
   const headers = data[0];
   return data.slice(1).map(row => {
@@ -108,7 +111,7 @@ function getArticles() {
 
 function saveArticle(article) {
   const sheet = getOrCreateSheet(SHEET_NAME_ARTICLES, ART_COLS);
-  const data  = sheet.getDataRange().getValues();
+  const data = sheet.getDataRange().getValues();
   const headers = data[0];
 
   // Look for existing row
@@ -128,7 +131,7 @@ function saveArticle(article) {
 
 function deleteArticle(id) {
   const sheet = getOrCreateSheet(SHEET_NAME_ARTICLES, ART_COLS);
-  const data  = sheet.getDataRange().getValues();
+  const data = sheet.getDataRange().getValues();
   for (let r = data.length - 1; r >= 1; r--) {
     if (data[r][0] === id) {
       sheet.deleteRow(r + 1);
@@ -142,7 +145,7 @@ function deleteArticle(id) {
 // ============================================================
 function getCategories() {
   const sheet = getOrCreateSheet(SHEET_NAME_CATEGORIES, CAT_COLS);
-  const data  = sheet.getDataRange().getValues();
+  const data = sheet.getDataRange().getValues();
   if (data.length <= 1) return [];
   const headers = data[0];
   return data.slice(1).map(row => {
@@ -154,7 +157,7 @@ function getCategories() {
 
 function saveCategory(category) {
   const sheet = getOrCreateSheet(SHEET_NAME_CATEGORIES, CAT_COLS);
-  const data  = sheet.getDataRange().getValues();
+  const data = sheet.getDataRange().getValues();
 
   for (let r = 1; r < data.length; r++) {
     if (data[r][0] === category.id) {
@@ -170,7 +173,7 @@ function saveCategory(category) {
 
 function deleteCategory(id) {
   const sheet = getOrCreateSheet(SHEET_NAME_CATEGORIES, CAT_COLS);
-  const data  = sheet.getDataRange().getValues();
+  const data = sheet.getDataRange().getValues();
   for (let r = data.length - 1; r >= 1; r--) {
     if (data[r][0] === id) {
       sheet.deleteRow(r + 1);
@@ -184,10 +187,39 @@ function deleteCategory(id) {
 // ============================================================
 function addSubscriber(email) {
   if (!email) return;
-  const sheet = getOrCreateSheet(SHEET_NAME_SUBSCRIBERS, ['email','subscribedAt']);
-  const data  = sheet.getDataRange().getValues();
+  const sheet = getOrCreateSheet(SHEET_NAME_SUBSCRIBERS, ['email', 'subscribedAt']);
+  const data = sheet.getDataRange().getValues();
   const exists = data.slice(1).some(row => row[0] === email);
   if (!exists) sheet.appendRow([email, new Date().toISOString()]);
+}
+
+// ============================================================
+// CONTACT MESSAGES & EMAIL NOTIFICATION
+// ============================================================
+function sendContactMessage(name, email, subject, message) {
+  if (!email || !message) return;
+
+  // 1. Log message in Google Sheet tab
+  const sheet = getOrCreateSheet('ContactMessages', ['Name', 'Email', 'Subject', 'Message', 'SentAt']);
+  sheet.appendRow([name || 'Anonymous', email, subject || 'General', message, new Date().toISOString()]);
+
+  // 2. Send Email Notification to aireportly7@gmail.com
+  const recipient = "aireportly7@gmail.com";
+  const mailSubject = `[AI Reportly] New Contact Message: ${subject || 'General Enquiry'}`;
+  const bodyText = `You have received a new contact message from AI Reportly:\n\n` +
+    `Name: ${name || 'N/A'}\n` +
+    `Email: ${email}\n` +
+    `Subject: ${subject || 'N/A'}\n` +
+    `Date: ${new Date().toLocaleString()}\n\n` +
+    `Message:\n${message}\n\n` +
+    `----------------------------------------\n` +
+    `Sent automatically from AI Reportly Website`;
+
+  try {
+    MailApp.sendEmail(recipient, mailSubject, bodyText, { replyTo: email });
+  } catch (err) {
+    Logger.log("Email error: " + err.toString());
+  }
 }
 
 // ============================================================
