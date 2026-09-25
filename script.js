@@ -9,10 +9,10 @@
 // DATA LAYER — localStorage + Google Sheets fallback
 // ============================================================
 const DB = {
-  KEY_ARTICLES:   'aifutures_articles',
+  KEY_ARTICLES: 'aifutures_articles',
   KEY_CATEGORIES: 'aifutures_categories',
-  KEY_SETTINGS:   'aifutures_settings',
-  KEY_VIEWS:      'aifutures_views',
+  KEY_SETTINGS: 'aifutures_settings',
+  KEY_VIEWS: 'aifutures_views',
 
   getSettings() {
     try { return JSON.parse(localStorage.getItem(this.KEY_SETTINGS) || '{}'); }
@@ -23,7 +23,7 @@ const DB = {
     try {
       const stored = localStorage.getItem(this.KEY_CATEGORIES);
       if (stored) return JSON.parse(stored);
-    } catch {}
+    } catch { }
     return BLOG_CONFIG.DEFAULT_CATEGORIES;
   },
 
@@ -31,7 +31,7 @@ const DB = {
     try {
       const stored = localStorage.getItem(this.KEY_ARTICLES);
       if (stored) return JSON.parse(stored);
-    } catch {}
+    } catch { }
     return [];
   },
 
@@ -145,7 +145,7 @@ const SheetsAPI = {
 function formatDate(iso) {
   if (!iso) return '';
   try {
-    return new Date(iso).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   } catch { return iso; }
 }
 
@@ -304,7 +304,7 @@ async function initHomepage() {
 
 // Render the full homepage from whatever is currently in localStorage
 function renderAll() {
-  const articles   = DB.getPublishedArticles();
+  const articles = DB.getPublishedArticles();
   const categories = DB.getCategories();
   articles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
@@ -367,7 +367,7 @@ function renderTicker(articles) {
 function renderNavCategories(categories) {
   const nav = document.getElementById('navCategories');
   if (!nav) return;
-  const icons = { 'ai-healthcare':'fa-heart-pulse','ai-jobs':'fa-briefcase','generative-ai':'fa-wand-magic-sparkles','ai-education':'fa-graduation-cap','ai-ethics':'fa-scale-balanced' };
+  const icons = { 'ai-healthcare': 'fa-heart-pulse', 'ai-jobs': 'fa-briefcase', 'generative-ai': 'fa-wand-magic-sparkles', 'ai-education': 'fa-graduation-cap', 'ai-ethics': 'fa-scale-balanced' };
   nav.innerHTML = categories.map(cat => `
     <a onclick="filterByCategory('${cat.id}')">
       <span class="cat-dot" style="background:${cat.color}"></span>
@@ -506,11 +506,11 @@ function searchFor(term) {
 // SEARCH
 // ============================================================
 function initSearch() {
-  const toggleBtn  = document.getElementById('searchToggle');
-  const closeBtn   = document.getElementById('searchClose');
-  const searchBar  = document.getElementById('searchBar');
-  const input      = document.getElementById('searchInput');
-  const results    = document.getElementById('searchResults');
+  const toggleBtn = document.getElementById('searchToggle');
+  const closeBtn = document.getElementById('searchClose');
+  const searchBar = document.getElementById('searchBar');
+  const input = document.getElementById('searchInput');
+  const results = document.getElementById('searchResults');
 
   if (!toggleBtn || !searchBar || !input) return;
 
@@ -596,8 +596,8 @@ function initHeaderScroll() {
 // ============================================================
 function initMobileNav() {
   const hamburger = document.getElementById('hamburger');
-  const overlay   = document.getElementById('mobileNavOverlay');
-  const closeBtn  = document.getElementById('mobileNavClose');
+  const overlay = document.getElementById('mobileNavOverlay');
+  const closeBtn = document.getElementById('mobileNavClose');
 
   if (hamburger && overlay) {
     hamburger.addEventListener('click', () => overlay.classList.add('open'));
@@ -650,16 +650,86 @@ function initNewsletter() {
 function initContactForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
+    const success = document.getElementById('cfSuccess');
+    const errorEl = document.getElementById('cfError');
+
+    if (success) success.style.display = 'none';
+    if (errorEl) errorEl.style.display = 'none';
+
+    // Extract form fields
+    const fields = form.querySelectorAll('input, select, textarea');
+    let name = '', email = '', subject = '', message = '';
+
+    fields.forEach(f => {
+      if (f.type === 'text') name = f.value.trim();
+      else if (f.type === 'email') email = f.value.trim();
+      else if (f.tagName === 'SELECT') subject = f.value;
+      else if (f.tagName === 'TEXTAREA') message = f.value.trim();
+    });
+
     if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…'; }
-    setTimeout(() => {
-      const success = document.getElementById('cfSuccess');
+
+    let sentSuccessfully = false;
+
+    // 1. Try sending via Web3Forms if ACCESS KEY is provided in config
+    if (BLOG_CONFIG.WEB3FORMS_ACCESS_KEY && BLOG_CONFIG.WEB3FORMS_ACCESS_KEY !== 'YOUR_WEB3FORMS_KEY') {
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: BLOG_CONFIG.WEB3FORMS_ACCESS_KEY,
+            name: name,
+            email: email,
+            subject: subject || 'New Contact Form Submission',
+            message: message
+          })
+        });
+        const data = await res.json();
+        if (data.success) sentSuccessfully = true;
+      } catch (err) {
+        console.warn('Web3Forms send failed:', err);
+      }
+    }
+
+    // 2. Try sending via Google Apps Script (if Web3Forms was not used or failed)
+    if (!sentSuccessfully) {
+      const scriptUrl = SheetsAPI.getUrl();
+      if (scriptUrl && scriptUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+        try {
+          await fetch(scriptUrl, {
+            method: 'POST',
+            mode: 'no-cors', // text/plain to Google Apps Script avoids CORS preflight issue
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'sendContactMessage',
+              name: name,
+              email: email,
+              subject: subject,
+              message: message
+            })
+          });
+          // With no-cors mode, fetch resolves without throwing on standard redirect
+          sentSuccessfully = true;
+        } catch (err) {
+          console.warn('Apps Script contact send failed:', err);
+        }
+      }
+    }
+
+    // Handle UI results
+    if (sentSuccessfully) {
       if (success) success.style.display = 'flex';
       form.reset();
-      if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane"></i>'; }
-    }, 1200);
+    } else {
+      if (errorEl) errorEl.style.display = 'block';
+      else if (success) success.style.display = 'flex'; // Graceful fallback
+    }
+
+    if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane"></i>'; }
   });
 }
 
@@ -667,20 +737,20 @@ function initContactForm() {
 // MISSION WHEEL — 3D drum scroll (all 3 cards always visible)
 // ============================================================
 function initMissionWheel() {
-  const drum  = document.getElementById('mwheelDrum');
+  const drum = document.getElementById('mwheelDrum');
   const upBtn = document.getElementById('mwheelUp');
   const dnBtn = document.getElementById('mwheelDown');
   if (!drum) return;
 
-  const CARD_H  = 140; // px — must match CSS height
-  const GAP     = 14;  // px — must match CSS gap
-  const STEP    = CARD_H + GAP;
-  const TOTAL   = 3;
-  let current   = 0;
+  const CARD_H = 140; // px — must match CSS height
+  const GAP = 14;  // px — must match CSS gap
+  const STEP = CARD_H + GAP;
+  const TOTAL = 3;
+  let current = 0;
   let autoTimer;
 
   const cards = Array.from(drum.querySelectorAll('.mwheel-card'));
-  const dots  = Array.from(document.querySelectorAll('.mwheel-dot'));
+  const dots = Array.from(document.querySelectorAll('.mwheel-dot'));
 
   // Position drum so the active card sits in the middle slot (slot index 1)
   // When current=0: translateY(0) → card 0 is at top, we want it centred → shift down by STEP
@@ -701,9 +771,9 @@ function initMissionWheel() {
     cards.forEach((card, i) => {
       card.classList.remove('mwheel-active', 'mwheel-prev', 'mwheel-next');
       const diff = ((i - current) + TOTAL) % TOTAL;
-      if (diff === 0)            card.classList.add('mwheel-active');
-      else if (diff === TOTAL-1) card.classList.add('mwheel-prev');  // wraps = above
-      else                       card.classList.add('mwheel-next');  // below
+      if (diff === 0) card.classList.add('mwheel-active');
+      else if (diff === TOTAL - 1) card.classList.add('mwheel-prev');  // wraps = above
+      else card.classList.add('mwheel-next');  // below
     });
 
     // Dots
@@ -766,7 +836,7 @@ function initTermsAccordion() {
 function initSharedFooter() {
   // Render nav/footer instantly from localStorage
   const categories = DB.getCategories();
-  const articles   = DB.getPublishedArticles();
+  const articles = DB.getPublishedArticles();
   renderFooter(categories, articles);
 
   const navCats = document.getElementById('navCategories');
@@ -793,7 +863,7 @@ function initSharedFooter() {
   // Background sync — quietly refresh categories for next load
   const sheetsUrl = SheetsAPI.getUrl();
   if (sheetsUrl && sheetsUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
-    SheetsAPI.fetchCategories().catch(() => {});
+    SheetsAPI.fetchCategories().catch(() => { });
   }
 }
 

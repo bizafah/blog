@@ -8,6 +8,9 @@ const BLOG_CONFIG = {
   SPREADSHEET_ID: "1HA3Wo2L7qO5FxC2yPYJfXN-rR8EWGadVOsILIuwcfCY",
   APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbyqVjVBwI6aF5byePKfO82wY6_1BxwWMfQNkcFIWgs9DVqLaIPWv_bT367L18Tz2sz60Q/exec",
 
+  // ---- Contact Form Service (Optional: Web3Forms key) ----
+  WEB3FORMS_ACCESS_KEY: "YOUR_WEB3FORMS_KEY",
+
   // ---- Image Hosting ----
   IMGBB_API_KEY: "c64bdf9b051e440356c814b990048bd6",
 
