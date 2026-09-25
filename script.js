@@ -650,7 +650,7 @@ function initNewsletter() {
 function initContactForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
-  form.addEventListener('submit', async e => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
     const success = document.getElementById('cfSuccess');
@@ -670,66 +670,52 @@ function initContactForm() {
       else if (f.tagName === 'TEXTAREA') message = f.value.trim();
     });
 
-    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…'; }
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Opening Email App…'; }
 
-    let sentSuccessfully = false;
-
-    // 1. Try sending via Web3Forms if ACCESS KEY is provided in config
-    if (BLOG_CONFIG.WEB3FORMS_ACCESS_KEY && BLOG_CONFIG.WEB3FORMS_ACCESS_KEY !== 'YOUR_WEB3FORMS_KEY') {
+    // 1. Log message to Apps Script in background (fire-and-forget)
+    const scriptUrl = SheetsAPI.getUrl();
+    if (scriptUrl && scriptUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        fetch(scriptUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({
-            access_key: BLOG_CONFIG.WEB3FORMS_ACCESS_KEY,
+            action: 'sendContactMessage',
             name: name,
             email: email,
-            subject: subject || 'New Contact Form Submission',
+            subject: subject,
             message: message
           })
-        });
-        const data = await res.json();
-        if (data.success) sentSuccessfully = true;
-      } catch (err) {
-        console.warn('Web3Forms send failed:', err);
-      }
+        }).catch(() => { });
+      } catch (err) { }
     }
 
-    // 2. Try sending via Google Apps Script (if Web3Forms was not used or failed)
-    if (!sentSuccessfully) {
-      const scriptUrl = SheetsAPI.getUrl();
-      if (scriptUrl && scriptUrl !== 'YOUR_APPS_SCRIPT_URL_HERE') {
-        try {
-          await fetch(scriptUrl, {
-            method: 'POST',
-            mode: 'no-cors', // text/plain to Google Apps Script avoids CORS preflight issue
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify({
-              action: 'sendContactMessage',
-              name: name,
-              email: email,
-              subject: subject,
-              message: message
-            })
-          });
-          // With no-cors mode, fetch resolves without throwing on standard redirect
-          sentSuccessfully = true;
-        } catch (err) {
-          console.warn('Apps Script contact send failed:', err);
-        }
-      }
-    }
+    // 2. Format mailto link to auto-open email app pre-filled
+    const recipient = "aireportly7@gmail.com";
+    const mailSubject = encodeURIComponent(`[AI Reportly] ${subject || 'Contact Form Enquiry'} - ${name || 'Website Visitor'}`);
+    const mailBody = encodeURIComponent(
+      `Name: ${name || 'N/A'}\n` +
+      `Email: ${email}\n` +
+      `Subject: ${subject || 'N/A'}\n\n` +
+      `Message:\n${message}\n\n` +
+      `----------------------------------------\n` +
+      `Sent from AI Reportly Website`
+    );
 
-    // Handle UI results
-    if (sentSuccessfully) {
-      if (success) success.style.display = 'flex';
+    const mailtoUrl = `mailto:${recipient}?subject=${mailSubject}&body=${mailBody}`;
+
+    setTimeout(() => {
+      // Open default mail client window
+      window.location.href = mailtoUrl;
+
+      if (success) {
+        success.style.display = 'flex';
+        success.innerHTML = '<i class="fa-solid fa-circle-check"></i> Email app opened! Please tap <strong>Send</strong> in your mail app to finish sending.';
+      }
       form.reset();
-    } else {
-      if (errorEl) errorEl.style.display = 'block';
-      else if (success) success.style.display = 'flex'; // Graceful fallback
-    }
-
-    if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane"></i>'; }
+      if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane"></i>'; }
+    }, 500);
   });
 }
 
